@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dal Makhani Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #d4a574 0%, #8b4513 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #8b4513; border-bottom: 3px solid #8b4513; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #8b4513; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #8b4513; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🍲 Dal Makhani 🍲</h1>
+        <p class="lead">Creamy lentils with butter and cream</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Dal Makhani</h2>
+                <p>Dal Makhani is a luxurious lentil curry made with black lentils and kidney beans, slow-cooked and finished with butter and cream. It's rich, creamy, and a restaurant favorite.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li>1 cup Black Lentils (Urad Dal)</li>
+                    <li>1/4 cup Red Kidney Beans (Rajma)</li>
+                    <li>4 tablespoons Butter</li>
+                    <li>1/2 cup Heavy Cream</li>
+                    <li>3 Tomatoes (pureed)</li>
+                    <li>1 large Onion (chopped)</li>
+                    <li>1.5 tablespoons Ginger-Garlic Paste</li>
+                    <li>2 Green Chillies (chopped)</li>
+                    <li>1 teaspoon Coriander Powder</li>
+                    <li>1/2 teaspoon Cumin Powder</li>
+                    <li>1/4 teaspoon Red Chilli Powder</li>
+                    <li>1/4 teaspoon Turmeric Powder</li>
+                    <li>Salt to taste</li>
+                    <li>Fresh Coriander (garnish)</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Soak lentils and kidney beans separately for 4 hours.</li>
+                    <li>Pressure cook until very soft (about 45 minutes).</li>
+                    <li>Heat butter in a pan and sauté onions until golden.</li>
+                    <li>Add ginger-garlic paste and green chillies. Cook for 1 minute.</li>
+                    <li>Add tomato puree and cook until oil separates (5-7 minutes).</li>
+                    <li>Add coriander, cumin, chilli, and turmeric powders. Mix well.</li>
+                    <li>Add the cooked dal and kidney beans to the pan.</li>
+                    <li>Add salt and mix well.</li>
+                    <li>Simmer for 20 minutes on low heat, stirring occasionally.</li>
+                    <li>Add heavy cream and stir well.</li>
+                    <li>Simmer for another 10 minutes until creamy and aromatic.</li>
+                    <li>Garnish with fresh coriander and serve hot.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with Basmati Rice</li>
+                    <li>Pair with Garlic Naan</li>
+                    <li>Garnish with dollop of cream</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

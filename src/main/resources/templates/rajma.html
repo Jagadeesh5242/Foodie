@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajma Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #c83349 0%, #d4313f 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #d4313f; border-bottom: 3px solid #d4313f; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #d4313f; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #d4313f; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🫘 Rajma 🫘</h1>
+        <p class="lead">Kidney bean curry with tomato gravy</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Rajma</h2>
+                <p>Rajma is a popular North Indian curry made with kidney beans cooked in a tomato-based gravy. It's healthy, protein-rich, and usually served with rice. A comfort food favorite in many Indian homes.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li>2 cups Kidney Beans (soaked overnight and cooked)</li>
+                    <li>3 Tomatoes (pureed)</li>
+                    <li>2 tablespoons Oil</li>
+                    <li>1 large Onion (finely chopped)</li>
+                    <li>1 tablespoon Ginger-Garlic Paste</li>
+                    <li>2 Green Chillies (chopped)</li>
+                    <li>1 teaspoon Cumin Seeds</li>
+                    <li>1 teaspoon Coriander Powder</li>
+                    <li>1/2 teaspoon Red Chilli Powder</li>
+                    <li>1/4 teaspoon Turmeric Powder</li>
+                    <li>1/2 teaspoon Garam Masala</li>
+                    <li>Salt to taste</li>
+                    <li>Fresh Coriander (garnish)</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Soak kidney beans overnight and pressure cook until soft.</li>
+                    <li>Heat oil in a pan and add cumin seeds.</li>
+                    <li>Sauté onions until golden brown.</li>
+                    <li>Add ginger-garlic paste and green chillies. Cook for 1 minute.</li>
+                    <li>Add tomato puree and cook until oil separates (5-7 minutes).</li>
+                    <li>Add coriander, chilli, turmeric, and garam masala powders.</li>
+                    <li>Add cooked kidney beans to the curry.</li>
+                    <li>Add salt and mix well.</li>
+                    <li>Simmer for 15-20 minutes, stirring occasionally.</li>
+                    <li>The curry should be thick and aromatic.</li>
+                    <li>Garnish with fresh coriander.</li>
+                    <li>Serve hot with steamed rice.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with Steamed White Rice</li>
+                    <li>Pair with Roti or Chapati</li>
+                    <li>Accompany with Pickle</li>
+                    <li>Serve with Sliced Onions</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

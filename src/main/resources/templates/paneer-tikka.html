@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paneer Tikka Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #f5576c; border-bottom: 3px solid #f5576c; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #f5576c; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #f5576c; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🧀 Paneer Tikka 🧀</h1>
+        <p class="lead">Grilled cottage cheese with aromatic spices</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Paneer Tikka</h2>
+                <p>Paneer Tikka is a vegetarian appetizer made with cottage cheese marinated in yogurt and spices, then grilled or baked. It's healthy, protein-rich, and perfect for parties or as a snack.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li>400g Paneer (cottage cheese), cut into cubes</li>
+                    <li>1 cup Yogurt</li>
+                    <li>2 tablespoons Ginger-Garlic Paste</li>
+                    <li>1 tablespoon Red Chilli Powder</li>
+                    <li>1 tablespoon Turmeric Powder</li>
+                    <li>2 tablespoons Lemon Juice</li>
+                    <li>Salt to taste</li>
+                    <li>2 Bell Peppers (chunked)</li>
+                    <li>1 large Onion (chunked)</li>
+                    <li>Fresh Cilantro</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Mix yogurt, ginger-garlic paste, chilli powder, turmeric, and lemon juice.</li>
+                    <li>Add salt and mix well to make the marinade.</li>
+                    <li>Add paneer cubes, bell peppers, and onions to the marinade.</li>
+                    <li>Let it marinate for at least 2 hours or overnight.</li>
+                    <li>Thread the marinated paneer and vegetables onto skewers alternately.</li>
+                    <li>Grill in an oven at 200°C for 20-25 minutes, turning halfway.</li>
+                    <li>Alternatively, pan-fry in a greased pan until golden.</li>
+                    <li>Garnish with cilantro and serve hot with mint chutney.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with mint chutney</li>
+                    <li>Pair with lemon wedges</li>
+                    <li>Serve as appetizer before main course</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

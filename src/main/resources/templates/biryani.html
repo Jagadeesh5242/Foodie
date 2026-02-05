@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biryani Recipe</title>
+    <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .recipe-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .recipe-header h1 {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .recipe-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .recipe-section {
+            margin-bottom: 30px;
+        }
+        .recipe-section h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .ingredient-list {
+            list-style: none;
+            padding: 0;
+        }
+        .ingredient-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .ingredient-list li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .step-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: step-counter;
+        }
+        .step-list li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f0f0f0;
+            border-left: 4px solid #667eea;
+            counter-increment: step-counter;
+        }
+        .step-list li:before {
+            content: "Step " counter(step-counter) ": ";
+            font-weight: bold;
+            color: #667eea;
+        }
+        .nutrition-table {
+            background-color: #f9f9f9;
+        }
+        .back-button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="back-button">
+        <a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a>
+    </div>
+
+    <div class="recipe-header">
+        <h1>🍚 Biryani Recipe 🍚</h1>
+        <p class="lead">A fragrant and delicious Indian rice dish</p>
+    </div>
+
+    <div class="container">
+        <div class="recipe-content">
+            <!-- Overview Section -->
+            <div class="recipe-section">
+                <h2>About Biryani</h2>
+                <p>Biryani is one of the most beloved Indian dishes, known for its rich flavors and aromatic spices. It's a one-pot meal that combines basmati rice with meat (chicken, mutton, or fish) and a blend of traditional Indian spices. This dish is perfect for special occasions and celebrations.</p>
+            </div>
+
+            <!-- Ingredients Section -->
+            <div class="recipe-section">
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li>2 cups Basmati Rice</li>
+                    <li>500g Chicken/Mutton (cut into pieces)</li>
+                    <li>2 Large Onions (sliced)</li>
+                    <li>1 cup Yogurt</li>
+                    <li>4 Green Chillies (chopped)</li>
+                    <li>1 Tablespoon Ginger-Garlic Paste</li>
+                    <li>1/4 cup Mint Leaves (chopped)</li>
+                    <li>1/4 cup Cilantro (chopped)</li>
+                    <li>4-5 Cloves</li>
+                    <li>2 Bay Leaves</li>
+                    <li>1 Inch Cinnamon Stick</li>
+                    <li>1 Star Anise</li>
+                    <li>1 Teaspoon Black Cumin Seeds</li>
+                    <li>4 Green Cardamom Pods</li>
+                    <li>2 Black Cardamom Pods</li>
+                    <li>1/2 Teaspoon Saffron Strands</li>
+                    <li>1/2 cup Ghee</li>
+                    <li>Salt to taste</li>
+                    <li>Water for cooking rice</li>
+                </ul>
+            </div>
+
+            <!-- Instructions Section -->
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Soak the basmati rice in water for 30 minutes, then wash thoroughly.</li>
+                    <li>Heat 1/4 cup ghee in a pan and fry half of the sliced onions until golden brown. Set aside.</li>
+                    <li>In a bowl, mix yogurt with ginger-garlic paste, green chillies, mint, cilantro, and salt. Add the meat to this mixture and marinate for 30 minutes.</li>
+                    <li>Boil water in a large pot with salt, cloves, bay leaves, cinnamon, star anise, and black cumin seeds.</li>
+                    <li>Add soaked rice to boiling water and cook until 70% done. Drain and set aside.</li>
+                    <li>In a heavy-bottomed pot, layer the partially cooked rice and marinated meat alternately, starting with meat.</li>
+                    <li>Dissolve saffron in 1/2 cup warm milk and pour over the rice.</li>
+                    <li>Top with fried onions and remaining ghee.</li>
+                    <li>Cover the pot with aluminum foil, then place a lid on top for dum cooking.</li>
+                    <li>Cook on high heat for 2-3 minutes until steam forms, then reduce to low heat.</li>
+                    <li>Cook for 45-50 minutes on low heat without opening the lid.</li>
+                    <li>Turn off the heat and let it rest for 5 minutes before opening.</li>
+                    <li>Gently mix the biryani with a fork and garnish with fried onions and mint.</li>
+                </ol>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="recipe-section">
+                <h2>Chef's Tips</h2>
+                <ul>
+                    <li><strong>Rice Quality:</strong> Always use good quality Basmati rice for authentic biryani.</li>
+                    <li><strong>Marination:</strong> The longer you marinate the meat, the better the flavor.</li>
+                    <li><strong>Dum Cooking:</strong> Do not open the lid during cooking; this steams the dish perfectly.</li>
+                    <li><strong>Ghee Ratio:</strong> Generous use of ghee adds richness to the dish.</li>
+                    <li><strong>Spice Balance:</strong> Adjust spices according to your preference.</li>
+                </ul>
+            </div>
+
+            <!-- Nutrition Info -->
+            <div class="recipe-section">
+                <h2>Nutritional Information</h2>
+                <table class="table nutrition-table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Per Serving (100g)</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Calories</td>
+                            <td>150-180 kcal</td>
+                        </tr>
+                        <tr>
+                            <td>Protein</td>
+                            <td>8-10g</td>
+                        </tr>
+                        <tr>
+                            <td>Carbohydrates</td>
+                            <td>25-30g</td>
+                        </tr>
+                        <tr>
+                            <td>Fat</td>
+                            <td>5-7g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Serving Section -->
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with <strong>Raita</strong> (yogurt-based side dish)</li>
+                    <li>Pair with <strong>Shorba</strong> (light broth)</li>
+                    <li>Add <strong>Pickle</strong> on the side for tangy flavor</li>
+                    <li>Serve with fresh <strong>Salad</strong></li>
+                    <li>Pair with <strong>Naan</strong> or <strong>Roti</strong> for those who want extra bread</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

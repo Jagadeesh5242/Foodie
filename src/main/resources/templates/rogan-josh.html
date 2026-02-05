@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rogan Josh Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #8b0000 0%, #d4310f 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #d4310f; border-bottom: 3px solid #d4310f; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #d4310f; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #d4310f; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🍖 Rogan Josh 🍖</h1>
+        <p class="lead">Aromatic meat curry with yogurt and tomatoes</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Rogan Josh</h2>
+                <p>Rogan Josh is a classic Kashmiri curry made with meat (usually lamb or chicken). The name means "meat in fragrant gravy." It's aromatic, flavorful, and features a blend of traditional spices with yogurt and tomatoes.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li>700g Lamb or Mutton (cut into pieces)</li>
+                    <li>2 cups Yogurt</li>
+                    <li>3 large Onions (sliced)</li>
+                    <li>3 Tomatoes (pureed)</li>
+                    <li>3 tablespoons Ginger-Garlic Paste</li>
+                    <li>4 Green Cardamom Pods</li>
+                    <li>2 Black Cardamom Pods</li>
+                    <li>3 Cloves</li>
+                    <li>1 inch Cinnamon Stick</li>
+                    <li>1 Bay Leaf</li>
+                    <li>1 Star Anise</li>
+                    <li>2 tablespoons Coriander Powder</li>
+                    <li>1 tablespoon Cumin Powder</li>
+                    <li>1 tablespoon Red Chilli Powder</li>
+                    <li>1/2 teaspoon Turmeric</li>
+                    <li>3 tablespoons Oil or Ghee</li>
+                    <li>Salt to taste</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Heat oil in a heavy-bottomed pot. Add whole spices (cardamom, cloves, cinnamon, bay leaf, star anise).</li>
+                    <li>Sauté onions until golden brown. Remove half and set aside.</li>
+                    <li>Add meat to the remaining onions and cook until partially done (5 minutes).</li>
+                    <li>Add ginger-garlic paste and cook for 1-2 minutes.</li>
+                    <li>Add yogurt and stir well to combine.</li>
+                    <li>Add tomato puree and ground spices (coriander, cumin, chilli, turmeric).</li>
+                    <li>Mix well and cook for 2-3 minutes.</li>
+                    <li>Add salt and reserved onions on top.</li>
+                    <li>Cover the pot and simmer on low heat for 1-1.5 hours until meat is tender.</li>
+                    <li>Stir occasionally and check if additional water is needed.</li>
+                    <li>The curry should be thick and aromatic.</li>
+                    <li>Serve hot with naan or rice.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with Basmati Rice or Pulao</li>
+                    <li>Pair with Garlic Naan or Roti</li>
+                    <li>Garnish with fresh coriander</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

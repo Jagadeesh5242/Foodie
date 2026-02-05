@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butter Chicken Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #ff6b6b; border-bottom: 3px solid #ff6b6b; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #ff6b6b; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #ff6b6b; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🍗 Butter Chicken 🍗</h1>
+        <p class="lead">Creamy, rich, and delicious tomato-based curry</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Butter Chicken</h2>
+                <p>Butter Chicken (Murgh Makhani) is one of India's most popular dishes. Tender chicken in a smooth, creamy tomato sauce with butter and cream. Perfect for special occasions and easy weeknight dinners.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li>500g Chicken (boneless, cut into pieces)</li>
+                    <li>1 cup Yogurt</li>
+                    <li>2 tablespoons Ginger-Garlic Paste</li>
+                    <li>1 tablespoon Red Chilli Powder</li>
+                    <li>3 tablespoons Butter</li>
+                    <li>1 large Onion (sliced)</li>
+                    <li>4 Tomatoes (pureed)</li>
+                    <li>1/2 cup Heavy Cream</li>
+                    <li>2 tablespoons Kasuri Methi (dried fenugreek)</li>
+                    <li>Salt and pepper to taste</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Marinate chicken in yogurt, ginger-garlic paste, and chilli powder for 2 hours.</li>
+                    <li>Heat butter in a pan and fry marinated chicken until cooked. Set aside.</li>
+                    <li>In the same pan, sauté onions until golden.</li>
+                    <li>Add tomato puree and cook for 5-7 minutes until oil separates.</li>
+                    <li>Add cream and mix well.</li>
+                    <li>Add cooked chicken back to the pan.</li>
+                    <li>Add kasuri methi and simmer for 10 minutes.</li>
+                    <li>Season with salt and pepper. Serve hot with naan or rice.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with Garlic Naan</li>
+                    <li>Pair with Basmati Rice</li>
+                    <li>Add side of sliced onions</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

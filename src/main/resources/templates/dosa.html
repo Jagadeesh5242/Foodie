@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosa Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: #333; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #fa709a; border-bottom: 3px solid #fa709a; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #fa709a; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #fa709a; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🥘 Dosa 🥘</h1>
+        <p class="lead">Crispy South Indian crepe with savory potato filling</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Dosa</h2>
+                <p>Dosa is a traditional South Indian breakfast item. It's a thin, crispy crepe made from rice and lentil batter, filled with spiced potato mixture. Served with sambar and chutney, it's a complete meal.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients (Dosa Batter)</h2>
+                <ul class="ingredient-list">
+                    <li>1 cup Rice (soaked)</li>
+                    <li>1/2 cup Urad Dal (black lentils, soaked)</li>
+                    <li>1/4 teaspoon Fenugreek Seeds</li>
+                    <li>Salt to taste</li>
+                    <li>Water as needed</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients (Potato Filling)</h2>
+                <ul class="ingredient-list">
+                    <li>3 Potatoes (boiled and cubed)</li>
+                    <li>2 Onions (finely chopped)</li>
+                    <li>2 Green Chillies (chopped)</li>
+                    <li>1 teaspoon Mustard Seeds</li>
+                    <li>1 teaspoon Cumin Seeds</li>
+                    <li>10-12 Curry Leaves</li>
+                    <li>2 tablespoons Oil</li>
+                    <li>Turmeric powder</li>
+                    <li>Salt to taste</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Soak rice and urad dal separately for 4 hours.</li>
+                    <li>Grind them together with fenugreek seeds and salt until smooth.</li>
+                    <li>Let batter ferment for 8-12 hours.</li>
+                    <li>For filling: Heat oil, add mustard and cumin seeds.</li>
+                    <li>Add curry leaves, onions, and green chillies.</li>
+                    <li>Add boiled potatoes, turmeric, and salt. Mix well.</li>
+                    <li>Heat a non-stick pan (dosa tava) or griddle.</li>
+                    <li>Pour batter and spread into a thin circle.</li>
+                    <li>Pour oil around edges and cook until crispy.</li>
+                    <li>Add potato filling on one half.</li>
+                    <li>Fold dosa in half and serve hot.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with Sambar (lentil soup)</li>
+                    <li>Pair with Coconut Chutney</li>
+                    <li>Add Mint Chutney on the side</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

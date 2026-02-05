@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tandoori Chicken Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #eb3349; border-bottom: 3px solid #eb3349; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #eb3349; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #eb3349; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🔥 Tandoori Chicken 🔥</h1>
+        <p class="lead">Smoky grilled chicken with aromatic spices</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Tandoori Chicken</h2>
+                <p>Tandoori Chicken is a classic Indian appetizer. Chicken marinated in yogurt and spices, then cooked in a tandoor (clay oven) until charred and smoky. It's healthy, flavorful, and perfect for dinner parties.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li>1 kg Chicken (cut into pieces)</li>
+                    <li>1 cup Yogurt</li>
+                    <li>3 tablespoons Ginger-Garlic Paste</li>
+                    <li>2 tablespoons Red Chilli Powder</li>
+                    <li>1 tablespoon Turmeric Powder</li>
+                    <li>2 tablespoons Lemon Juice</li>
+                    <li>2 tablespoons Garam Masala</li>
+                    <li>1/2 teaspoon Cumin Seeds</li>
+                    <li>Salt to taste</li>
+                    <li>3 tablespoons Oil or Ghee</li>
+                    <li>Fresh Coriander</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Make slits in chicken pieces for better marination.</li>
+                    <li>Mix yogurt, ginger-garlic paste, red chilli powder, turmeric, and lemon juice.</li>
+                    <li>Add garam masala, cumin seeds, and salt.</li>
+                    <li>Coat chicken thoroughly with the marinade.</li>
+                    <li>Refrigerate for at least 4 hours or overnight.</li>
+                    <li>Preheat oven to 200°C or heat tandoor.</li>
+                    <li>Thread chicken onto skewers.</li>
+                    <li>Cook in oven or tandoor for 30-40 minutes until cooked through.</li>
+                    <li>Baste with oil/ghee halfway through cooking.</li>
+                    <li>Chicken should be golden and charred on edges.</li>
+                    <li>Garnish with fresh coriander and serve hot.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with Mint Chutney</li>
+                    <li>Pair with Lemon Wedges</li>
+                    <li>Accompany with Sliced Onions</li>
+                    <li>Serve with Naan Bread</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

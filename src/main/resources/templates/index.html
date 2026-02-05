@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Time Planner</title>
+    <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Autocomplete dropdown styling */
+        .autocomplete-container {
+            position: relative;
+            display: inline-block;
+            width: 250px;
+        }
+
+        #searchInput {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        #suggestionsList {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: 1px solid #ddd;
+            border-top: none;
+            background-color: white;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 0 0 20px 20px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #suggestionsList li {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        #suggestionsList li:hover {
+            background-color: #f0f0f0;
+        }
+
+        #suggestionsList li.highlight {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body style="background-image: url('./foodhome.jpg'); 
+             background-size: cover; 
+             background-repeat: no-repeat; 
+             background-position: center;">
+
+    <form action="/search" method="get" style="text-align:center; margin-top:20px;">
+        <div class="autocomplete-container">
+            <input type="text" id="searchInput" name="keyword" placeholder="Search recipes... (type 1+ letter)"
+                style="
+                    padding:10px;
+                    width:100%;
+                    border:1px solid #ccc;
+                    border-radius:20px;
+                    outline:none;
+                ">
+            <ul id="suggestionsList"></ul>
+        </div>
+
+        <button type="submit"
+            style="
+                padding:10px 15px;
+                border:none;
+                border-radius:20px;
+                background-color:#4CAF50;
+                color:white;
+                cursor:pointer;
+                margin-left: 10px;
+            ">
+            Search
+        </button>
+    </form>
+
+    <div class="container text-center" style="margin-top: 20%;">
+        <h1 class="display-4 text-white"><b>Welcome to Chef Mantra</b></h1>
+        <p class="lead text-white">Any Body can cook</p>
+        <p class="lead text-white">Plan your meals with ease!</p>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsList = document.getElementById('suggestionsList');
+
+        searchInput.addEventListener('input', async (e) => {
+            const keyword = e.target.value.trim();
+
+            // Show suggestions only if user typed at least 1 character
+            if (keyword.length === 0) {
+                suggestionsList.style.display = 'none';
+                suggestionsList.innerHTML = '';
+                return;
+            }
+
+            try {
+                // Fetch recipes from backend
+                const response = await fetch(`/api/recipes/search?keyword=${encodeURIComponent(keyword)}`);
+                const recipes = await response.json();
+
+                // Clear previous suggestions
+                suggestionsList.innerHTML = '';
+
+                if (recipes.length > 0) {
+                    recipes.forEach(recipe => {
+                        const li = document.createElement('li');
+                        li.textContent = recipe;
+                        li.addEventListener('click', () => {
+                            searchInput.value = recipe;
+                            suggestionsList.style.display = 'none';
+                        });
+                        suggestionsList.appendChild(li);
+                    });
+                    suggestionsList.style.display = 'block';
+                } else {
+                    const li = document.createElement('li');
+                    li.textContent = 'No recipes found';
+                    li.style.color = '#999';
+                    suggestionsList.appendChild(li);
+                    suggestionsList.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error fetching recipes:', error);
+            }
+        });
+
+        // Hide suggestions when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.autocomplete-container')) {
+                suggestionsList.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

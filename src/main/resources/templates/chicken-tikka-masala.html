@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Tikka Masala Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #f5576c; border-bottom: 3px solid #f5576c; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #f5576c; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #f5576c; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🍛 Chicken Tikka Masala 🍛</h1>
+        <p class="lead">Creamy tomato sauce with tender chicken tikka</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Chicken Tikka Masala</h2>
+                <p>Chicken Tikka Masala is an iconic Indian dish with a creamy, tomato-based sauce. It combines grilled chicken tikka with a smooth, aromatic gravy. It's rich, comforting, and absolutely delicious.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients (Chicken Tikka)</h2>
+                <ul class="ingredient-list">
+                    <li>600g Chicken (cut into cubes)</li>
+                    <li>1 cup Yogurt</li>
+                    <li>2 tablespoons Ginger-Garlic Paste</li>
+                    <li>1 tablespoon Red Chilli Powder</li>
+                    <li>1 tablespoon Lemon Juice</li>
+                    <li>Salt to taste</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients (Masala Sauce)</h2>
+                <ul class="ingredient-list">
+                    <li>4 Tomatoes (pureed)</li>
+                    <li>1 large Onion (sliced)</li>
+                    <li>3 tablespoons Butter</li>
+                    <li>1/2 cup Heavy Cream</li>
+                    <li>1 tablespoon Ginger-Garlic Paste</li>
+                    <li>1 tablespoon Garam Masala</li>
+                    <li>1 teaspoon Cumin Powder</li>
+                    <li>1/2 teaspoon Red Chilli Powder</li>
+                    <li>Salt and pepper to taste</li>
+                    <li>Fresh Coriander (garnish)</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Mix yogurt, ginger-garlic paste, chilli powder, and lemon juice.</li>
+                    <li>Marinate chicken for 2 hours.</li>
+                    <li>Thread chicken onto skewers and grill or bake at 200°C for 20 minutes.</li>
+                    <li>Heat butter in a pan and sauté onions until golden.</li>
+                    <li>Add ginger-garlic paste and cook for 1 minute.</li>
+                    <li>Add tomato puree and cook until oil separates (5-7 minutes).</li>
+                    <li>Add garam masala, cumin, and chilli powder. Mix well.</li>
+                    <li>Add grilled chicken tikka to the sauce.</li>
+                    <li>Stir in heavy cream and simmer for 10 minutes.</li>
+                    <li>Adjust salt and pepper to taste.</li>
+                    <li>Garnish with fresh coriander and serve hot.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with Basmati Rice</li>
+                    <li>Pair with Garlic Naan</li>
+                    <li>Accompany with side salad</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

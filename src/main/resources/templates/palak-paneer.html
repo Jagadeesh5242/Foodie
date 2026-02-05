@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palak Paneer Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #134e5e 0%, #71b280 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #71b280; border-bottom: 3px solid #71b280; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #71b280; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #71b280; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🥬 Palak Paneer 🥬</h1>
+        <p class="lead">Creamy spinach curry with cottage cheese</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Palak Paneer</h2>
+                <p>Palak Paneer is a vegetarian delight made with spinach puree and cottage cheese. It's creamy, healthy, and packed with nutrients. A favorite in Indian restaurants and home kitchens alike.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li>500g Fresh Spinach (chopped)</li>
+                    <li>250g Paneer (cottage cheese, cubed)</li>
+                    <li>1/2 cup Heavy Cream</li>
+                    <li>2 tablespoons Ghee or Butter</li>
+                    <li>1 large Onion (chopped)</li>
+                    <li>1 tablespoon Ginger-Garlic Paste</li>
+                    <li>2 Green Chillies (chopped)</li>
+                    <li>1/2 teaspoon Cumin Seeds</li>
+                    <li>1/2 teaspoon Garam Masala</li>
+                    <li>Salt to taste</li>
+                    <li>Black pepper to taste</li>
+                    <li>Water as needed</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Boil spinach in water until soft (3-4 minutes).</li>
+                    <li>Drain and cool, then blend into a smooth puree.</li>
+                    <li>Heat ghee in a pan and add cumin seeds.</li>
+                    <li>Sauté onions until translucent.</li>
+                    <li>Add ginger-garlic paste and green chillies. Cook for 1 minute.</li>
+                    <li>Add spinach puree and stir well.</li>
+                    <li>Cook for 5 minutes on medium heat.</li>
+                    <li>Add garam masala, salt, and black pepper.</li>
+                    <li>Stir in heavy cream and mix well.</li>
+                    <li>Gently add paneer cubes.</li>
+                    <li>Simmer for 5-7 minutes without stirring much.</li>
+                    <li>Serve hot with naan or rice.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with Garlic Naan</li>
+                    <li>Pair with Basmati Rice</li>
+                    <li>Garnish with fresh cream</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

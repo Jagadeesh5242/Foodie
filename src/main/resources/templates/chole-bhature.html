@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chole Bhature Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #e74c3c; border-bottom: 3px solid #e74c3c; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #e74c3c; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🍞 Chole Bhature 🍞</h1>
+        <p class="lead">Fluffy fried bread with spiced chickpeas</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Chole Bhature</h2>
+                <p>Chole Bhature is a popular North Indian breakfast dish. Bhature is a soft, fluffy fried bread served with Chole (spiced chickpeas). It's hearty, filling, and a favorite in Punjab.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients (Bhature Dough)</h2>
+                <ul class="ingredient-list">
+                    <li>2 cups All-Purpose Flour</li>
+                    <li>1/2 cup Yogurt</li>
+                    <li>1 tablespoon Sugar</li>
+                    <li>1/2 teaspoon Salt</li>
+                    <li>1/4 teaspoon Baking Powder</li>
+                    <li>1/4 teaspoon Baking Soda</li>
+                    <li>1 tablespoon Oil</li>
+                    <li>Warm water as needed</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients (Chole Curry)</h2>
+                <ul class="ingredient-list">
+                    <li>2 cans Chickpeas (or 1 cup dried, soaked and cooked)</li>
+                    <li>3 tablespoons Oil</li>
+                    <li>1 teaspoon Cumin Seeds</li>
+                    <li>2 Onions (finely chopped)</li>
+                    <li>1 tablespoon Ginger-Garlic Paste</li>
+                    <li>3 Tomatoes (pureed)</li>
+                    <li>1 tablespoon Red Chilli Powder</li>
+                    <li>1 teaspoon Coriander Powder</li>
+                    <li>1/2 teaspoon Turmeric</li>
+                    <li>1/2 teaspoon Garam Masala</li>
+                    <li>Salt to taste</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Mix flour, sugar, salt, baking powder, and baking soda.</li>
+                    <li>Add yogurt and oil. Mix well.</li>
+                    <li>Add warm water gradually and knead into soft dough.</li>
+                    <li>Cover and let it rest for 4-6 hours or overnight.</li>
+                    <li>For chole: Heat oil and add cumin seeds.</li>
+                    <li>Sauté onions until golden brown.</li>
+                    <li>Add ginger-garlic paste and sauté for 1 minute.</li>
+                    <li>Add tomato puree and cook until oil separates.</li>
+                    <li>Add spices and cook for 2 minutes.</li>
+                    <li>Add chickpeas and simmer for 15 minutes. Add salt.</li>
+                    <li>Divide dough into 8 balls. Roll each into a circle.</li>
+                    <li>Heat oil in a deep pan and deep fry until puffed and golden.</li>
+                    <li>Serve hot bhature with chole curry on the side.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve with Chole Curry</li>
+                    <li>Pair with Mint Chutney</li>
+                    <li>Add sliced onions and lemon</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

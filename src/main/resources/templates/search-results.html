@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" 
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .search-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .recipe-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            text-decoration: none;
+            color: inherit;
+        }
+        .recipe-card h5 {
+            color: #667eea;
+            font-weight: bold;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a>
+
+    <div class="search-header">
+        <h1>Search Results</h1>
+        <p th:if="${keyword}">Results for "<span th:text="${keyword}"></span>"</p>
+    </div>
+
+    <div class="container" style="margin-top: 30px;">
+        <div th:if="${recipes.size() > 0}">
+            <a th:each="recipe : ${recipes}" 
+               th:href="@{/} + ${recipe.toLowerCase().replaceAll(' ', '-')}" 
+               class="recipe-card">
+                <h5 th:text="${recipe}"></h5>
+                <p>Click to view full recipe</p>
+            </a>
+        </div>
+
+        <div th:if="${recipes.size() == 0}" class="no-results">
+            <h3>No recipes found</h3>
+            <p th:if="${keyword}">We couldn't find any recipes matching "<span th:text="${keyword}"></span>"</p>
+            <p th:if="!${keyword}">Try searching for a recipe!</p>
+            <a href="/" class="btn btn-primary mt-3">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

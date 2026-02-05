@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biryani Rice Recipe</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .recipe-header { background: linear-gradient(135deg, #d4a574 0%, #c67a4a 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
+        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
+        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .recipe-section { margin-bottom: 30px; }
+        .recipe-section h2 { color: #c67a4a; border-bottom: 3px solid #c67a4a; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        .ingredient-list { list-style: none; padding: 0; }
+        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
+        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
+        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #c67a4a; counter-increment: step-counter; }
+        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #c67a4a; }
+    </style>
+</head>
+<body>
+    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
+    <div class="recipe-header">
+        <h1>🍚 Biryani Rice 🍚</h1>
+        <p class="lead">Fragrant basmati rice with aromatic spices</p>
+    </div>
+    <div class="container">
+        <div class="recipe-content">
+            <div class="recipe-section">
+                <h2>About Biryani Rice</h2>
+                <p>Biryani Rice is the perfect complement to any biryani curry. It's aromatic basmati rice infused with whole spices, creating a fragrant and flavorful rice dish that's essential for an authentic biryani experience.</p>
+            </div>
+            <div class="recipe-section">
+                <h2>Ingredients</h2>
+                <ul class="ingredient-list">
+                    <li>2 cups Basmati Rice (soaked)</li>
+                    <li>4 cups Water</li>
+                    <li>4 tablespoons Ghee or Oil</li>
+                    <li>1 large Onion (sliced)</li>
+                    <li>4 Cloves</li>
+                    <li>2 Bay Leaves</li>
+                    <li>1 inch Cinnamon Stick</li>
+                    <li>2 Green Cardamom Pods</li>
+                    <li>1 Black Cardamom Pod</li>
+                    <li>1 Star Anise</li>
+                    <li>1 teaspoon Black Cumin Seeds</li>
+                    <li>Salt to taste</li>
+                </ul>
+            </div>
+            <div class="recipe-section">
+                <h2>Instructions</h2>
+                <ol class="step-list">
+                    <li>Soak basmati rice in water for 30 minutes.</li>
+                    <li>Heat ghee in a large pot and fry sliced onions until golden. Remove and set aside.</li>
+                    <li>In the same ghee, add whole spices (cloves, bay leaves, cinnamon, cardamom, star anise, cumin seeds).</li>
+                    <li>Let the spices splutter for 30 seconds.</li>
+                    <li>Add 4 cups of water and bring to a boil.</li>
+                    <li>Add salt to the water.</li>
+                    <li>Drain the soaked rice and add to boiling water.</li>
+                    <li>Cook on high heat until rice is 70% cooked (about 6-8 minutes).</li>
+                    <li>Drain the rice in a colander.</li>
+                    <li>In a heavy-bottomed pot, layer the partially cooked rice with fried onions.</li>
+                    <li>Drizzle remaining ghee on top and cover with aluminum foil.</li>
+                    <li>Place the lid on top and cook on high heat for 2-3 minutes.</li>
+                    <li>Reduce heat to low and cook for 20-25 minutes (dum cooking).</li>
+                    <li>Turn off heat and let it rest for 5 minutes before opening.</li>
+                    <li>Gently mix with a fork to separate the grains.</li>
+                    <li>Serve hot as a side to biryani curry.</li>
+                </ol>
+            </div>
+            <div class="recipe-section">
+                <h2>Serving Suggestions</h2>
+                <ul>
+                    <li>Serve as side to Biryani Curry</li>
+                    <li>Pair with Raita (yogurt condiment)</li>
+                    <li>Accompany with Salad</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
