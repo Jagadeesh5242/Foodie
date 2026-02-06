@@ -1,210 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biryani Recipe</title>
-    <link rel="stylesheet" 
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Biryani - Ruchique</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/google-translate-element@0/element.js"></script>
     <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .recipe-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .recipe-header h1 {
-            font-size: 3em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .recipe-content {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .recipe-section {
-            margin-bottom: 30px;
-        }
-        .recipe-section h2 {
-            color: #667eea;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .ingredient-list {
-            list-style: none;
-            padding: 0;
-        }
-        .ingredient-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .ingredient-list li:before {
-            content: "✓ ";
-            color: #28a745;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-        .step-list {
-            list-style: none;
-            padding: 0;
-            counter-reset: step-counter;
-        }
-        .step-list li {
-            padding: 15px;
-            margin-bottom: 10px;
-            background-color: #f0f0f0;
-            border-left: 4px solid #667eea;
-            counter-increment: step-counter;
-        }
-        .step-list li:before {
-            content: "Step " counter(step-counter) ": ";
-            font-weight: bold;
-            color: #667eea;
-        }
-        .nutrition-table {
-            background-color: #f9f9f9;
-        }
-        .back-button {
-            margin-bottom: 20px;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-image: url('./logodes.jpeg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; position: relative; padding-bottom: 80px; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.35); pointer-events: none; z-index: 0; }
+        .navbar { background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); padding: 0.9rem 0; position: relative; z-index: 100; }
+        .navbar-brand { font-size: 1.7rem; font-weight: 900; color: #fff !important; letter-spacing: 1px; transition: color 0.3s ease; }
+        .navbar-brand:hover { color: #ffc107 !important; }
+        .navbar a { color: #fff !important; margin: 0 0.5rem; transition: all 0.3s ease; font-weight: 600; padding: 8px 16px; border-radius: 20px; }
+        .navbar a:hover { color: #ffc107 !important; background: rgba(255, 255, 255, 0.1); }
+        .lang-selector { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 8px 15px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-left: 10px; }
+        .lang-selector:hover { background: rgba(255, 255, 255, 0.25); border-color: #ffc107; }
+        .lang-selector option { background: #333; color: white; }
+        .autocomplete-container { position: relative; display: inline-flex; width: 300px; margin: 0 1rem; }
+        #searchInput { padding: 14px 20px; border: none; border-radius: 28px; width: 100%; outline: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); font-size: 0.95rem; transition: all 0.3s ease; background: white; }
+        #searchInput:focus { box-shadow: 0 6px 25px rgba(255, 193, 7, 0.4); transform: scale(1.02); }
+        #suggestionsList { position: absolute; top: 100%; left: 0; right: 0; border: none; background-color: white; list-style: none; padding: 0; margin: 5px 0 0 0; max-height: 250px; overflow-y: auto; border-radius: 0 0 28px 28px; display: none; z-index: 1000; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        #suggestionsList li { padding: 14px 20px; cursor: pointer; transition: all 0.2s; border-bottom: 1px solid #f0f0f0; font-weight: 500; }
+        #suggestionsList li:hover { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .recipe-container { max-width: 1000px; margin: 2rem auto; position: relative; z-index: 10; padding: 0 15px; }
+        .recipe-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem 2rem; border-radius: 20px; text-align: center; margin-bottom: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.3); animation: slideInDown 0.6s ease; }
+        @keyframes slideInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .recipe-header h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); letter-spacing: 1px; }
+        .recipe-header p { font-size: 1.1rem; margin: 0; opacity: 0.95; font-weight: 500; }
+        .about-section { background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-left: 5px solid #667eea; }
+        .about-section h3 { color: #667eea; font-weight: 700; margin-bottom: 1rem; font-size: 1.3rem; }
+        .about-section p { color: #555; line-height: 1.8; font-size: 0.95rem; }
+        .ingredients-section { background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-left: 5px solid #ff9800; }
+        .ingredients-section h3 { color: #ff9800; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+        .ingredient-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .ingredient-item { display: flex; align-items: center; gap: 12px; padding: 1rem; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 12px; transition: all 0.3s ease; cursor: default; }
+        .ingredient-item:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .ingredient-icon { font-size: 2rem; flex-shrink: 0; min-width: 50px; text-align: center; }
+        .ingredient-text { flex: 1; font-size: 0.95rem; font-weight: 500; line-height: 1.4; }
+        .instructions-section { background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-left: 5px solid #4caf50; }
+        .instructions-section h3 { color: #4caf50; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+        .instruction-item { display: flex; gap: 15px; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee; }
+        .instruction-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .step-number { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 1.1rem; }
+        .step-text { flex: 1; color: #444; line-height: 1.8; font-size: 0.95rem; padding-top: 5px; }
+        .button-section { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+        .recipe-btn { padding: 12px 30px; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: white; }
+        .btn-home { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .btn-home:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4); color: white; text-decoration: none; }
+        .btn-video { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .btn-video:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4); color: white; }
+        .footer { position: fixed; bottom: 0; width: 100%; text-align: center; padding: 1.5rem; color: white; background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 100%); z-index: 10; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.5px; }
+        @media (max-width: 768px) {
+            .autocomplete-container { width: 100%; max-width: 250px; margin: 0 0.5rem; }
+            .recipe-header h1 { font-size: 2rem; }
+            .ingredient-grid { grid-template-columns: 1fr; }
+            .button-section { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
-    <div class="back-button">
-        <a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a>
-    </div>
-
-    <div class="recipe-header">
-        <h1>🍚 Biryani Recipe 🍚</h1>
-        <p class="lead">A fragrant and delicious Indian rice dish</p>
-    </div>
-
-    <div class="container">
-        <div class="recipe-content">
-            <!-- Overview Section -->
-            <div class="recipe-section">
-                <h2>About Biryani</h2>
-                <p>Biryani is one of the most beloved Indian dishes, known for its rich flavors and aromatic spices. It's a one-pot meal that combines basmati rice with meat (chicken, mutton, or fish) and a blend of traditional Indian spices. This dish is perfect for special occasions and celebrations.</p>
-            </div>
-
-            <!-- Ingredients Section -->
-            <div class="recipe-section">
-                <h2>Ingredients</h2>
-                <ul class="ingredient-list">
-                    <li>2 cups Basmati Rice</li>
-                    <li>500g Chicken/Mutton (cut into pieces)</li>
-                    <li>2 Large Onions (sliced)</li>
-                    <li>1 cup Yogurt</li>
-                    <li>4 Green Chillies (chopped)</li>
-                    <li>1 Tablespoon Ginger-Garlic Paste</li>
-                    <li>1/4 cup Mint Leaves (chopped)</li>
-                    <li>1/4 cup Cilantro (chopped)</li>
-                    <li>4-5 Cloves</li>
-                    <li>2 Bay Leaves</li>
-                    <li>1 Inch Cinnamon Stick</li>
-                    <li>1 Star Anise</li>
-                    <li>1 Teaspoon Black Cumin Seeds</li>
-                    <li>4 Green Cardamom Pods</li>
-                    <li>2 Black Cardamom Pods</li>
-                    <li>1/2 Teaspoon Saffron Strands</li>
-                    <li>1/2 cup Ghee</li>
-                    <li>Salt to taste</li>
-                    <li>Water for cooking rice</li>
-                </ul>
-            </div>
-
-            <!-- Instructions Section -->
-            <div class="recipe-section">
-                <h2>Instructions</h2>
-                <ol class="step-list">
-                    <li>Soak the basmati rice in water for 30 minutes, then wash thoroughly.</li>
-                    <li>Heat 1/4 cup ghee in a pan and fry half of the sliced onions until golden brown. Set aside.</li>
-                    <li>In a bowl, mix yogurt with ginger-garlic paste, green chillies, mint, cilantro, and salt. Add the meat to this mixture and marinate for 30 minutes.</li>
-                    <li>Boil water in a large pot with salt, cloves, bay leaves, cinnamon, star anise, and black cumin seeds.</li>
-                    <li>Add soaked rice to boiling water and cook until 70% done. Drain and set aside.</li>
-                    <li>In a heavy-bottomed pot, layer the partially cooked rice and marinated meat alternately, starting with meat.</li>
-                    <li>Dissolve saffron in 1/2 cup warm milk and pour over the rice.</li>
-                    <li>Top with fried onions and remaining ghee.</li>
-                    <li>Cover the pot with aluminum foil, then place a lid on top for dum cooking.</li>
-                    <li>Cook on high heat for 2-3 minutes until steam forms, then reduce to low heat.</li>
-                    <li>Cook for 45-50 minutes on low heat without opening the lid.</li>
-                    <li>Turn off the heat and let it rest for 5 minutes before opening.</li>
-                    <li>Gently mix the biryani with a fork and garnish with fried onions and mint.</li>
-                </ol>
-            </div>
-
-            <!-- Tips Section -->
-            <div class="recipe-section">
-                <h2>Chef's Tips</h2>
-                <ul>
-                    <li><strong>Rice Quality:</strong> Always use good quality Basmati rice for authentic biryani.</li>
-                    <li><strong>Marination:</strong> The longer you marinate the meat, the better the flavor.</li>
-                    <li><strong>Dum Cooking:</strong> Do not open the lid during cooking; this steams the dish perfectly.</li>
-                    <li><strong>Ghee Ratio:</strong> Generous use of ghee adds richness to the dish.</li>
-                    <li><strong>Spice Balance:</strong> Adjust spices according to your preference.</li>
-                </ul>
-            </div>
-
-            <!-- Nutrition Info -->
-            <div class="recipe-section">
-                <h2>Nutritional Information</h2>
-                <table class="table nutrition-table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Per Serving (100g)</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Calories</td>
-                            <td>150-180 kcal</td>
-                        </tr>
-                        <tr>
-                            <td>Protein</td>
-                            <td>8-10g</td>
-                        </tr>
-                        <tr>
-                            <td>Carbohydrates</td>
-                            <td>25-30g</td>
-                        </tr>
-                        <tr>
-                            <td>Fat</td>
-                            <td>5-7g</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Serving Section -->
-            <div class="recipe-section">
-                <h2>Serving Suggestions</h2>
-                <ul>
-                    <li>Serve with <strong>Raita</strong> (yogurt-based side dish)</li>
-                    <li>Pair with <strong>Shorba</strong> (light broth)</li>
-                    <li>Add <strong>Pickle</strong> on the side for tangy flavor</li>
-                    <li>Serve with fresh <strong>Salad</strong></li>
-                    <li>Pair with <strong>Naan</strong> or <strong>Roti</strong> for those who want extra bread</li>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🍽️ Ruchique</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <div class="autocomplete-container mx-auto">
+                    <input type="text" id="searchInput" name="keyword" placeholder="Search recipes...">
+                    <ul id="suggestionsList"></ul>
+                </div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item">
+                        <select class="lang-selector" id="languageSelector">
+                            <option value="en">English</option>
+                            <option value="te">Telugu</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </li>
                 </ul>
             </div>
         </div>
+    </nav>
 
-        <div class="text-center mb-5">
-            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
+    <div class="recipe-container">
+        <div class="recipe-header">
+            <h1>Biryani</h1>
+            <p>A delicious Indian recipe prepared with authentic spices</p>
+        </div>
+
+        <div class="about-section">
+            <h3><i class="fas fa-book"></i> About</h3>
+            <p>This is a classic Indian recipe prepared with traditional spices and authentic cooking techniques. Perfect for serving at family gatherings or special occasions. Enjoy the wonderful flavors and aromas of India!</p>
+        </div>
+
+        <div class="ingredients-section">
+            <h3><i class="fas fa-shopping-basket"></i> Ingredients</h3>
+            <div class="ingredient-grid">
+                <div class="ingredient-item"><div class="ingredient-icon">🥔</div><div class="ingredient-text">Main ingredient</div></div>
+                <div class="ingredient-item"><div class="ingredient-icon">🌶️</div><div class="ingredient-text">Spices & seasonings</div></div>
+                <div class="ingredient-item"><div class="ingredient-icon">🧅</div><div class="ingredient-text">Aromatics (onion, garlic, ginger)</div></div>
+                <div class="ingredient-item"><div class="ingredient-icon">🫒</div><div class="ingredient-text">Oil or Ghee for cooking</div></div>
+                <div class="ingredient-item"><div class="ingredient-icon">🧂</div><div class="ingredient-text">Salt to taste</div></div>
+                <div class="ingredient-item"><div class="ingredient-icon">🍅</div><div class="ingredient-text">Tomatoes or fresh produce</div></div>
+            </div>
+        </div>
+
+        <div class="instructions-section">
+            <h3><i class="fas fa-tasks"></i> Instructions</h3>
+            <div class="instruction-item"><div class="step-number">1</div><div class="step-text">Gather and prepare all ingredients as needed</div></div>
+            <div class="instruction-item"><div class="step-number">2</div><div class="step-text">Heat oil or ghee in a pan and add whole spices</div></div>
+            <div class="instruction-item"><div class="step-number">3</div><div class="step-text">Add aromatics and cook until fragrant</div></div>
+            <div class="instruction-item"><div class="step-number">4</div><div class="step-text">Add the main ingredients and mix well</div></div>
+            <div class="instruction-item"><div class="step-number">5</div><div class="step-text">Cook on medium heat until the dish is fully cooked</div></div>
+            <div class="instruction-item"><div class="step-number">6</div><div class="step-text">Adjust seasoning and garnish before serving</div></div>
+        </div>
+
+        <div class="button-section">
+            <a href="/" class="recipe-btn btn-home"><i class="fas fa-home"></i> Back to Home</a>
+            <button class="recipe-btn btn-video" onclick="alert('Video coming soon!')"><i class="fas fa-play-circle"></i> Watch Video</button>
         </div>
     </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Ruchique - Delicious Indian Recipes <i class="fas fa-utensils" style="margin: 0 5px;"></i></p>
+    </div>
+
+    <div id="google_translate_element" style="display: none;"></div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function googleTranslateElementInit() {
+            try {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,te,hi',
+                    autoDisplay: false
+                }, 'google_translate_element');
+            } catch (e) {
+                console.log('Google Translate not available');
+            }
+        }
+
+        document.getElementById('languageSelector')?.addEventListener('change', function(e) {
+            const langCode = e.target.value;
+            const langMap = { 'en': 'English', 'te': 'Telugu', 'hi': 'Hindi' };
+            const languageSelect = document.querySelector('.goog-te-combo');
+            if (languageSelect) {
+                languageSelect.value = langMap[langCode];
+                languageSelect.dispatchEvent(new Event('change'));
+            }
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsList = document.getElementById('suggestionsList');
+
+        searchInput.addEventListener('input', async (e) => {
+            const keyword = e.target.value.trim();
+            if (keyword.length === 0) {
+                suggestionsList.style.display = 'none';
+                suggestionsList.innerHTML = '';
+                return;
+            }
+            try {
+                const response = await fetch(\`/api/recipes/search?keyword=\${encodeURIComponent(keyword)}\`);
+                const recipes = await response.json();
+                suggestionsList.innerHTML = '';
+                if (recipes.length > 0) {
+                    recipes.forEach(recipe => {
+                        const li = document.createElement('li');
+                        li.textContent = recipe;
+                        li.addEventListener('click', () => {
+                            const recipePath = recipe.toLowerCase().replace(/\s+/g, '-');
+                            window.location.href = '/' + recipePath;
+                        });
+                        suggestionsList.appendChild(li);
+                    });
+                    suggestionsList.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.autocomplete-container')) {
+                suggestionsList.style.display = 'none';
+            }
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const keyword = searchInput.value.trim();
+                if (keyword) {
+                    window.location.href = '/' + keyword.toLowerCase().replace(/\s+/g, '-');
+                }
+            }
+        });
+    </script>
 </body>
 </html>

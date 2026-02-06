@@ -1,23 +1,122 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Time Planner</title>
+    <title>Ruchique - Indian Recipes</title>
     <link rel="stylesheet" 
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/google-translate-element@0/element.js"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('./logodes.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navbar Styling - Enhanced */
+        .navbar {
+            background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 0.9rem 0;
+            position: relative;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #fff !important;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #ffc107 !important;
+        }
+
+        .navbar a {
+            color: #fff !important;
+            margin: 0 0.8rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .navbar a:hover {
+            color: #ffc107 !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Language Selector */
+        .lang-selector {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .lang-selector:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #ffc107;
+        }
+
+        .lang-selector option {
+            background: #333;
+            color: white;
+        }
+
         /* Autocomplete dropdown styling */
         .autocomplete-container {
             position: relative;
-            display: inline-block;
-            width: 250px;
+            display: inline-flex;
+            width: 350px;
+            margin: 0 1rem;
         }
 
         #searchInput {
-            padding: 10px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 28px;
             width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 20px;
             outline: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        #searchInput:focus {
+            box-shadow: 0 6px 25px rgba(255, 193, 7, 0.4);
+            transform: scale(1.02);
         }
 
         #suggestionsList {
@@ -25,82 +124,187 @@
             top: 100%;
             left: 0;
             right: 0;
-            border: 1px solid #ddd;
-            border-top: none;
+            border: none;
             background-color: white;
             list-style: none;
             padding: 0;
-            margin: 0;
-            max-height: 200px;
+            margin: 5px 0 0 0;
+            max-height: 250px;
             overflow-y: auto;
-            border-radius: 0 0 20px 20px;
+            border-radius: 0 0 28px 28px;
             display: none;
             z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
         #suggestionsList li {
-            padding: 10px 15px;
+            padding: 14px 20px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+            font-weight: 500;
         }
 
         #suggestionsList li:hover {
-            background-color: #f0f0f0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
 
-        #suggestionsList li.highlight {
-            background-color: #4CAF50;
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-top: 12%;
             color: white;
+            position: relative;
+            z-index: 10;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section p {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            font-weight: 400;
+        }
+
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem;
+            color: white;
+            background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 10;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Google Translate */
+        .goog-tooltip {
+            background-color: #667eea !important;
+        }
+
+        @media (max-width: 768px) {
+            .autocomplete-container {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+
+            .navbar {
+                padding: 0.7rem 0;
+            }
         }
     </style>
 </head>
-<body style="background-image: url('./logodes.jpeg'); 
-             background-size: cover; 
-             background-repeat: no-repeat; 
-             background-position: center;">
-
-    <form action="/search" method="get" style="text-align:center; margin-top:20px;">
-        <div class="autocomplete-container">
-            <input type="text" id="searchInput" name="keyword" placeholder="Search recipes... (type 1+ letter)"
-                style="
-                    padding:10px;
-                    width:100%;
-                    border:1px solid #ccc;
-                    border-radius:20px;
-                    outline:none;
-                ">
-            <ul id="suggestionsList"></ul>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🍽️ Ruchique</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <div class="autocomplete-container mx-auto">
+                    <input type="text" id="searchInput" name="keyword" placeholder="Search recipes...">
+                    <ul id="suggestionsList"></ul>
+                </div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item">
+                        <select class="lang-selector" id="languageSelector">
+                            <option value="en">English</option>
+                            <option value="te">Telugu</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <button type="submit"
-            style="
-                padding:10px 15px;
-                border:none;
-                border-radius:20px;
-                background-color:#4CAF50;
-                color:white;
-                cursor:pointer;
-                margin-left: 10px;
-            ">
-            Search
-        </button>
-    </form>
-
-    <div class="container text-center" style="margin-top: 33%;">
-        <h1 class="display-4 text-white"><b>Welcome to Chef Mantra</b></h1>
-        <p class="lead text-white">Any Body can cook</p>
-        <p class="lead text-white">Plan your meals with ease!</p>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Welcome to Ruchique</h1>
+        <p>Authentic Indian Recipes</p>
+        <p>Plan your meals with ease!</p>
     </div>
 
+    <div class="footer">
+        <p>&copy; 2026 Ruchique - Delicious Indian Recipes <i class="fas fa-utensils" style="margin: 0 5px;"></i></p>
+    </div>
+
+    <!-- Google Translate Element -->
+    <div id="google_translate_element" style="display: none;"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // Google Translate Init
+        function googleTranslateElementInit() {
+            try {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,te,hi',
+                    autoDisplay: false
+                }, 'google_translate_element');
+            } catch (e) {
+                console.log('Google Translate not available');
+            }
+        }
+
+        // Handle language change
+        document.getElementById('languageSelector')?.addEventListener('change', function(e) {
+            const langCode = e.target.value;
+            const langMap = { 'en': 'English', 'te': 'Telugu', 'hi': 'Hindi' };
+            const languageSelect = document.querySelector('.goog-te-combo');
+            if (languageSelect) {
+                languageSelect.value = langMap[langCode];
+                languageSelect.dispatchEvent(new Event('change'));
+            }
+        });
+
+        // Search functionality
         const searchInput = document.getElementById('searchInput');
         const suggestionsList = document.getElementById('suggestionsList');
 
         searchInput.addEventListener('input', async (e) => {
             const keyword = e.target.value.trim();
 
-            // Show suggestions only if user typed at least 1 character
             if (keyword.length === 0) {
                 suggestionsList.style.display = 'none';
                 suggestionsList.innerHTML = '';
@@ -108,11 +312,9 @@
             }
 
             try {
-                // Fetch recipes from backend
                 const response = await fetch(`/api/recipes/search?keyword=${encodeURIComponent(keyword)}`);
                 const recipes = await response.json();
 
-                // Clear previous suggestions
                 suggestionsList.innerHTML = '';
 
                 if (recipes.length > 0) {
@@ -120,7 +322,6 @@
                         const li = document.createElement('li');
                         li.textContent = recipe;
                         li.addEventListener('click', () => {
-                            // Convert recipe name to URL path
                             const recipePath = recipe.toLowerCase().replace(/\s+/g, '-');
                             window.location.href = '/' + recipePath;
                         });
@@ -146,14 +347,14 @@
             }
         });
 
-        // Prevent form submission and navigate to recipe page
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const keyword = searchInput.value.trim();
-            if (keyword) {
-                // Convert input to URL path
-                const recipePath = keyword.toLowerCase().replace(/\s+/g, '-');
-                window.location.href = '/' + recipePath;
+        // Search on Enter key
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const keyword = searchInput.value.trim();
+                if (keyword) {
+                    const recipePath = keyword.toLowerCase().replace(/\s+/g, '-');
+                    window.location.href = '/' + recipePath;
+                }
             }
         });
     </script>

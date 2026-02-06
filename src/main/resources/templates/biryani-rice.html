@@ -3,85 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biryani Rice Recipe</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Biryani Rice Recipe - Chef Mantra</title>
     <style>
-        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .recipe-header { background: linear-gradient(135deg, #d4a574 0%, #c67a4a 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
-        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
-        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .recipe-section { margin-bottom: 30px; }
-        .recipe-section h2 { color: #c67a4a; border-bottom: 3px solid #c67a4a; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; color: #333; }
+        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px 30px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .navbar-logo { font-size: 24px; font-weight: bold; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .navbar-logo:hover { color: #e0e0e0; }
+        .navbar-center { flex: 1; display: flex; justify-content: center; }
+        .autocomplete-container { position: relative; width: 100%; max-width: 350px; }
+        .search-input { width: 100%; padding: 12px 20px; border: none; border-radius: 25px; font-size: 14px; outline: none; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: box-shadow 0.3s ease; }
+        .search-input:focus { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        .suggestions-list { position: absolute; top: 100%; left: 0; right: 0; background: white; border-radius: 0 0 25px 25px; list-style: none; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin-top: -5px; display: none; z-index: 1001; }
+        .suggestions-list.active { display: block; }
+        .suggestion-item { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background-color 0.2s ease; }
+        .suggestion-item:hover { background-color: #f0f0f0; color: #667eea; }
+        .navbar-right { display: flex; gap: 20px; align-items: center; }
+        .nav-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .nav-link:hover { color: #e0e0e0; }
+        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 40px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); margin-bottom: 30px; }
+        .recipe-title { font-size: 36px; font-weight: bold; color: #333; margin-bottom: 10px; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
+        .recipe-subtitle { color: #666; font-size: 14px; margin-bottom: 30px; }
+        .section-title { font-size: 20px; font-weight: bold; color: #667eea; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #764ba2; padding-bottom: 10px; }
+        .section-title:first-of-type { margin-top: 0; }
         .ingredient-list { list-style: none; padding: 0; }
-        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
-        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
-        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
-        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #c67a4a; counter-increment: step-counter; }
-        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #c67a4a; }
+        .ingredient-list li { padding: 10px 0 10px 25px; position: relative; line-height: 1.6; color: #555; }
+        .ingredient-list li:before { content: "•"; position: absolute; left: 0; color: #764ba2; font-weight: bold; font-size: 18px; }
+        .instructions-list { list-style: none; padding: 0; counter-reset: step; }
+        .instructions-list li { padding: 12px 0 12px 35px; position: relative; line-height: 1.8; color: #555; counter-increment: step; }
+        .instructions-list li:before { content: counter(step); position: absolute; left: 0; top: 10px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
+        .about-text { font-size: 15px; line-height: 1.8; color: #666; margin-bottom: 20px; }
+        .button-group { display: flex; gap: 15px; margin-top: 40px; justify-content: center; }
+        .btn { padding: 12px 30px; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; font-size: 14px; }
+        .btn-home { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-home:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); color: white; }
+        .footer { background: rgba(0, 0, 0, 0.1); color: white; text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+        .footer p { margin: 0; font-size: 13px; }
+        @media (max-width: 768px) { .navbar { flex-direction: column; gap: 15px; } .recipe-card { padding: 25px; } .recipe-title { font-size: 28px; } .button-group { flex-direction: column; } .btn { width: 100%; text-align: center; } }
     </style>
 </head>
 <body>
-    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
-    <div class="recipe-header">
-        <h1>🍚 Biryani Rice 🍚</h1>
-        <p class="lead">Fragrant basmati rice with aromatic spices</p>
-    </div>
+    <nav class="navbar">
+        <a href="/" class="navbar-logo">🍽️ Chef Mantra</a>
+        <div class="navbar-center">
+            <div class="autocomplete-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search recipes...">
+                <ul class="suggestions-list" id="suggestionsList"></ul>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a href="/" class="nav-link">Home</a>
+        </div>
+    </nav>
+
     <div class="container">
-        <div class="recipe-content">
-            <div class="recipe-section">
-                <h2>About Biryani Rice</h2>
-                <p>Biryani Rice is the perfect complement to any biryani curry. It's aromatic basmati rice infused with whole spices, creating a fragrant and flavorful rice dish that's essential for an authentic biryani experience.</p>
+        <div class="recipe-card">
+            <h1 class="recipe-title">Biryani Rice</h1>
+            <p class="recipe-subtitle">Fragrant basmati rice cooked with aromatic spices</p>
+            <h2 class="section-title">About</h2>
+            <p class="about-text">Biryani Rice is the foundation of this iconic dish. Premium basmati rice layered with aromatic spices and cooked in the dum pukht method creates a fragrant, fluffy masterpiece that's a meal in itself.</p>
+            <h2 class="section-title">Ingredients</h2>
+            <ul class="ingredient-list">
+                <li>3 cups Basmati Rice, soaked for 30 minutes</li>
+                <li>4 cups Water</li>
+                <li>4 tablespoons Ghee</li>
+                <li>2 onions, sliced</li>
+                <li>3 green cardamom pods</li>
+                <li>2 black cardamom pods</li>
+                <li>3 cloves</li>
+                <li>1 inch Cinnamon Stick</li>
+                <li>1 bay leaf</li>
+                <li>2 tablespoons Ginger-Garlic Paste</li>
+                <li>1/4 cup Fresh Mint and Coriander, chopped</li>
+                <li>2 Green Chilies, sliced</li>
+                <li>Salt to taste</li>
+            </ul>
+            <h2 class="section-title">Instructions</h2>
+            <ol class="instructions-list">
+                <li>Boil water with whole spices and salt.</li>
+                <li>Add soaked and drained rice to boiling water.</li>
+                <li>Cook until 70% done, then drain immediately.</li>
+                <li>Heat ghee in a heavy-bottomed pot.</li>
+                <li>Brown onions until golden and crispy.</li>
+                <li>Remove half the onions and set aside.</li>
+                <li>Layer partially cooked rice over remaining onions.</li>
+                <li>Sprinkle ginger-garlic paste, mint, coriander, and green chilies.</li>
+                <li>Top with reserved fried onions and remaining ghee.</li>
+                <li>Cover with foil and place tight-fitting lid.</li>
+                <li>Cook on high heat for 2-3 minutes until steam forms.</li>
+                <li>Reduce heat to low and cook for 45 minutes (dum cooking).</li>
+                <li>Turn off heat and let rest for 5 minutes without opening.</li>
+                <li>Gently open and fluff with a fork.</li>
+                <li>Serve hot, garnishing with fresh herbs.</li>
+            </ol>
+            <div class="button-group">
+                <a href="/" class="btn btn-home">← Back to Home</a>
+                <a href="#" class="btn btn-home" style="background: linear-gradient(135deg, #dc143c 0%, #c41e3a 100%);">▶ Watch Video</a>
             </div>
-            <div class="recipe-section">
-                <h2>Ingredients</h2>
-                <ul class="ingredient-list">
-                    <li>2 cups Basmati Rice (soaked)</li>
-                    <li>4 cups Water</li>
-                    <li>4 tablespoons Ghee or Oil</li>
-                    <li>1 large Onion (sliced)</li>
-                    <li>4 Cloves</li>
-                    <li>2 Bay Leaves</li>
-                    <li>1 inch Cinnamon Stick</li>
-                    <li>2 Green Cardamom Pods</li>
-                    <li>1 Black Cardamom Pod</li>
-                    <li>1 Star Anise</li>
-                    <li>1 teaspoon Black Cumin Seeds</li>
-                    <li>Salt to taste</li>
-                </ul>
-            </div>
-            <div class="recipe-section">
-                <h2>Instructions</h2>
-                <ol class="step-list">
-                    <li>Soak basmati rice in water for 30 minutes.</li>
-                    <li>Heat ghee in a large pot and fry sliced onions until golden. Remove and set aside.</li>
-                    <li>In the same ghee, add whole spices (cloves, bay leaves, cinnamon, cardamom, star anise, cumin seeds).</li>
-                    <li>Let the spices splutter for 30 seconds.</li>
-                    <li>Add 4 cups of water and bring to a boil.</li>
-                    <li>Add salt to the water.</li>
-                    <li>Drain the soaked rice and add to boiling water.</li>
-                    <li>Cook on high heat until rice is 70% cooked (about 6-8 minutes).</li>
-                    <li>Drain the rice in a colander.</li>
-                    <li>In a heavy-bottomed pot, layer the partially cooked rice with fried onions.</li>
-                    <li>Drizzle remaining ghee on top and cover with aluminum foil.</li>
-                    <li>Place the lid on top and cook on high heat for 2-3 minutes.</li>
-                    <li>Reduce heat to low and cook for 20-25 minutes (dum cooking).</li>
-                    <li>Turn off heat and let it rest for 5 minutes before opening.</li>
-                    <li>Gently mix with a fork to separate the grains.</li>
-                    <li>Serve hot as a side to biryani curry.</li>
-                </ol>
-            </div>
-            <div class="recipe-section">
-                <h2>Serving Suggestions</h2>
-                <ul>
-                    <li>Serve as side to Biryani Curry</li>
-                    <li>Pair with Raita (yogurt condiment)</li>
-                    <li>Accompany with Salad</li>
-                </ul>
-            </div>
-        </div>
-        <div class="text-center mb-5">
-            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
         </div>
     </div>
+
+    <div class="footer"><p>&copy; 2026 Chef Mantra. All rights reserved.</p></div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsList = document.getElementById('suggestionsList');
+        searchInput.addEventListener('input', async (e) => {
+            const keyword = e.target.value.trim();
+            if (keyword.length === 0) { suggestionsList.classList.remove('active'); return; }
+            try {
+                const response = await fetch(`/api/recipes/search?keyword=${encodeURIComponent(keyword)}`);
+                const recipes = await response.json();
+                suggestionsList.innerHTML = '';
+                if (recipes.length > 0) {
+                    recipes.forEach(recipe => {
+                        const li = document.createElement('li');
+                        li.className = 'suggestion-item';
+                        li.textContent = recipe;
+                        li.addEventListener('click', () => {
+                            const url = recipe.toLowerCase().replace(/\s+/g, '-');
+                            window.location.href = `/${url}.html`;
+                        });
+                        suggestionsList.appendChild(li);
+                    });
+                    suggestionsList.classList.add('active');
+                }
+            } catch (error) { console.error('Search error:', error); }
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.autocomplete-container')) { suggestionsList.classList.remove('active'); }
+        });
+    </script>
 </body>
 </html>
