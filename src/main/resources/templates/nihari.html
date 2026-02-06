@@ -313,6 +313,15 @@
             letter-spacing: 0.5px;
         }
 
+        @media (max-width: 992px) {
+            .autocomplete-container {
+                width: 100%;
+                max-width: 350px;
+                margin: 0.5rem 0.5rem;
+                flex: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             .content-grid {
                 grid-template-columns: 1fr;
@@ -328,8 +337,14 @@
 
             .autocomplete-container {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
                 margin: 0.5rem auto;
+                flex: 1;
+            }
+
+            #searchInput {
+                font-size: 0.9rem;
+                padding: 12px 16px;
             }
 
             .action-buttons {
@@ -339,6 +354,82 @@
             .btn-action {
                 width: 100%;
                 justify-content: center;
+            }
+
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding-top: 100px;
+                padding-bottom: 80px;
+            }
+
+            .autocomplete-container {
+                width: calc(100% - 20px) !important;
+                max-width: none !important;
+                margin: 0.5rem 10px !important;
+                flex: 1 !important;
+            }
+
+            #searchInput {
+                font-size: 0.85rem;
+                padding: 10px 14px;
+                border-radius: 20px;
+            }
+
+            #suggestionsList {
+                max-height: 200px;
+            }
+
+            #suggestionsList li {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+
+            .recipe-title {
+                font-size: 1.5rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem;
+                letter-spacing: 0px;
+            }
+
+            .navbar {
+                padding: 0.5rem 0;
+            }
+
+            .ingredient-chip {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+
+            .step-number {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+            .instruction-step {
+                gap: 10px;
+            }
+
+            .step-text {
+                font-size: 0.9rem;
+            }
+
+            .btn-action {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                gap: 6px;
+            }
+
+            .footer {
+                padding: 1rem;
+                font-size: 0.85rem;
             }
         }
     </style>
