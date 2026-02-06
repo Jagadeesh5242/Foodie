@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pakora Recipe - Ruchique</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/google-translate-element@0/element.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            padding: 0.9rem 0;
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #fff !important;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #ffc107 !important;
+        }
+
+        .navbar a {
+            color: #fff !important;
+            margin: 0 0.8rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .navbar a:hover {
+            color: #ffc107 !important;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+        }
+
+        .lang-selector {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-selector:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: #ffc107;
+        }
+
+        .lang-selector option {
+            background: #333;
+            color: white;
+        }
+
+        .container {
+            margin-top: 5rem;
+            margin-bottom: 3rem;
+            max-width: 900px;
+        }
+
+        .recipe-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border-left: 6px solid #ffc107;
+        }
+
+        h1 {
+            color: #fa709a;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            color: #d1924a;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #fa709a;
+            font-weight: 800;
+            margin-top: 2rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 3px solid #ffc107;
+            padding-bottom: 0.5rem;
+        }
+
+        .ingredient-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ingredient-item {
+            background: linear-gradient(135deg, #ffe8e8 0%, #fff8e8 100%);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 4px solid #fa709a;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .ingredient-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #fff9e6 0%, #fff0cc 100%);
+        }
+
+        .ingredient-emoji {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredient-name {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+
+        .ingredient-weight {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .instructions {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instruction-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            gap: 1.5rem;
+        }
+
+        .instruction-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(250,112,154,0.4);
+        }
+
+        .instruction-text {
+            padding-top: 0.7rem;
+            color: #333;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-video {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a3f 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255,107,107,0.4);
+        }
+
+        .btn-video:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,107,107,0.6);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-home {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(250,112,154,0.4);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(250,112,154,0.6);
+            color: white;
+            text-decoration: none;
+        }
+
+        .about {
+            background: linear-gradient(135deg, rgba(255,193,7,0.1) 0%, rgba(255,152,0,0.1) 100%);
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .about-title {
+            color: #ffc107;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .recipe-card {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .ingredient-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🍽️ Ruchique</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item">
+                        <select class="lang-selector" id="languageSelector">
+                            <option value="en">English</option>
+                            <option value="te">Telugu</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="recipe-card">
+            <h1>🫒 Pakora</h1>
+            <p class="subtitle">Crispy Indian Vegetable Fritters</p>
+
+            <div class="about">
+                <div class="about-title">About This Dish</div>
+                <p>Pakora is a popular Indian appetizer made from vegetables coated in a gram flour (chickpea flour) batter and deep-fried until golden and crispy. It's commonly served as a snack or starter with green chutney and tamarind sauce.</p>
+            </div>
+
+            <div class="section-title">📦 Ingredients</div>
+            <div class="ingredient-grid">
+                <div class="ingredient-item">
+                    <div class="ingredient-emoji">🥔</div>
+                    <div class="ingredient-name">Gram Flour</div>
+                    <div class="ingredient-weight">1 cup</div>
+                </div>
+                <div class="ingredient-item">
+                    <div class="ingredient-emoji">🧅</div>
+                    <div class="ingredient-name">Onion</div>
+                    <div class="ingredient-weight">2 medium</div>
+                </div>
+                <div class="ingredient-item">
+                    <div class="ingredient-emoji">🫒</div>
+                    <div class="ingredient-name">Cooking Oil</div>
+                    <div class="ingredient-weight">For frying</div>
+                </div>
+                <div class="ingredient-item">
+                    <div class="ingredient-emoji">🧂</div>
+                    <div class="ingredient-name">Salt</div>
+                    <div class="ingredient-weight">To taste</div>
+                </div>
+                <div class="ingredient-item">
+                    <div class="ingredient-emoji">🌶️</div>
+                    <div class="ingredient-name">Red Chili Powder</div>
+                    <div class="ingredient-weight">1 tsp</div>
+                </div>
+                <div class="ingredient-item">
+                    <div class="ingredient-emoji">💧</div>
+                    <div class="ingredient-name">Water</div>
+                    <div class="ingredient-weight">As needed</div>
+                </div>
+            </div>
+
+            <div class="section-title">👨‍🍳 Instructions</div>
+            <ol class="instructions">
+                <li class="instruction-item">
+                    <div class="instruction-number">1</div>
+                    <div class="instruction-text">Mix gram flour with salt, turmeric, and red chili powder in a bowl</div>
+                </li>
+                <li class="instruction-item">
+                    <div class="instruction-number">2</div>
+                    <div class="instruction-text">Add water gradually to make a thick batter of dropping consistency</div>
+                </li>
+                <li class="instruction-item">
+                    <div class="instruction-number">3</div>
+                    <div class="instruction-text">Slice onions into rings or cut vegetables into desired shapes</div>
+                </li>
+                <li class="instruction-item">
+                    <div class="instruction-number">4</div>
+                    <div class="instruction-text">Dip vegetable pieces into the batter, coating them evenly</div>
+                </li>
+                <li class="instruction-item">
+                    <div class="instruction-number">5</div>
+                    <div class="instruction-text">Heat oil in a deep pan until it reaches 170°C (medium-high heat)</div>
+                </li>
+                <li class="instruction-item">
+                    <div class="instruction-number">6</div>
+                    <div class="instruction-text">Carefully drop batter-coated vegetables into hot oil</div>
+                </li>
+                <li class="instruction-item">
+                    <div class="instruction-number">7</div>
+                    <div class="instruction-text">Fry for 2-3 minutes until golden brown on all sides, stirring occasionally</div>
+                </li>
+                <li class="instruction-item">
+                    <div class="instruction-number">8</div>
+                    <div class="instruction-text">Remove with a slotted spoon and drain on paper towels</div>
+                </li>
+                <li class="instruction-item">
+                    <div class="instruction-number">9</div>
+                    <div class="instruction-text">Serve hot with green chutney and tamarind sauce</div>
+                </li>
+            </ol>
+
+            <div class="button-group">
+                <button class="btn-video" onclick="alert('Please share a video link for Pakora recipe!')">
+                    <i class="fas fa-play-circle"></i> Watch Video
+                </button>
+                <a href="/" class="btn-home">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Ruchique - Authentic Indian Recipes <i class="fas fa-utensils"></i></p>
+    </div>
+
+    <div id="google_translate_element" style="display: none;"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function googleTranslateElementInit() {
+            try {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,te,hi',
+                    autoDisplay: false
+                }, 'google_translate_element');
+            } catch (e) {
+                console.log('Google Translate not available');
+            }
+        }
+
+        document.getElementById('languageSelector')?.addEventListener('change', function(e) {
+            const langCode = e.target.value;
+            const langMap = { 'en': 'English', 'te': 'Telugu', 'hi': 'Hindi' };
+            const languageSelect = document.querySelector('.goog-te-combo');
+            if (languageSelect) {
+                languageSelect.value = langMap[langCode];
+                languageSelect.dispatchEvent(new Event('change'));
+            }
+        });
+    </script>
+</body>
+</html>

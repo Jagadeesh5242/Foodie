@@ -3,88 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garlic Naan Recipe</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Garlic Naan Recipe - Chef Mantra</title>
     <style>
-        body { background-color: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .recipe-header { background: linear-gradient(135deg, #c67a4a 0%, #d4a574 100%); color: white; padding: 40px 20px; text-align: center; margin-bottom: 30px; }
-        .recipe-header h1 { font-size: 3em; font-weight: bold; margin-bottom: 10px; }
-        .recipe-content { background: white; border-radius: 10px; padding: 30px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .recipe-section { margin-bottom: 30px; }
-        .recipe-section h2 { color: #c67a4a; border-bottom: 3px solid #c67a4a; padding-bottom: 10px; margin-bottom: 15px; font-weight: bold; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; color: #333; }
+        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px 30px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .navbar-logo { font-size: 24px; font-weight: bold; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .navbar-logo:hover { color: #e0e0e0; }
+        .navbar-center { flex: 1; display: flex; justify-content: center; }
+        .autocomplete-container { position: relative; width: 100%; max-width: 350px; }
+        .search-input { width: 100%; padding: 12px 20px; border: none; border-radius: 25px; font-size: 14px; outline: none; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: box-shadow 0.3s ease; }
+        .search-input:focus { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        .suggestions-list { position: absolute; top: 100%; left: 0; right: 0; background: white; border-radius: 0 0 25px 25px; list-style: none; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin-top: -5px; display: none; z-index: 1001; }
+        .suggestions-list.active { display: block; }
+        .suggestion-item { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background-color 0.2s ease; }
+        .suggestion-item:hover { background-color: #f0f0f0; color: #667eea; }
+        .navbar-right { display: flex; gap: 20px; align-items: center; }
+        .nav-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .nav-link:hover { color: #e0e0e0; }
+        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        .recipe-card { background: white; border-radius: 15px; padding: 40px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); margin-bottom: 30px; }
+        .recipe-title { font-size: 36px; font-weight: bold; color: #333; margin-bottom: 10px; border-bottom: 3px solid #667eea; padding-bottom: 15px; }
+        .recipe-subtitle { color: #666; font-size: 14px; margin-bottom: 30px; }
+        .section-title { font-size: 20px; font-weight: bold; color: #667eea; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #764ba2; padding-bottom: 10px; }
+        .section-title:first-of-type { margin-top: 0; }
         .ingredient-list { list-style: none; padding: 0; }
-        .ingredient-list li { padding: 8px 0; border-bottom: 1px solid #eee; }
-        .ingredient-list li:before { content: "✓ "; color: #28a745; font-weight: bold; margin-right: 10px; }
-        .step-list { list-style: none; padding: 0; counter-reset: step-counter; }
-        .step-list li { padding: 15px; margin-bottom: 10px; background-color: #f0f0f0; border-left: 4px solid #c67a4a; counter-increment: step-counter; }
-        .step-list li:before { content: "Step " counter(step-counter) ": "; font-weight: bold; color: #c67a4a; }
+        .ingredient-list li { padding: 10px 0 10px 25px; position: relative; line-height: 1.6; color: #555; }
+        .ingredient-list li:before { content: "•"; position: absolute; left: 0; color: #764ba2; font-weight: bold; font-size: 18px; }
+        .instructions-list { list-style: none; padding: 0; counter-reset: step; }
+        .instructions-list li { padding: 12px 0 12px 35px; position: relative; line-height: 1.8; color: #555; counter-increment: step; }
+        .instructions-list li:before { content: counter(step); position: absolute; left: 0; top: 10px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; }
+        .about-text { font-size: 15px; line-height: 1.8; color: #666; margin-bottom: 20px; }
+        .button-group { display: flex; gap: 15px; margin-top: 40px; justify-content: center; }
+        .btn { padding: 12px 30px; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; font-size: 14px; }
+        .btn-home { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-home:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); color: white; }
+        .footer { background: rgba(0, 0, 0, 0.1); color: white; text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+        .footer p { margin: 0; font-size: 13px; }
+        @media (max-width: 768px) { .navbar { flex-direction: column; gap: 15px; } .recipe-card { padding: 25px; } .recipe-title { font-size: 28px; } .button-group { flex-direction: column; } .btn { width: 100%; text-align: center; } }
     </style>
 </head>
 <body>
-    <div><a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a></div>
-    <div class="recipe-header">
-        <h1>🧄 Garlic Naan 🧄</h1>
-        <p class="lead">Soft Indian flatbread with garlic and herbs</p>
-    </div>
+    <nav class="navbar">
+        <a href="/" class="navbar-logo">🍽️ Chef Mantra</a>
+        <div class="navbar-center">
+            <div class="autocomplete-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search recipes...">
+                <ul class="suggestions-list" id="suggestionsList"></ul>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a href="/" class="nav-link">Home</a>
+        </div>
+    </nav>
+
     <div class="container">
-        <div class="recipe-content">
-            <div class="recipe-section">
-                <h2>About Garlic Naan</h2>
-                <p>Garlic Naan is a popular Indian flatbread brushed with garlic, butter, and herbs. It's soft, fluffy, and the perfect accompaniment to curries. Traditionally cooked in a tandoor, it can also be made in a home oven or skillet.</p>
+        <div class="recipe-card">
+            <h1 class="recipe-title">Garlic Naan</h1>
+            <p class="recipe-subtitle">Soft, aromatic flatbread with garlic and butter</p>
+            <h2 class="section-title">About</h2>
+            <p class="about-text">Garlic Naan is a beloved Indian flatbread brushed with garlic-infused butter. Its soft and pillowy texture, combined with the savory aroma of garlic, makes it perfect for any curry or as a standalone snack.</p>
+            <h2 class="section-title">Ingredients</h2>
+            <ul class="ingredient-list">
+                <li>2 cups All-Purpose Flour</li>
+                <li>1/2 cup Yogurt</li>
+                <li>1/4 tablespoon Sugar</li>
+                <li>1/2 teaspoon Salt</li>
+                <li>1/2 teaspoon Baking Powder</li>
+                <li>3 tablespoons Oil</li>
+                <li>Water as needed</li>
+                <li>3 tablespoons Butter, melted</li>
+                <li>6 cloves Garlic, minced</li>
+                <li>2 tablespoons Fresh Coriander, chopped</li>
+            </ul>
+            <h2 class="section-title">Instructions</h2>
+            <ol class="instructions-list">
+                <li>Mix flour, salt, baking powder, and sugar in a bowl.</li>
+                <li>Add yogurt and oil to the dry ingredients.</li>
+                <li>Add water gradually and knead into a soft dough.</li>
+                <li>Cover and let rest for 2-3 hours.</li>
+                <li>Divide dough into 6-8 portions and shape into balls.</li>
+                <li>Roll each ball into a thin oval or round shape.</li>
+                <li>Heat a tawa or cast iron skillet over high heat.</li>
+                <li>Place naan on the hot tawa and cook until light brown spots appear.</li>
+                <li>Flip and cook the other side until puffed and cooked.</li>
+                <li>Mix melted butter with minced garlic and chopped coriander.</li>
+                <li>Brush the garlic-butter mixture on hot naan.</li>
+                <li>Serve immediately while warm.</li>
+            </ol>
+            <div class="button-group">
+                <a href="/" class="btn btn-home">← Back to Home</a>
+                <a href="#" class="btn btn-home" style="background: linear-gradient(135deg, #dc143c 0%, #c41e3a 100%);">▶ Watch Video</a>
             </div>
-            <div class="recipe-section">
-                <h2>Ingredients (Dough)</h2>
-                <ul class="ingredient-list">
-                    <li>3 cups All-Purpose Flour</li>
-                    <li>1/2 cup Yogurt</li>
-                    <li>1/4 cup Milk</li>
-                    <li>1 tablespoon Sugar</li>
-                    <li>1/2 teaspoon Salt</li>
-                    <li>1/4 teaspoon Baking Powder</li>
-                    <li>2 tablespoons Oil</li>
-                    <li>1/4 teaspoon Baking Soda</li>
-                    <li>Warm water as needed</li>
-                </ul>
-            </div>
-            <div class="recipe-section">
-                <h2>Ingredients (Topping)</h2>
-                <ul class="ingredient-list">
-                    <li>4 tablespoons Butter</li>
-                    <li>6-8 Garlic Cloves (minced)</li>
-                    <li>Fresh Coriander (chopped)</li>
-                    <li>Fresh Parsley (optional)</li>
-                    <li>Salt to taste</li>
-                </ul>
-            </div>
-            <div class="recipe-section">
-                <h2>Instructions</h2>
-                <ol class="step-list">
-                    <li>Mix flour, salt, sugar, baking powder, and baking soda in a bowl.</li>
-                    <li>Add yogurt and oil. Mix well.</li>
-                    <li>Add milk and warm water gradually to form soft dough.</li>
-                    <li>Knead for 5-7 minutes until smooth and elastic.</li>
-                    <li>Apply oil and cover. Let it rest for 4-6 hours.</li>
-                    <li>Divide dough into 8 balls. Roll each into a 1/4-inch thick circle.</li>
-                    <li>Heat a skillet or tawa on high heat until very hot.</li>
-                    <li>Place naan on the hot skillet and cook for 1-2 minutes until bubbles form.</li>
-                    <li>Flip and cook the other side until golden brown spots appear.</li>
-                    <li>Melt butter and mix with minced garlic and salt.</li>
-                    <li>Brush the warm naan with garlic butter.</li>
-                    <li>Sprinkle fresh coriander and serve immediately.</li>
-                </ol>
-            </div>
-            <div class="recipe-section">
-                <h2>Serving Suggestions</h2>
-                <ul>
-                    <li>Serve hot with butter</li>
-                    <li>Pair with any curry</li>
-                    <li>Enjoy with dal and pickles</li>
-                </ul>
-            </div>
-        </div>
-        <div class="text-center mb-5">
-            <a href="/" class="btn btn-primary btn-lg">← Back to Home</a>
         </div>
     </div>
+
+    <div class="footer"><p>&copy; 2026 Chef Mantra. All rights reserved.</p></div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsList = document.getElementById('suggestionsList');
+        searchInput.addEventListener('input', async (e) => {
+            const keyword = e.target.value.trim();
+            if (keyword.length === 0) { suggestionsList.classList.remove('active'); return; }
+            try {
+                const response = await fetch(`/api/recipes/search?keyword=${encodeURIComponent(keyword)}`);
+                const recipes = await response.json();
+                suggestionsList.innerHTML = '';
+                if (recipes.length > 0) {
+                    recipes.forEach(recipe => {
+                        const li = document.createElement('li');
+                        li.className = 'suggestion-item';
+                        li.textContent = recipe;
+                        li.addEventListener('click', () => {
+                            const url = recipe.toLowerCase().replace(/\s+/g, '-');
+                            window.location.href = `/${url}.html`;
+                        });
+                        suggestionsList.appendChild(li);
+                    });
+                    suggestionsList.classList.add('active');
+                }
+            } catch (error) { console.error('Search error:', error); }
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.autocomplete-container')) { suggestionsList.classList.remove('active'); }
+        });
+    </script>
 </body>
 </html>
