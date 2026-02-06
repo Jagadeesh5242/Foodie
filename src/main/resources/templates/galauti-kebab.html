@@ -1,61 +1,345 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Galauti Kebab - Ruchique</title>
+    <title>Galauti Kebab - Ruchique 🍽️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/google-translate-element@0/element.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-image: url('./logodes.jpeg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh; position: relative; padding-bottom: 80px; }
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.35); pointer-events: none; z-index: 0; }
-        .navbar { background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); padding: 0.9rem 0; position: relative; z-index: 100; }
-        .navbar-brand { font-size: 1.7rem; font-weight: 900; color: #fff !important; letter-spacing: 1px; transition: color 0.3s ease; }
-        .navbar-brand:hover { color: #ffc107 !important; }
-        .navbar a { color: #fff !important; margin: 0 0.5rem; transition: all 0.3s ease; font-weight: 600; padding: 8px 16px; border-radius: 20px; }
-        .navbar a:hover { color: #ffc107 !important; background: rgba(255, 255, 255, 0.1); }
-        .lang-selector { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 8px 15px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-left: 10px; }
-        .lang-selector:hover { background: rgba(255, 255, 255, 0.25); border-color: #ffc107; }
-        .lang-selector option { background: #333; color: white; }
-        .autocomplete-container { position: relative; display: inline-flex; width: 300px; margin: 0 1rem; }
-        #searchInput { padding: 14px 20px; border: none; border-radius: 28px; width: 100%; outline: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); font-size: 0.95rem; transition: all 0.3s ease; background: white; }
-        #searchInput:focus { box-shadow: 0 6px 25px rgba(255, 193, 7, 0.4); transform: scale(1.02); }
-        #suggestionsList { position: absolute; top: 100%; left: 0; right: 0; border: none; background-color: white; list-style: none; padding: 0; margin: 5px 0 0 0; max-height: 250px; overflow-y: auto; border-radius: 0 0 28px 28px; display: none; z-index: 1000; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-        #suggestionsList li { padding: 14px 20px; cursor: pointer; transition: all 0.2s; border-bottom: 1px solid #f0f0f0; font-weight: 500; }
-        #suggestionsList li:hover { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-        .recipe-container { max-width: 1000px; margin: 2rem auto; position: relative; z-index: 10; padding: 0 15px; }
-        .recipe-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem 2rem; border-radius: 20px; text-align: center; margin-bottom: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.3); animation: slideInDown 0.6s ease; }
-        @keyframes slideInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        .recipe-header h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); letter-spacing: 1px; }
-        .recipe-header p { font-size: 1.1rem; margin: 0; opacity: 0.95; font-weight: 500; }
-        .about-section { background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-left: 5px solid #667eea; }
-        .about-section h3 { color: #667eea; font-weight: 700; margin-bottom: 1rem; font-size: 1.3rem; }
-        .about-section p { color: #555; line-height: 1.8; font-size: 0.95rem; }
-        .ingredients-section { background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-left: 5px solid #ff9800; }
-        .ingredients-section h3 { color: #ff9800; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
-        .ingredient-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-        .ingredient-item { display: flex; align-items: center; gap: 12px; padding: 1rem; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 12px; transition: all 0.3s ease; cursor: default; }
-        .ingredient-item:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-        .ingredient-icon { font-size: 2rem; flex-shrink: 0; min-width: 50px; text-align: center; }
-        .ingredient-text { flex: 1; font-size: 0.95rem; font-weight: 500; line-height: 1.4; }
-        .instructions-section { background: rgba(255, 255, 255, 0.95); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-left: 5px solid #4caf50; }
-        .instructions-section h3 { color: #4caf50; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
-        .instruction-item { display: flex; gap: 15px; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee; }
-        .instruction-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .step-number { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 1.1rem; }
-        .step-text { flex: 1; color: #444; line-height: 1.8; font-size: 0.95rem; padding-top: 5px; }
-        .button-section { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
-        .recipe-btn { padding: 12px 30px; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: white; }
-        .btn-home { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .btn-home:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4); color: white; text-decoration: none; }
-        .btn-video { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .btn-video:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4); color: white; }
-        .footer { position: fixed; bottom: 0; width: 100%; text-align: center; padding: 1.5rem; color: white; background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 100%); z-index: 10; font-size: 0.95rem; font-weight: 500; letter-spacing: 0.5px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 0.9rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #fff !important;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #ffc107 !important;
+        }
+
+        .navbar a {
+            color: #fff !important;
+            margin: 0 0.8rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .navbar a:hover {
+            color: #ffc107 !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-selector {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .lang-selector:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #ffc107;
+        }
+
+        .lang-selector option {
+            background: #333;
+            color: white;
+        }
+
+        .autocomplete-container {
+            position: relative;
+            display: inline-flex;
+            width: 350px;
+            margin: 0 1rem;
+        }
+
+        #searchInput {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 28px;
+            width: 100%;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        #searchInput:focus {
+            box-shadow: 0 6px 25px rgba(255, 193, 7, 0.4);
+            transform: scale(1.02);
+        }
+
+        #suggestionsList {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: none;
+            background-color: white;
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 0 0;
+            max-height: 250px;
+            overflow-y: auto;
+            border-radius: 0 0 28px 28px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        #suggestionsList li {
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+            font-weight: 500;
+        }
+
+        #suggestionsList li:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .recipe-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .recipe-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .recipe-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .recipe-desc {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-header {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ffc107;
+        }
+
+        .ingredients-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .ingredient-chip {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .ingredient-chip:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .instructions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .instruction-step {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .step-text {
+            padding-top: 8px;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 28px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-home {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-home:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+        }
+
+        .btn-video {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-video:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+            text-decoration: none;
+            color: white;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem;
+            color: white;
+            background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 100;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 768px) {
-            .autocomplete-container { width: 100%; max-width: 250px; margin: 0 0.5rem; }
-            .recipe-header h1 { font-size: 2rem; }
-            .ingredient-grid { grid-template-columns: 1fr; }
-            .button-section { flex-direction: column; align-items: stretch; }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ingredients-list {
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-title {
+                font-size: 1.8rem;
+            }
+
+            .autocomplete-container {
+                width: 100%;
+                max-width: 300px;
+                margin: 0.5rem auto;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-action {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -87,40 +371,65 @@
 
     <div class="recipe-container">
         <div class="recipe-header">
-            <h1>Galauti Kebab</h1>
-            <p>A delicious Indian recipe prepared with authentic spices</p>
+            <h1 class="recipe-title">Galauti Kebab</h1>
+            <p class="recipe-desc">Authentic Indian Recipe | Traditional Preparation</p>
         </div>
 
-        <div class="about-section">
-            <h3><i class="fas fa-book"></i> About</h3>
-            <p>This is a classic Indian recipe prepared with traditional spices and authentic cooking techniques. Perfect for serving at family gatherings or special occasions. Enjoy the wonderful flavors and aromas of India!</p>
-        </div>
+        <div class="content-grid">
+            <div class="card-section">
+                <h2 class="section-header">📋 Ingredients</h2>
+                <div class="ingredients-list">
+                            <div class="ingredient-chip">🥩 Ground Meat</div>
+                            <div class="ingredient-chip">🧅 Onion</div>
+                            <div class="ingredient-chip">🥚 Egg</div>
+                            <div class="ingredient-chip">🍞 Bread Crumbs</div>
+                            <div class="ingredient-chip">🌶️ Green Chili</div>
+                            <div class="ingredient-chip">🧄 Garlic</div>
+                            <div class="ingredient-chip">🌿 Cilantro</div>
+                            <div class="ingredient-chip">🧂 Salt</div>
+                </div>
+            </div>
 
-        <div class="ingredients-section">
-            <h3><i class="fas fa-shopping-basket"></i> Ingredients</h3>
-            <div class="ingredient-grid">
-                <div class="ingredient-item"><div class="ingredient-icon">🥔</div><div class="ingredient-text">Main ingredient</div></div>
-                <div class="ingredient-item"><div class="ingredient-icon">🌶️</div><div class="ingredient-text">Spices & seasonings</div></div>
-                <div class="ingredient-item"><div class="ingredient-icon">🧅</div><div class="ingredient-text">Aromatics (onion, garlic, ginger)</div></div>
-                <div class="ingredient-item"><div class="ingredient-icon">🫒</div><div class="ingredient-text">Oil or Ghee for cooking</div></div>
-                <div class="ingredient-item"><div class="ingredient-icon">🧂</div><div class="ingredient-text">Salt to taste</div></div>
-                <div class="ingredient-item"><div class="ingredient-icon">🍅</div><div class="ingredient-text">Tomatoes or fresh produce</div></div>
+            <div class="card-section">
+                <h2 class="section-header">👨‍🍳 Instructions</h2>
+                <div class="instructions-list">
+
+                            <div class="instruction-step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Soak bread crumbs in milk</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Mix ground meat with bread crumbs, egg, and spices</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Form into small oval patties</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">4</div>
+                                <div class="step-text">Heat ghee on tawa and place patties</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">5</div>
+                                <div class="step-text">Cook on both sides until golden brown</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">6</div>
+                                <div class="step-text">Serve hot with mint chutney and lemon</div>
+                            </div>
+                </div>
             </div>
         </div>
 
-        <div class="instructions-section">
-            <h3><i class="fas fa-tasks"></i> Instructions</h3>
-            <div class="instruction-item"><div class="step-number">1</div><div class="step-text">Gather and prepare all ingredients as needed</div></div>
-            <div class="instruction-item"><div class="step-number">2</div><div class="step-text">Heat oil or ghee in a pan and add whole spices</div></div>
-            <div class="instruction-item"><div class="step-number">3</div><div class="step-text">Add aromatics and cook until fragrant</div></div>
-            <div class="instruction-item"><div class="step-number">4</div><div class="step-text">Add the main ingredients and mix well</div></div>
-            <div class="instruction-item"><div class="step-number">5</div><div class="step-text">Cook on medium heat until the dish is fully cooked</div></div>
-            <div class="instruction-item"><div class="step-number">6</div><div class="step-text">Adjust seasoning and garnish before serving</div></div>
-        </div>
-
-        <div class="button-section">
-            <a href="/" class="recipe-btn btn-home"><i class="fas fa-home"></i> Back to Home</a>
-            <button class="recipe-btn btn-video" onclick="alert('Video coming soon!')"><i class="fas fa-play-circle"></i> Watch Video</button>
+        <div class="action-buttons">
+            <a href="/" class="btn-action btn-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <a href="https://www.youtube.com/results?search_query=Galauti Kebab+recipe" target="_blank" class="btn-action btn-video"><i class="fas fa-play-circle"></i> Watch Recipe Video</a>
         </div>
     </div>
 
@@ -133,73 +442,96 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        function googleTranslateElementInit() {
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsList = document.getElementById('suggestionsList');
+        const languageSelector = document.getElementById('languageSelector');
+        
+        if (searchInput && suggestionsList) {
+            searchInput.value = '';
+            suggestionsList.innerHTML = '';
+            suggestionsList.style.display = 'none';
+            
+            let searchTimer;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimer);
+                const keyword = this.value.trim();
+                
+                if (!keyword) {
+                    suggestionsList.innerHTML = '';
+                    suggestionsList.style.display = 'none';
+                    return;
+                }
+                
+                searchTimer = setTimeout(() => {
+                    fetch('/api/recipes/search?keyword=' + encodeURIComponent(keyword))
+                        .then(res => res.json())
+                        .then(recipes => {
+                            suggestionsList.innerHTML = '';
+                            if (recipes && recipes.length > 0) {
+                                recipes.forEach(recipe => {
+                                    const li = document.createElement('li');
+                                    li.textContent = recipe;
+                                    li.addEventListener('click', () => {
+                                        searchInput.value = '';
+                                        suggestionsList.innerHTML = '';
+                                        suggestionsList.style.display = 'none';
+                                        window.location.href = '/' + recipe.toLowerCase().replace(/\s+/g, '-');
+                                    });
+                                    suggestionsList.appendChild(li);
+                                });
+                                suggestionsList.style.display = 'block';
+                            }
+                        })
+                        .catch(err => console.log('Search error:', err));
+                }, 200);
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    clearTimeout(searchTimer);
+                    const keyword = this.value.trim();
+                    if (keyword) {
+                        searchInput.value = '';
+                        suggestionsList.innerHTML = '';
+                        suggestionsList.style.display = 'none';
+                        window.location.href = '/' + keyword.toLowerCase().replace(/\s+/g, '-');
+                    }
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.autocomplete-container')) {
+                    suggestionsList.style.display = 'none';
+                }
+            });
+        }
+        
+        if (languageSelector) {
+            languageSelector.addEventListener('change', function(e) {
+                const langMap = { 'en': 'English', 'te': 'Telugu', 'hi': 'Hindi' };
+                const combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    combo.value = langMap[this.value] || 'English';
+                    combo.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+        }
+        
+        function initTranslate() {
             try {
                 new google.translate.TranslateElement({
                     pageLanguage: 'en',
                     includedLanguages: 'en,te,hi',
                     autoDisplay: false
                 }, 'google_translate_element');
-            } catch (e) {
-                console.log('Google Translate not available');
-            }
+            } catch(e) {}
         }
-
-        document.getElementById('languageSelector')?.addEventListener('change', function(e) {
-            const langCode = e.target.value;
-            const langMap = { 'en': 'English', 'te': 'Telugu', 'hi': 'Hindi' };
-            const languageSelect = document.querySelector('.goog-te-combo');
-            if (languageSelect) {
-                languageSelect.value = langMap[langCode];
-                languageSelect.dispatchEvent(new Event('change'));
-            }
-        });
-
-        const searchInput = document.getElementById('searchInput');
-        const suggestionsList = document.getElementById('suggestionsList');
-
-        searchInput.addEventListener('input', async (e) => {
-            const keyword = e.target.value.trim();
-            if (keyword.length === 0) {
-                suggestionsList.style.display = 'none';
-                suggestionsList.innerHTML = '';
-                return;
-            }
-            try {
-                const response = await fetch(\`/api/recipes/search?keyword=\${encodeURIComponent(keyword)}\`);
-                const recipes = await response.json();
-                suggestionsList.innerHTML = '';
-                if (recipes.length > 0) {
-                    recipes.forEach(recipe => {
-                        const li = document.createElement('li');
-                        li.textContent = recipe;
-                        li.addEventListener('click', () => {
-                            const recipePath = recipe.toLowerCase().replace(/\s+/g, '-');
-                            window.location.href = '/' + recipePath;
-                        });
-                        suggestionsList.appendChild(li);
-                    });
-                    suggestionsList.style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.autocomplete-container')) {
-                suggestionsList.style.display = 'none';
-            }
-        });
-
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const keyword = searchInput.value.trim();
-                if (keyword) {
-                    window.location.href = '/' + keyword.toLowerCase().replace(/\s+/g, '-');
-                }
-            }
-        });
+        
+        if (window.google && window.google.translate) {
+            initTranslate();
+        } else {
+            setTimeout(initTranslate, 1500);
+        }
     </script>
 </body>
 </html>
