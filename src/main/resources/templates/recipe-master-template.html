@@ -1,573 +1,528 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Recipe Master Template - Ruchique 🍽️</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Recipe - Ruchique</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/google-translate-element@0/element.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            min-height: 100vh; 
-            color: #333; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        /* NAVBAR IMPROVEMENTS */
-        .navbar { 
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); 
-            padding: 12px 30px; 
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            gap: 20px;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            padding-top: 80px;
+            padding-bottom: 80px;
         }
-        
-        .navbar-logo { 
-            font-size: 26px; 
-            font-weight: 800; 
-            color: white; 
-            text-decoration: none; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            min-width: fit-content;
-            letter-spacing: 0.5px;
+
+        .navbar {
+            background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 0.9rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
-        
-        .navbar-logo:hover { color: #ffc107; transition: 0.3s; }
-        
-        .navbar-center { 
-            flex: 1; 
-            display: flex; 
-            justify-content: center; 
-            min-width: 300px;
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #fff !important;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
         }
-        
-        .autocomplete-container { 
-            position: relative; 
-            width: 100%; 
-            max-width: 400px; 
+
+        .navbar-brand:hover {
+            color: #ffc107 !important;
         }
-        
-        .search-input { 
-            width: 100%; 
-            padding: 14px 25px; 
-            border: none; 
-            border-radius: 30px; 
-            font-size: 14px; 
-            outline: none; 
-            background: white; 
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+
+        .navbar a {
+            color: #fff !important;
+            margin: 0 0.8rem;
             transition: all 0.3s ease;
-        }
-        
-        .search-input:focus { 
-            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4); 
-            transform: scale(1.02);
-        }
-        
-        .suggestions-list { 
-            position: absolute; 
-            top: 100%; 
-            left: 0; 
-            right: 0; 
-            background: white; 
-            border-radius: 0 0 25px 25px; 
-            list-style: none; 
-            max-height: 250px; 
-            overflow-y: auto; 
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); 
-            margin-top: 0; 
-            display: none; 
-            z-index: 1001; 
-        }
-        
-        .suggestions-list.active { display: block; }
-        
-        .suggestion-item { 
-            padding: 14px 25px; 
-            cursor: pointer; 
-            border-bottom: 1px solid #eee; 
-            transition: all 0.2s ease;
-            font-weight: 500;
-        }
-        
-        .suggestion-item:hover { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            color: white; 
-        }
-        
-        .navbar-right { 
-            display: flex; 
-            gap: 15px; 
-            align-items: center; 
-            min-width: fit-content;
-        }
-        
-        .nav-link { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 600; 
-            transition: all 0.3s ease;
+            font-weight: 600;
             padding: 8px 16px;
             border-radius: 20px;
         }
-        
-        .nav-link:hover { 
-            background: rgba(255, 255, 255, 0.2); 
-            color: #ffc107; 
+
+        .navbar a:hover {
+            color: #ffc107 !important;
+            background: rgba(255, 255, 255, 0.1);
         }
-        
-        /* LANGUAGE SELECTOR */
+
         .lang-selector {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 6px 12px;
-            border-radius: 20px;
             color: white;
-            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 20px;
             font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 100px;
+            margin-left: 10px;
         }
-        
+
         .lang-selector:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #ffc107;
         }
-        
-        /* CONTAINER & CARD IMPROVEMENTS */
-        .container { 
-            max-width: 950px; 
-            margin: 30px auto; 
-            padding: 0 20px; 
+
+        .lang-selector option {
+            background: #333;
+            color: white;
         }
-        
-        .recipe-card { 
-            background: white; 
-            border-radius: 18px; 
-            padding: 45px; 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
-            margin-bottom: 30px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-        }
-        
-        .recipe-title { 
-            font-size: 42px; 
-            font-weight: 900; 
-            color: #1a1a1a; 
-            margin-bottom: 10px; 
-            border-bottom: 4px solid #667eea; 
-            padding-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
-        
-        .recipe-subtitle { 
-            color: #777; 
-            font-size: 16px; 
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-        
-        .section-title { 
-            font-size: 24px; 
-            font-weight: 750; 
-            color: #667eea; 
-            margin-top: 35px; 
-            margin-bottom: 20px; 
-            border-bottom: 3px solid #764ba2; 
-            padding-bottom: 12px;
-            letter-spacing: 0.5px;
-        }
-        
-        .section-title:first-of-type { margin-top: 0; }
-        
-        /* INGREDIENTS WITH IMAGES - IMPROVED */
-        .ingredients-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-            gap: 20px; 
-            margin: 25px 0; 
-        }
-        
-        .ingredient-card { 
-            background: linear-gradient(135deg, #f5f7fa 0%, #f0f0f5 100%);
-            border-radius: 15px; 
-            padding: 20px; 
-            text-align: center; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid #e9ecef;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            cursor: pointer;
+
+        .autocomplete-container {
             position: relative;
-            overflow: hidden;
-        }
-        
-        .ingredient-card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 12px 25px rgba(102, 126, 234, 0.25);
-            border-color: #667eea;
-            background: linear-gradient(135deg, #fff5f5 0%, #f0e5ff 100%);
-        }
-        
-        .ingredient-image { 
-            width: 100%; 
-            height: 140px; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            border-radius: 12px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            color: white; 
-            font-size: 60px; 
-            margin-bottom: 15px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .ingredient-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .ingredient-name { 
-            font-weight: 700; 
-            color: #1a1a1a; 
-            font-size: 14px; 
-            line-height: 1.5;
-            max-height: 45px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .ingredient-quantity {
-            color: #667eea;
-            font-size: 12px;
-            margin-top: 5px;
-            font-weight: 600;
-        }
-        
-        /* INSTRUCTIONS IMPROVED */
-        .instructions-list { 
-            list-style: none; 
-            padding: 0; 
-            counter-reset: step; 
-        }
-        
-        .instructions-list li { 
-            padding: 16px 0 16px 50px; 
-            position: relative; 
-            line-height: 1.8; 
-            color: #444;
-            counter-increment: step;
-            margin-bottom: 15px;
-            border-left: 3px solid #f0f0f0;
-            transition: all 0.3s ease;
-        }
-        
-        .instructions-list li:hover {
-            border-left-color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
-            padding-left: 55px;
-        }
-        
-        .instructions-list li:before { 
-            content: counter(step); 
-            position: absolute; 
-            left: -25px; 
-            top: 10px; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            color: white; 
-            width: 32px; 
-            height: 32px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-weight: bold; 
-            font-size: 14px;
-            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
-        }
-        
-        .about-text { 
-            font-size: 16px; 
-            line-height: 1.8; 
-            color: #555; 
-            margin-bottom: 25px;
-            padding: 20px;
-            background: #f9f9f9;
-            border-left: 4px solid #667eea;
-            border-radius: 8px;
-        }
-        
-        /* BUTTONS - ENHANCED */
-        .button-group { 
-            display: flex; 
-            gap: 15px; 
-            margin-top: 40px; 
-            justify-content: center; 
-            flex-wrap: wrap; 
-        }
-        
-        .btn { 
-            padding: 14px 35px; 
-            border: none; 
-            border-radius: 30px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            text-decoration: none; 
             display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 15px;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 350px;
+            margin: 0 1rem;
         }
-        
-        .btn-home { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            color: white; 
+
+        #searchInput {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 28px;
+            width: 100%;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
         }
-        
-        .btn-home:hover { 
-            transform: translateY(-4px); 
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); 
-            color: white; 
+
+        #searchInput:focus {
+            box-shadow: 0 6px 25px rgba(255, 193, 7, 0.4);
+            transform: scale(1.02);
         }
-        
-        .btn-video { 
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%); 
-            color: white; 
+
+        #suggestionsList {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: none;
+            background-color: white;
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 0 0;
+            max-height: 250px;
+            overflow-y: auto;
+            border-radius: 0 0 28px 28px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-        
-        .btn-video:hover { 
-            transform: translateY(-4px); 
-            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4); 
-            color: white; 
-        }
-        
-        .btn i { 
-            font-size: 18px;
-        }
-        
-        /* FOOTER */
-        .footer { 
-            background: linear-gradient(90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.15) 100%);
-            color: white; 
-            text-align: center; 
-            padding: 30px; 
-            margin-top: 50px; 
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .footer p { 
-            margin: 0; 
-            font-size: 14px;
+
+        #suggestionsList li {
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f0f0f0;
             font-weight: 500;
         }
-        
-        /* GOOGLE TRANSLATE IMPROVEMENTS */
-        .goog-tooltip { 
-            background-color: #667eea !important;
-            color: white !important;
-        }
-        
-        .goog-text-highlight { background-color: #ffc107 !important; }
-        
-        /* RESPONSIVENESS */
-        @media (max-width: 768px) { 
-            .navbar { 
-                flex-direction: column; 
-                gap: 12px; 
-                padding: 10px 20px;
-            }
-            
-            .navbar-center {
-                width: 100%;
-                min-width: auto;
-            }
-            
-            .navbar-right {
-                width: 100%;
-                justify-content: space-around;
-            }
-            
-            .recipe-card { 
-                padding: 25px; 
-            } 
-            
-            .recipe-title { 
-                font-size: 32px; 
-            } 
-            
-            .button-group { 
-                flex-direction: column; 
-            } 
-            
-            .btn { 
-                width: 100%; 
-                text-align: center; 
-                justify-content: center;
-            }
-            
-            .ingredients-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 15px; 
-            }
 
-            .section-title {
-                font-size: 20px;
-            }
+        #suggestionsList li:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
-        
-        @media (max-width: 480px) {
-            .ingredients-grid {
+
+        .recipe-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .recipe-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .recipe-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .recipe-desc {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-header {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ffc107;
+        }
+
+        .ingredients-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .ingredient-chip {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .ingredient-chip:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .instructions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .instruction-step {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .step-text {
+            padding-top: 8px;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 28px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-home {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-home:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+        }
+
+        .btn-video {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-video:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+            text-decoration: none;
+            color: white;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem;
+            color: white;
+            background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 100;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
                 grid-template-columns: 1fr;
             }
-            
+
+            .ingredients-list {
+                grid-template-columns: 1fr;
+            }
+
             .recipe-title {
-                font-size: 26px;
+                font-size: 1.8rem;
+            }
+
+            .autocomplete-container {
+                width: 100%;
+                max-width: 300px;
+                margin: 0.5rem auto;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-action {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- NAVBAR WITH LANGUAGE SELECTOR -->
-    <nav class="navbar">
-        <a href="/" class="navbar-logo">🍽️ Ruchique</a>
-        <div class="navbar-center">
-            <div class="autocomplete-container">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search recipes...">
-                <ul class="suggestions-list" id="suggestionsList"></ul>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🍽️ Ruchique</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <div class="autocomplete-container mx-auto">
+                    <input type="text" id="searchInput" name="keyword" placeholder="Search recipes...">
+                    <ul id="suggestionsList"></ul>
+                </div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item">
+                        <select class="lang-selector" id="languageSelector">
+                            <option value="en">English</option>
+                            <option value="te">Telugu</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <div class="navbar-right">
-            <a href="/" class="nav-link"><i class="fas fa-home"></i> Home</a>
-            <select class="lang-selector" id="languageSelector" onchange="changeLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="te">Telugu</option>
-                <option value="hi">Hindi</option>
-            </select>
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
-    <div class="container">
-        <div class="recipe-card">
-            <h1 class="recipe-title" id="recipeTitle">Recipe Name</h1>
-            <p class="recipe-subtitle" id="recipeSubtitle">Recipe description goes here...</p>
-            
-            <h2 class="section-title" id="aboutTitle">About</h2>
-            <p class="about-text" id="aboutText">About section content...</p>
-            
-            <h2 class="section-title" id="ingredientsTitle">Ingredients</h2>
-            <div class="ingredients-grid" id="ingredientsGrid">
-                <!-- Ingredients will be populated here -->
+    <div class="recipe-container">
+        <div class="recipe-header">
+            <h1 class="recipe-title">Recipe Master Template</h1>
+            <p class="recipe-desc">Authentic Indian Recipe | Traditional Preparation</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="card-section">
+                <h2 class="section-header">📋 Ingredients</h2>
+                <div class="ingredients-list">
+                            <div class="ingredient-chip">🥘 Main Ingredient</div>
+                            <div class="ingredient-chip">🧂 Salt</div>
+                            <div class="ingredient-chip">🫒 Oil</div>
+                            <div class="ingredient-chip">🧅 Onion</div>
+                            <div class="ingredient-chip">🌶️ Spices</div>
+                </div>
             </div>
-            
-            <h2 class="section-title" id="instructionsTitle">Instructions</h2>
-            <ol class="instructions-list" id="instructionsList">
-                <!-- Instructions will be populated here -->
-            </ol>
-            
-            <div class="button-group">
-                <a href="/" class="btn btn-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
-                <a href="#" class="btn btn-video" onclick="promptVideoLink(); return false;">
-                    <i class="fas fa-play-circle"></i> Watch Video
-                </a>
+
+            <div class="card-section">
+                <h2 class="section-header">👨‍🍳 Instructions</h2>
+                <div class="instructions-list">
+
+                            <div class="instruction-step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Prepare ingredients</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Cook main ingredient</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Add seasonings</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">4</div>
+                                <div class="step-text">Adjust taste</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">5</div>
+                                <div class="step-text">Serve hot</div>
+                            </div>
+                </div>
             </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/" class="btn-action btn-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <a href="https://www.youtube.com/results?search_query=Recipe Master Template+recipe" target="_blank" class="btn-action btn-video"><i class="fas fa-play-circle"></i> Watch Recipe Video</a>
         </div>
     </div>
 
-    <!-- FOOTER -->
     <div class="footer">
-        <p>&copy; 2026 Ruchique. Delicious Recipes for Every Occasion. <i class="fas fa-heart" style="color: #ff6b6b;"></i></p>
+        <p>&copy; 2026 Ruchique - Delicious Indian Recipes <i class="fas fa-utensils" style="margin: 0 5px;"></i></p>
     </div>
 
-    <!-- GOOGLE TRANSLATE -->
     <div id="google_translate_element" style="display: none;"></div>
-    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        // Initialize Google Translate
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,te,hi',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-        
-        // Change language function
-        function changeLanguage(langCode) {
-            const selectElement = document.querySelector('.goog-te-combo');
-            if (selectElement) {
-                selectElement.value = langCodeMap[langCode];
-                selectElement.dispatchEvent(new Event('change'));
-            }
-        }
-        
-        const langCodeMap = {
-            'en': 'en',
-            'te': 'te',
-            'hi': 'hi'
-        };
-        
-        // Search functionality
         const searchInput = document.getElementById('searchInput');
         const suggestionsList = document.getElementById('suggestionsList');
-
-        searchInput.addEventListener('input', async (e) => {
-            const keyword = e.target.value.trim();
-            if (keyword.length === 0) {
-                suggestionsList.classList.remove('active');
-                suggestionsList.innerHTML = '';
-                return;
-            }
-            try {
-                const response = await fetch(`/api/recipes/search?keyword=${encodeURIComponent(keyword)}`);
-                const recipes = await response.json();
-                suggestionsList.innerHTML = '';
-                if (recipes.length > 0) {
-                    recipes.forEach(recipe => {
-                        const li = document.createElement('li');
-                        li.className = 'suggestion-item';
-                        li.textContent = recipe;
-                        li.addEventListener('click', () => {
-                            const recipePath = recipe.toLowerCase().replace(/\s+/g, '-');
-                            window.location.href = '/' + recipePath;
-                        });
-                        suggestionsList.appendChild(li);
-                    });
-                    suggestionsList.classList.add('active');
-                }
-            } catch (error) {
-                console.error('Error fetching recipes:', error);
-            }
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.autocomplete-container')) {
-                suggestionsList.classList.remove('active');
-            }
-        });
+        const languageSelector = document.getElementById('languageSelector');
         
-        // Video link prompt
-        function promptVideoLink() {
-            const videoUrl = prompt('Enter your video URL (e.g., https://youtube.com/watch?v=...)');
-            if (videoUrl) {
-                window.open(videoUrl, '_blank');
-            }
+        if (searchInput && suggestionsList) {
+            searchInput.value = '';
+            suggestionsList.innerHTML = '';
+            suggestionsList.style.display = 'none';
+            
+            let searchTimer;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimer);
+                const keyword = this.value.trim();
+                
+                if (!keyword) {
+                    suggestionsList.innerHTML = '';
+                    suggestionsList.style.display = 'none';
+                    return;
+                }
+                
+                searchTimer = setTimeout(() => {
+                    fetch('/api/recipes/search?keyword=' + encodeURIComponent(keyword))
+                        .then(res => res.json())
+                        .then(recipes => {
+                            suggestionsList.innerHTML = '';
+                            if (recipes && recipes.length > 0) {
+                                recipes.forEach(recipe => {
+                                    const li = document.createElement('li');
+                                    li.textContent = recipe;
+                                    li.addEventListener('click', () => {
+                                        searchInput.value = '';
+                                        suggestionsList.innerHTML = '';
+                                        suggestionsList.style.display = 'none';
+                                        window.location.href = '/' + recipe.toLowerCase().replace(/\s+/g, '-');
+                                    });
+                                    suggestionsList.appendChild(li);
+                                });
+                                suggestionsList.style.display = 'block';
+                            }
+                        })
+                        .catch(err => console.log('Search error:', err));
+                }, 200);
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    clearTimeout(searchTimer);
+                    const keyword = this.value.trim();
+                    if (keyword) {
+                        searchInput.value = '';
+                        suggestionsList.innerHTML = '';
+                        suggestionsList.style.display = 'none';
+                        window.location.href = '/' + keyword.toLowerCase().replace(/\s+/g, '-');
+                    }
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.autocomplete-container')) {
+                    suggestionsList.style.display = 'none';
+                }
+            });
+        }
+        
+        if (languageSelector) {
+            languageSelector.addEventListener('change', function(e) {
+                const langMap = { 'en': 'English', 'te': 'Telugu', 'hi': 'Hindi' };
+                const combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    combo.value = langMap[this.value] || 'English';
+                    combo.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+        }
+        
+        function initTranslate() {
+            try {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,te,hi',
+                    autoDisplay: false
+                }, 'google_translate_element');
+            } catch(e) {}
+        }
+        
+        if (window.google && window.google.translate) {
+            initTranslate();
+        } else {
+            setTimeout(initTranslate, 1500);
         }
     </script>
 </body>

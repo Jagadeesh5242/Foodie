@@ -1,139 +1,537 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>ENHANCED_TEMPLATE - Ruchique 🍽️</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${RECIPE_TITLE}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/google-translate-element@0/element.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; color: #333; }
-        
-        .navbar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 15px 30px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-        .navbar-logo { font-size: 24px; font-weight: bold; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-        .navbar-logo:hover { color: #e0e0e0; }
-        .navbar-center { flex: 1; display: flex; justify-content: center; min-width: 300px; }
-        .autocomplete-container { position: relative; width: 100%; max-width: 380px; }
-        .search-input { width: 100%; padding: 12px 20px; border: none; border-radius: 25px; font-size: 14px; outline: none; background: white; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); transition: box-shadow 0.3s ease; }
-        .search-input:focus { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
-        .suggestions-list { position: absolute; top: 100%; left: 0; right: 0; background: white; border-radius: 0 0 25px 25px; list-style: none; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); margin-top: -5px; display: none; z-index: 1001; }
-        .suggestions-list.active { display: block; }
-        .suggestion-item { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #eee; transition: background-color 0.2s ease; }
-        .suggestion-item:hover { background-color: #f0f0f0; color: #667eea; }
-        .navbar-right { display: flex; gap: 20px; align-items: center; }
-        .nav-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
-        .nav-link:hover { color: #e0e0e0; }
-        
-        .container { max-width: 950px; margin: 30px auto; padding: 0 20px; }
-        .recipe-card { background: white; border-radius: 15px; padding: 45px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); margin-bottom: 30px; }
-        
-        .recipe-title { font-size: 38px; font-weight: bold; color: #333; margin-bottom: 10px; border-bottom: 4px solid #667eea; padding-bottom: 15px; }
-        .recipe-subtitle { color: #777; font-size: 16px; margin-bottom: 30px; font-style: italic; }
-        
-        .section-title { font-size: 22px; font-weight: bold; color: #667eea; margin-top: 35px; margin-bottom: 20px; border-bottom: 3px solid #764ba2; padding-bottom: 12px; }
-        .section-title:first-of-type { margin-top: 0; }
-        
-        .about-text { font-size: 15px; line-height: 1.8; color: #666; margin-bottom: 20px; }
-        
-        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; margin-bottom: 20px; }
-        .ingredient-card { background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%); border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); transition: all 0.3s ease; border-left: 4px solid #667eea; }
-        .ingredient-card:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2); }
-        .ingredient-emoji { font-size: 32px; margin-bottom: 8px; }
-        .ingredient-name { font-weight: 600; font-size: 13px; color: #333; line-height: 1.4; }
-        
-        .ingredients-list { list-style: none; padding: 0; }
-        .ingredients-list li { padding: 12px 0; padding-left: 35px; position: relative; line-height: 1.6; color: #555; border-bottom: 1px solid #f0f0f0; }
-        .ingredients-list li:last-child { border-bottom: none; }
-        .ingredients-list li:before { content: "🔸"; position: absolute; left: 0; color: #764ba2; font-size: 14px; }
-        
-        .instructions-list { list-style: none; padding: 0; counter-reset: step; }
-        .instructions-list li { padding: 18px 0; padding-left: 50px; position: relative; line-height: 1.8; color: #555; }
-        .instructions-list li:before { content: counter(step); position: absolute; left: 8px; top: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; counter-increment: step; }
-        
-        .button-group { display: flex; gap: 15px; margin-top: 40px; justify-content: center; flex-wrap: wrap; }
-        .btn { padding: 13px 35px; border: none; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-size: 15px; }
-        .btn-home { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-        .btn-home:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); color: white; text-decoration: none; }
-        .btn-video { background: linear-gradient(135deg, #dc143c 0%, #c41e3a 100%); color: white; }
-        .btn-video:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220, 20, 60, 0.4); color: white; text-decoration: none; }
-        
-        .footer { background: rgba(0, 0, 0, 0.1); color: white; text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
-        .footer p { margin: 0; font-size: 13px; }
-        
-        @media (max-width: 768px) { .navbar { flex-direction: column; padding: 15px; gap: 10px; } .navbar-center { flex: 1 1 100%; order: 3; } .recipe-card { padding: 25px; } .recipe-title { font-size: 28px; } .ingredients-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; } .button-group { flex-direction: column; } .btn { width: 100%; justify-content: center; } }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 0.9rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #fff !important;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #ffc107 !important;
+        }
+
+        .navbar a {
+            color: #fff !important;
+            margin: 0 0.8rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .navbar a:hover {
+            color: #ffc107 !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-selector {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .lang-selector:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #ffc107;
+        }
+
+        .lang-selector option {
+            background: #333;
+            color: white;
+        }
+
+        .autocomplete-container {
+            position: relative;
+            display: inline-flex;
+            width: 350px;
+            margin: 0 1rem;
+        }
+
+        #searchInput {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 28px;
+            width: 100%;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        #searchInput:focus {
+            box-shadow: 0 6px 25px rgba(255, 193, 7, 0.4);
+            transform: scale(1.02);
+        }
+
+        #suggestionsList {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: none;
+            background-color: white;
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 0 0;
+            max-height: 250px;
+            overflow-y: auto;
+            border-radius: 0 0 28px 28px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        #suggestionsList li {
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+            font-weight: 500;
+        }
+
+        #suggestionsList li:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .recipe-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .recipe-header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .recipe-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .recipe-desc {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-header {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ffc107;
+        }
+
+        .ingredients-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .ingredient-chip {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .ingredient-chip:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .instructions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .instruction-step {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .step-text {
+            padding-top: 8px;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 28px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-home {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .btn-home:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            text-decoration: none;
+        }
+
+        .btn-video {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-video:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+            text-decoration: none;
+            color: white;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem;
+            color: white;
+            background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 100;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ingredients-list {
+                grid-template-columns: 1fr;
+            }
+
+            .recipe-title {
+                font-size: 1.8rem;
+            }
+
+            .autocomplete-container {
+                width: 100%;
+                max-width: 300px;
+                margin: 0.5rem auto;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-action {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="/" class="navbar-logo">🍽️ Ruchique</a>
-        <div class="navbar-center">
-            <div class="autocomplete-container">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search recipes...">
-                <ul class="suggestions-list" id="suggestionsList"></ul>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🍽️ Ruchique</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <div class="autocomplete-container mx-auto">
+                    <input type="text" id="searchInput" name="keyword" placeholder="Search recipes...">
+                    <ul id="suggestionsList"></ul>
+                </div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item">
+                        <select class="lang-selector" id="languageSelector">
+                            <option value="en">English</option>
+                            <option value="te">Telugu</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <div class="navbar-right">
-            <a href="/" class="nav-link">Home</a>
         </div>
     </nav>
 
-    <div class="container">
-        <div class="recipe-card">
-            <h1 class="recipe-title">${RECIPE_TITLE}</h1>
-            <p class="recipe-subtitle">${RECIPE_SUBTITLE}</p>
-            
-            <h2 class="section-title">About</h2>
-            <p class="about-text">${RECIPE_ABOUT}</p>
-            
-            <h2 class="section-title">Ingredients</h2>
-            <div class="ingredients-grid">
-                ${INGREDIENTS_GRID}
+    <div class="recipe-container">
+        <div class="recipe-header">
+            <h1 class="recipe-title">ENHANCED_TEMPLATE</h1>
+            <p class="recipe-desc">Authentic Indian Recipe | Traditional Preparation</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="card-section">
+                <h2 class="section-header">📋 Ingredients</h2>
+                <div class="ingredients-list">
+                            <div class="ingredient-chip">🥘 Premium Ingredient 1</div>
+                            <div class="ingredient-chip">🥘 Premium Ingredient 2</div>
+                            <div class="ingredient-chip">🧂 Premium Salt</div>
+                            <div class="ingredient-chip">🫒 Premium Oil</div>
+                            <div class="ingredient-chip">👨‍🍳 Premium Spice Blend</div>
+                            <div class="ingredient-chip">🧄 Fresh Garlic</div>
+                            <div class="ingredient-chip">🍅 Fresh Tomato</div>
+                            <div class="ingredient-chip">💧 Filtered Water</div>
+                </div>
             </div>
-            <ul class="ingredients-list">
-                ${INGREDIENTS_LIST}
-            </ul>
-            
-            <h2 class="section-title">Instructions</h2>
-            <ol class="instructions-list">
-                ${INSTRUCTIONS_LIST}
-            </ol>
-            
-            <div class="button-group">
-                <a href="/" class="btn btn-home">← Back to Home</a>
-                <a href="#" class="btn btn-video">▶ Watch Video</a>
+
+            <div class="card-section">
+                <h2 class="section-header">👨‍🍳 Instructions</h2>
+                <div class="instructions-list">
+
+                            <div class="instruction-step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Select highest quality ingredients for preparation</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Clean and prep ingredients with premium standards</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Use proper cooking techniques for best results</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">4</div>
+                                <div class="step-text">Monitor cooking temperature and timing carefully</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">5</div>
+                                <div class="step-text">Taste and adjust seasonings for perfect balance</div>
+                            </div>
+
+                            <div class="instruction-step">
+                                <div class="step-number">6</div>
+                                <div class="step-text">Present and serve with professional plating standards</div>
+                            </div>
+                </div>
             </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/" class="btn-action btn-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <a href="https://www.youtube.com/results?search_query=ENHANCED_TEMPLATE+recipe" target="_blank" class="btn-action btn-video"><i class="fas fa-play-circle"></i> Watch Recipe Video</a>
         </div>
     </div>
 
-    <div class="footer"><p>&copy; 2026 Ruchique. All rights reserved.</p></div>
+    <div class="footer">
+        <p>&copy; 2026 Ruchique - Delicious Indian Recipes <i class="fas fa-utensils" style="margin: 0 5px;"></i></p>
+    </div>
 
+    <div id="google_translate_element" style="display: none;"></div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         const searchInput = document.getElementById('searchInput');
         const suggestionsList = document.getElementById('suggestionsList');
-        searchInput.addEventListener('input', async (e) => {
-            const keyword = e.target.value.trim();
-            if (keyword.length === 0) { suggestionsList.classList.remove('active'); return; }
-            try {
-                const response = await fetch(`/api/recipes/search?keyword=${encodeURIComponent(keyword)}`);
-                const recipes = await response.json();
-                suggestionsList.innerHTML = '';
-                if (recipes.length > 0) {
-                    recipes.forEach(recipe => {
-                        const li = document.createElement('li');
-                        li.className = 'suggestion-item';
-                        li.textContent = recipe;
-                        li.addEventListener('click', () => {
-                            const url = recipe.toLowerCase().replace(/\s+/g, '-');
-                            window.location.href = `/${url}.html`;
-                        });
-                        suggestionsList.appendChild(li);
-                    });
-                    suggestionsList.classList.add('active');
+        const languageSelector = document.getElementById('languageSelector');
+        
+        if (searchInput && suggestionsList) {
+            searchInput.value = '';
+            suggestionsList.innerHTML = '';
+            suggestionsList.style.display = 'none';
+            
+            let searchTimer;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimer);
+                const keyword = this.value.trim();
+                
+                if (!keyword) {
+                    suggestionsList.innerHTML = '';
+                    suggestionsList.style.display = 'none';
+                    return;
                 }
-            } catch (error) { console.error('Search error:', error); }
-        });
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.autocomplete-container')) { suggestionsList.classList.remove('active'); }
-        });
+                
+                searchTimer = setTimeout(() => {
+                    fetch('/api/recipes/search?keyword=' + encodeURIComponent(keyword))
+                        .then(res => res.json())
+                        .then(recipes => {
+                            suggestionsList.innerHTML = '';
+                            if (recipes && recipes.length > 0) {
+                                recipes.forEach(recipe => {
+                                    const li = document.createElement('li');
+                                    li.textContent = recipe;
+                                    li.addEventListener('click', () => {
+                                        searchInput.value = '';
+                                        suggestionsList.innerHTML = '';
+                                        suggestionsList.style.display = 'none';
+                                        window.location.href = '/' + recipe.toLowerCase().replace(/\s+/g, '-');
+                                    });
+                                    suggestionsList.appendChild(li);
+                                });
+                                suggestionsList.style.display = 'block';
+                            }
+                        })
+                        .catch(err => console.log('Search error:', err));
+                }, 200);
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    clearTimeout(searchTimer);
+                    const keyword = this.value.trim();
+                    if (keyword) {
+                        searchInput.value = '';
+                        suggestionsList.innerHTML = '';
+                        suggestionsList.style.display = 'none';
+                        window.location.href = '/' + keyword.toLowerCase().replace(/\s+/g, '-');
+                    }
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.autocomplete-container')) {
+                    suggestionsList.style.display = 'none';
+                }
+            });
+        }
+        
+        if (languageSelector) {
+            languageSelector.addEventListener('change', function(e) {
+                const langMap = { 'en': 'English', 'te': 'Telugu', 'hi': 'Hindi' };
+                const combo = document.querySelector('.goog-te-combo');
+                if (combo) {
+                    combo.value = langMap[this.value] || 'English';
+                    combo.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+        }
+        
+        function initTranslate() {
+            try {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,te,hi',
+                    autoDisplay: false
+                }, 'google_translate_element');
+            } catch(e) {}
+        }
+        
+        if (window.google && window.google.translate) {
+            initTranslate();
+        } else {
+            setTimeout(initTranslate, 1500);
+        }
     </script>
 </body>
 </html>
