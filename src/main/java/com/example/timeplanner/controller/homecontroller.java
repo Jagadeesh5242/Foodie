@@ -14,93 +14,114 @@ public class homecontroller {
 
     // List of recipes - you can expand this
     private static final List<String> RECIPES = Arrays.asList(
-            // North Indian
+            // North Indian & Main Dishes
             "Butter Chicken",
             "Paneer Tikka",
-            "Dosa",
-            "Samosa",
-            "Chole Bhature",
-            "Tandoori Chicken",
             "Chicken Tikka Masala",
             "Rogan Josh",
             "Palak Paneer",
             "Aloo Gobi",
             "Rajma",
             "Dal Makhani",
-            "Garlic Naan",
-            // Biryani Varieties
-            "Chicken Biryani",
-            "Mutton Biryani",
-            "Fish Biryani",
-            "France Biryani",
-            "Paneer Biryani",
-            "Egg Biryani",
-            "Munakada Biryani",
-            "Vankai Biryani",
-            "Panasa Kaya Biryani",
-            "Ulava Caru Biryani",
-            // Telugu Vegetarian Dishes
-            "Gongura",
-            "Pesarattu",
-            "Bagara Rice",
-            "Lemon Rice",
-            "Tamarind Rice",
-            "Coconut Rice",
-            "Bendakaya Fry",
-            "Brinjal Fry",
-            "Bottle Gourd Fry",
-            "Chikhalwali",
-            "Aloo Fry",
-            // Telugu Non-Vegetarian Dishes
-            "Chicken 65",
-            "Gongura Chicken",
-            "Andhra Chicken Fry",
+            "Mutter Paneer",
+            "Chana Masala",
+            "Mushroom Curry",
+            "Cauliflower Masala",
+            "Chole Bhature",
+            "Nihari",
+            "Hyderabadi Haleem",
+            "Nawabi Keema",
+            "Dum Pukht Chicken",
+            "Tandoori Chicken",
             "Chicken Curry",
             "Mutton Curry",
             "Fish Curry",
             "Shrimp Curry",
+            "Garlic Naan",
+            "Paneer Chakli",
+            "Tandoori Paneer",
+            "Coconut Curry",
+            "Green Curry",
+            "Red Curry",
+            "Tomato Based Gravy",
+
             // South Indian Specialties
+            "Dosa",
             "Idli",
-            "Vada",
             "Uttapam",
             "Appam",
-            "Masala Dosa",
             "Medhu Vada",
+            "Masala Dosa",
+            "Cheese Dosa",
+            "Medu Vada",
             "Upma",
             "Puttu",
             "Filter Coffee",
-            "Cheese Dosa",
+            "Pesarattu",
+            "Sambar",
+            "Rasam",
+            "Vada",
+            "Pongal",
+            "Payesh",
+            "Inippu",
+            "Avial",
+            "Uttam Idli",
+
+            // Biryani Varieties
+            "Chicken Biryani",
+            "Mutton Biryani",
+            "Fish Biryani",
+            "Paneer Biryani",
+            "Egg Biryani",
+            "Vegetable Biryani",
+            "France Biryani",
+            "Munakada Biryani",
+            "Vankai Biryani",
+            "Panasa Kaya Biryani",
+            "Ulava Caru Biryani",
+            "Memoni Biryani",
+            "Hyderabadi Biryani",
+            "Dum Biryani",
+            "Lucknowi Biryani",
+            "Calcutta Biryani",
+
             // Breads & Rotis
             "Roti",
             "Paratha",
-            "Kulcha",
+            "Lachcha Paratha",
             "Puri",
-            "Khichdi",
+            "Kulcha",
+            "Butter Naan",
             "Saag Roti",
             "Makai Roti",
+            "Makki Ki Roti",
             "Tortilla",
-            "Lachcha Paratha",
-            "Butter Naan",
+
             // Desserts & Sweets
             "Gulab Jamun",
             "Kheer",
             "Rasmalai",
             "Barfi",
             "Halwa",
+            "Gajar Ka Halwa",
             "Jalebi",
             "Laddu",
             "Rasgulla",
-            "Payesh",
             "Fir Ni",
             "Malpua",
             "Mohan Thal",
             "Milk Cake",
             "Peda",
-            "Gajar Ka Halwa",
+            "Sandesh",
+            "Kalakand",
+            "Rasogulla",
+            "Gujhia",
+            "Burfi",
+
             // Snacks & Appetizers
             "Pakora",
+            "Samosa",
             "Spring Roll",
-            "Samosa Chat",
             "Bhelpuri",
             "Pani Puri",
             "Sev Tameta",
@@ -108,28 +129,15 @@ public class homecontroller {
             "Masala Peanuts",
             "Onion Bhajiya",
             "Aloo Tikki",
-            // Curries & Gravies
-            "Paneer Tikka Masala",
-            "Mutter Paneer",
-            "Paneer Chakli",
-            "Mushroom Curry",
-            "Cauliflower Masala",
-            "Tomato Based Gravy",
-            "Coconut Curry",
-            "Green Curry",
-            "Red Curry",
-            "Nihari",
-            // Regional Specialties
-            "Hyderabadi Haleem",
-            "Nawabi Keema",
-            "Dum Pukht Chicken",
-            "Burdwan Chicken",
-            "Lucknowi Kebab",
-            "Kashmir Pulao",
-            "Dum Biryani",
-            "Authentic Kebab",
-            "Seekh Kebab",
-            "Galauti Kebab");
+            "Samosa Chat",
+            "Bonda",
+            "Chakli",
+            "Murukku",
+            "Bhujia",
+            "Chikhalwali",
+            "Bendakaya Fry",
+            "Brinjal Fry",
+            "Bottle Gourd Fry");
 
     @GetMapping("/")
     public ModelAndView home() {
@@ -892,6 +900,364 @@ public class homecontroller {
     public ModelAndView galauti() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("galauti-kebab");
+        return mv;
+    }
+
+    // Additional routes for more recipes
+    @GetMapping("/vegetable-biryani")
+    public ModelAndView vegetableBiryani() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("vegetable-biryani");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-paneer")
+    public ModelAndView tandooriPaneer() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-paneer");
+        return mv;
+    }
+
+    @GetMapping("/memoni-biryani")
+    public ModelAndView memoniBiryani() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("memoni-biryani");
+        return mv;
+    }
+
+    @GetMapping("/hyderabadi-biryani")
+    public ModelAndView hyderabadiBiryani() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("hyderabadi-biryani");
+        return mv;
+    }
+
+    @GetMapping("/lucknowi-biryani")
+    public ModelAndView lucknowiBiryani() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("lucknowi-biryani");
+        return mv;
+    }
+
+    @GetMapping("/calcutta-biryani")
+    public ModelAndView calcuttaBiryani() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("calcutta-biryani");
+        return mv;
+    }
+
+    @GetMapping("/makki-ki-roti")
+    public ModelAndView makkiKiRoti() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("makki-ki-roti");
+        return mv;
+    }
+
+    @GetMapping("/sandesh")
+    public ModelAndView sandesh() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sandesh");
+        return mv;
+    }
+
+    @GetMapping("/kalakand")
+    public ModelAndView kalakand() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kalakand");
+        return mv;
+    }
+
+    @GetMapping("/gujhia")
+    public ModelAndView gujhia() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gujhia");
+        return mv;
+    }
+
+    @GetMapping("/ladoo")
+    public ModelAndView ladoo() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("ladoo");
+        return mv;
+    }
+
+    @GetMapping("/bonda")
+    public ModelAndView bonda() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("bonda");
+        return mv;
+    }
+
+    @GetMapping("/chakli")
+    public ModelAndView chakli() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chakli");
+        return mv;
+    }
+
+    @GetMapping("/murukku")
+    public ModelAndView murukku() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("murukku");
+        return mv;
+    }
+
+    @GetMapping("/bhujia")
+    public ModelAndView bhujia() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("bhujia");
+        return mv;
+    }
+
+    @GetMapping("/avial")
+    public ModelAndView avial() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("avial");
+        return mv;
+    }
+
+    @GetMapping("/baati")
+    public ModelAndView baati() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("baati");
+        return mv;
+    }
+
+    @GetMapping("/bendakaya")
+    public ModelAndView bendakaya() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("bendakaya");
+        return mv;
+    }
+
+    @GetMapping("/bhakri")
+    public ModelAndView bhakri() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("bhakri");
+        return mv;
+    }
+
+    @GetMapping("/bihari-litti")
+    public ModelAndView bihariLitti() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("bihari-litti");
+        return mv;
+    }
+
+    @GetMapping("/biryani-dum-pukht")
+    public ModelAndView biryaniDumPukht() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("biryani-dum-pukht");
+        return mv;
+    }
+
+    @GetMapping("/biryani-rice")
+    public ModelAndView biryaniRice() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("biryani-rice");
+        return mv;
+    }
+
+    @GetMapping("/biryani")
+    public ModelAndView biryani() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("biryani");
+        return mv;
+    }
+
+    @GetMapping("/burfi")
+    public ModelAndView burfi() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("burfi");
+        return mv;
+    }
+
+    @GetMapping("/chana-masala")
+    public ModelAndView chanaMasala() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chana-masala");
+        return mv;
+    }
+
+    @GetMapping("/dhokla")
+    public ModelAndView dhokla() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dhokla");
+        return mv;
+    }
+
+    @GetMapping("/haleem")
+    public ModelAndView haleem() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("haleem");
+        return mv;
+    }
+
+    @GetMapping("/inippu")
+    public ModelAndView inippu() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("inippu");
+        return mv;
+    }
+
+    @GetMapping("/kachumber-salad")
+    public ModelAndView kachumberSalad() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kachumber-salad");
+        return mv;
+    }
+
+    @GetMapping("/kadhi")
+    public ModelAndView kadhi() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kadhi");
+        return mv;
+    }
+
+    @GetMapping("/kebab")
+    public ModelAndView kebab() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kebab");
+        return mv;
+    }
+
+    @GetMapping("/kesari")
+    public ModelAndView kesari() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kesari");
+        return mv;
+    }
+
+    @GetMapping("/luchi")
+    public ModelAndView luchi() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("luchi");
+        return mv;
+    }
+
+    @GetMapping("/medu-vada")
+    public ModelAndView meduVada() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("medu-vada");
+        return mv;
+    }
+
+    @GetMapping("/mirchi-ka-salan")
+    public ModelAndView mirchiKaSalan() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("mirchi-ka-salan");
+        return mv;
+    }
+
+    @GetMapping("/naan")
+    public ModelAndView naan() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("naan");
+        return mv;
+    }
+
+    @GetMapping("/natu-kodi")
+    public ModelAndView natuKodi() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("natu-kodi");
+        return mv;
+    }
+
+    @GetMapping("/paya")
+    public ModelAndView paya() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paya");
+        return mv;
+    }
+
+    @GetMapping("/petha")
+    public ModelAndView petha() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("petha");
+        return mv;
+    }
+
+    @GetMapping("/poha")
+    public ModelAndView poha() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("poha");
+        return mv;
+    }
+
+    @GetMapping("/pongal")
+    public ModelAndView pongal() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("pongal");
+        return mv;
+    }
+
+    @GetMapping("/poori")
+    public ModelAndView poori() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("poori");
+        return mv;
+    }
+
+    @GetMapping("/pulihora")
+    public ModelAndView pulihora() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("pulihora");
+        return mv;
+    }
+
+    @GetMapping("/raita")
+    public ModelAndView raita() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("raita");
+        return mv;
+    }
+
+    @GetMapping("/rasam")
+    public ModelAndView rasam() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rasam");
+        return mv;
+    }
+
+    @GetMapping("/rasogulla")
+    public ModelAndView rasogulla() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rasogulla");
+        return mv;
+    }
+
+    @GetMapping("/sambar")
+    public ModelAndView sambar() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar");
+        return mv;
+    }
+
+    @GetMapping("/shami-kabab")
+    public ModelAndView shamiKabab() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("shami-kabab");
+        return mv;
+    }
+
+    @GetMapping("/sheekh-kabab")
+    public ModelAndView sheekhKabab() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sheekh-kabab");
+        return mv;
+    }
+
+    @GetMapping("/unappakaya")
+    public ModelAndView unappakaya() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("unappakaya");
+        return mv;
+    }
+
+    @GetMapping("/uttam-idli")
+    public ModelAndView uttamIdli() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("uttam-idli");
         return mv;
     }
 
