@@ -199,20 +199,28 @@ class RecipeTranslator {
         return;
       }
       
-      // If combo not found, try alternative method
-      console.log('[Translation] .goog-te-combo not found, trying alternative method');
+      // If combo not found, try alternative method - set cookie properly
+      console.log('[Translation] .goog-te-combo not found, setting cookie');
       
-      // Set Google Translate cookie
-      document.cookie = `googtrans=/en/${langCode === 'en' ? 'en' : (langCode === 'hi' ? 'hi' : 'te')}`;
+      // Clear old cookie first
+      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       
-      // Try to reload translation
-      if (window.location.href.indexOf('_escaped_fragment_') === -1) {
-        console.log('[Translation] Reloading page to apply translation');
-        // Wait a bit then reload
-        setTimeout(() => {
-          window.location.reload();
-        }, 300);
+      // Set new cookie with proper format
+      if (langCode === 'en') {
+        // For English, clear the translation
+        document.cookie = 'googtrans=/en/en; path=/;';
+      } else if (langCode === 'hi') {
+        document.cookie = 'googtrans=/en/hi; path=/;';
+      } else if (langCode === 'te') {
+        document.cookie = 'googtrans=/en/te; path=/;';
       }
+      
+      console.log('[Translation] Cookie set. Reloading page...');
+      
+      // Reload page to apply translation
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
     } catch (e) {
       console.error('[Translation] Error updating Google Translate:', e);
     }
