@@ -1,56 +1,193 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Search Results</title>
+    <title>Search Results - Ruchique 🍽️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" 
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/google-translate-element@0/element.js"></script>
     <style>
-        body {
-            background-color: #f8f9fa;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .search-header {
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 0.9rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #fff !important;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #ffc107 !important;
+        }
+
+        .navbar a {
+            color: #fff !important;
+            margin: 0 0.8rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .navbar a:hover {
+            color: #ffc107 !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-selector {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+        }
+
+        .lang-selector:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #ffc107;
+        }
+
+        .lang-selector option {
+            background: #333;
+            color: white;
+        }
+
+        .search-header {
+            background: rgba(0, 0, 0, 0.2);
             color: white;
             padding: 30px 20px;
             text-align: center;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 600px;
         }
+
+        .search-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
         .recipe-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 20px;
             margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
             display: block;
         }
+
         .recipe-card:hover {
             transform: translateY(-5px);
             text-decoration: none;
             color: inherit;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
+
         .recipe-card h5 {
             color: #667eea;
             font-weight: bold;
+            margin-bottom: 8px;
         }
+
         .no-results {
             text-align: center;
             padding: 40px;
-            color: #999;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem;
+            color: white;
+            background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 100;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .search-header h1 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <a href="/" class="btn btn-secondary" style="margin: 10px;">← Back to Home</a>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="fas fa-utensils"></i> Ruchique</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item">
+                        <select class="lang-selector" id="languageSelector">
+                            <option value="en">English</option>
+                            <option value="te">Telugu</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <div class="search-header">
-        <h1>Search Results</h1>
-        <p th:if="${keyword}">Results for "<span th:text="${keyword}"></span>"</p>
-    </div>
+    <!-- Google Translate Element -->
+    <div id="google_translate_element" style="display: none;"></div>
 
     <div class="container" style="margin-top: 30px;">
+        <div class="search-header">
+            <h1>Search Results</h1>
+            <p th:if="${keyword}">Results for "<span th:text="${keyword}"></span>"</p>
+        </div>
+
         <div th:if="${recipes.size() > 0}">
             <a th:each="recipe : ${recipes}" 
                th:href="@{/} + ${recipe.toLowerCase().replaceAll(' ', '-')}" 
@@ -67,5 +204,14 @@
             <a href="/" class="btn btn-primary mt-3">← Back to Home</a>
         </div>
     </div>
+
+    <div class="footer">
+        <p>&copy; 2026 Ruchique - Delicious Indian Recipes <i class="fas fa-utensils" style="margin: 0 5px;"></i></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/translation.js"></script>
 </body>
 </html>
+

@@ -345,11 +345,11 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/translation.js"></script>
     <script>
         // Improved search functionality - works on all pages
         const searchInput = document.getElementById('searchInput');
         const suggestionsList = document.getElementById('suggestionsList');
-        const languageSelector = document.getElementById('languageSelector');
         
         if (searchInput && suggestionsList) {
             // Initialize clean state
@@ -413,35 +413,6 @@
                     suggestionsList.style.display = 'none';
                 }
             });
-        }
-        
-        // Language selector
-        if (languageSelector) {
-            languageSelector.addEventListener('change', function(e) {
-                const langMap = { 'en': 'English', 'te': 'Telugu', 'hi': 'Hindi' };
-                const combo = document.querySelector('.goog-te-combo');
-                if (combo) {
-                    combo.value = langMap[this.value] || 'English';
-                    combo.dispatchEvent(new Event('change', { bubbles: true }));
-                }
-            });
-        }
-        
-        // Google Translate initialization with retry
-        function initTranslate() {
-            try {
-                new google.translate.TranslateElement({
-                    pageLanguage: 'en',
-                    includedLanguages: 'en,te,hi',
-                    autoDisplay: false
-                }, 'google_translate_element');
-            } catch(e) {}
-        }
-        
-        if (window.google && window.google.translate) {
-            initTranslate();
-        } else {
-            setTimeout(initTranslate, 1500);
         }
     </script>
 </body>
