@@ -113,6 +113,34 @@
             margin: 0 1rem;
         }
 
+        /* Mobile search bar - always visible */
+        .autocomplete-container-mobile {
+            display: none;
+            position: relative;
+            width: 100%;
+            padding: 8px;
+            background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%);
+            border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .autocomplete-container-mobile #searchInput {
+            width: 100%;
+            padding: 12px 14px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .autocomplete-container-mobile #suggestionsList {
+            max-height: 250px;
+            position: absolute;
+            top: 100%;
+            left: 8px;
+            right: 8px;
+            margin-top: -5px;
+        }
+
         #searchInput {
             padding: 14px 20px;
             border: none;
@@ -264,17 +292,23 @@
             .autocomplete-container {
                 width: 100% !important;
                 max-width: none !important;
-                margin: 10px 0 !important;
-                padding: 0 10px !important;
+                margin: 0 !important;
+                padding: 0 !important;
                 flex: 1 !important;
+                display: flex !important;
+                border-radius: 0;
+            }
+
+            .autocomplete-container-mobile {
                 display: flex !important;
             }
 
             #searchInput {
                 font-size: 0.85rem;
-                padding: 10px 14px;
+                padding: 12px 14px;
                 border-radius: 20px;
                 width: 100% !important;
+                margin: 8px 0;
             }
 
             #suggestionsList {
@@ -284,6 +318,10 @@
             .navbar-collapse {
                 width: 100%;
                 flex-basis: 100%;
+                display: none;
+            }
+
+            .navbar-collapse.show {
                 display: flex;
                 flex-direction: column;
             }
@@ -291,6 +329,8 @@
             .navbar-collapse .autocomplete-container {
                 order: 1;
                 width: 100%;
+                margin: 0 !important;
+                padding: 0 10px !important;
             }
 
             .navbar-collapse .navbar-nav {
@@ -363,6 +403,12 @@
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Search Bar (always visible on mobile) -->
+    <div class="autocomplete-container-mobile" id="mobileSearchBar">
+        <input type="text" id="mobileSearchInput" name="keyword" placeholder="🔍 Search recipes...">
+        <ul id="mobileSuggestionsList"></ul>
+    </div>
 
     <!-- Hero Section -->
     <div class="hero-section">
@@ -446,6 +492,72 @@
             document.addEventListener('click', function(e) {
                 if (!e.target.closest('.autocomplete-container')) {
                     suggestionsList.style.display = 'none';
+                }
+            });
+        }
+
+        // Mobile search functionality - mirrors desktop search
+        const mobileSearchInput = document.getElementById('mobileSearchInput');
+        const mobileSuggestionsList = document.getElementById('mobileSuggestionsList');
+        
+        if (mobileSearchInput && mobileSuggestionsList) {
+            mobileSearchInput.value = '';
+            mobileSuggestionsList.innerHTML = '';
+            
+            // Handle search input with debounce
+            let mobileSearchTimer;
+            mobileSearchInput.addEventListener('input', function(e) {
+                clearTimeout(mobileSearchTimer);
+                const keyword = this.value.trim();
+                
+                if (!keyword) {
+                    mobileSuggestionsList.innerHTML = '';
+                    mobileSuggestionsList.style.display = 'none';
+                    return;
+                }
+                
+                mobileSearchTimer = setTimeout(() => {
+                    fetch(`/api/recipes/search?keyword=${encodeURIComponent(keyword)}`)
+                        .then(res => res.json())
+                        .then(recipes => {
+                            mobileSuggestionsList.innerHTML = '';
+                            if (recipes && recipes.length > 0) {
+                                recipes.forEach(recipe => {
+                                    const li = document.createElement('li');
+                                    li.textContent = recipe;
+                                    li.addEventListener('click', () => {
+                                        mobileSearchInput.value = '';
+                                        mobileSuggestionsList.innerHTML = '';
+                                        mobileSuggestionsList.style.display = 'none';
+                                        window.location.href = '/' + recipe.toLowerCase().replace(/\s+/g, '-');
+                                    });
+                                    mobileSuggestionsList.appendChild(li);
+                                });
+                                mobileSuggestionsList.style.display = 'block';
+                            }
+                        })
+                        .catch(err => console.log('Mobile search error:', err));
+                }, 200);
+            });
+            
+            // Search on Enter key
+            mobileSearchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    clearTimeout(mobileSearchTimer);
+                    const keyword = this.value.trim();
+                    if (keyword) {
+                        mobileSearchInput.value = '';
+                        mobileSuggestionsList.innerHTML = '';
+                        mobileSuggestionsList.style.display = 'none';
+                        window.location.href = '/' + keyword.toLowerCase().replace(/\s+/g, '-');
+                    }
+                }
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('#mobileSearchBar')) {
+                    mobileSuggestionsList.style.display = 'none';
                 }
             });
         }
