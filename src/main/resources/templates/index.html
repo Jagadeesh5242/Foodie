@@ -445,33 +445,57 @@
                 const keyword = this.value.trim();
                 
                 if (!keyword) {
-                    suggestionsList.innerHTML = '';
                     suggestionsList.style.display = 'none';
+                    suggestionsList.innerHTML = '';
                     return;
                 }
                 
                 searchTimer = setTimeout(() => {
+                    console.log('[Search] Fetching recipes for keyword:', keyword);
                     fetch(`/api/recipes/search?keyword=${encodeURIComponent(keyword)}`)
                         .then(res => res.json())
                         .then(recipes => {
+                            // Always clear previous results first
                             suggestionsList.innerHTML = '';
+                            
                             if (recipes && recipes.length > 0) {
+                                console.log('[Search] Found ' + recipes.length + ' recipes');
                                 recipes.forEach(recipe => {
                                     const li = document.createElement('li');
                                     li.textContent = recipe;
+                                    li.style.cursor = 'pointer';
                                     li.addEventListener('click', () => {
+                                        const recipeName = recipe.toLowerCase().replace(/\s+/g, '-');
+                                        console.log('[Search] Navigating to:', recipeName);
                                         searchInput.value = '';
                                         suggestionsList.innerHTML = '';
                                         suggestionsList.style.display = 'none';
-                                        window.location.href = '/' + recipe.toLowerCase().replace(/\s+/g, '-');
+                                        window.location.href = '/' + recipeName;
                                     });
                                     suggestionsList.appendChild(li);
                                 });
+                                // Make sure dropdown is visible with results
                                 suggestionsList.style.display = 'block';
+                                console.log('[Search] Dropdown displayed');
+                            } else {
+                                console.log('[Search] No recipes found');
+                                suggestionsList.style.display = 'none';
                             }
                         })
-                        .catch(err => console.log('Search error:', err));
-                }, 200);
+                        .catch(err => {
+                            console.error('[Search] Fetch error:', err);
+                            suggestionsList.style.display = 'none';
+                            suggestionsList.innerHTML = '<li style="padding: 10px; color: red;">Error fetching recipes</li>';
+                            suggestionsList.style.display = 'block';
+                        });
+                }, 300);
+            });
+            
+            // Focus event - show suggestions if they exist
+            searchInput.addEventListener('focus', function(e) {
+                if (this.value.trim() && suggestionsList.children.length > 0) {
+                    suggestionsList.style.display = 'block';
+                }
             });
             
             // Search on Enter key
@@ -480,10 +504,12 @@
                     clearTimeout(searchTimer);
                     const keyword = this.value.trim();
                     if (keyword) {
+                        const recipeName = keyword.toLowerCase().replace(/\s+/g, '-');
+                        console.log('[Search] Enter key - navigating to:', recipeName);
                         searchInput.value = '';
                         suggestionsList.innerHTML = '';
                         suggestionsList.style.display = 'none';
-                        window.location.href = '/' + keyword.toLowerCase().replace(/\s+/g, '-');
+                        window.location.href = '/' + recipeName;
                     }
                 }
             });
@@ -503,6 +529,7 @@
         if (mobileSearchInput && mobileSuggestionsList) {
             mobileSearchInput.value = '';
             mobileSuggestionsList.innerHTML = '';
+            mobileSuggestionsList.style.display = 'none';
             
             // Handle search input with debounce
             let mobileSearchTimer;
@@ -511,33 +538,57 @@
                 const keyword = this.value.trim();
                 
                 if (!keyword) {
-                    mobileSuggestionsList.innerHTML = '';
                     mobileSuggestionsList.style.display = 'none';
+                    mobileSuggestionsList.innerHTML = '';
                     return;
                 }
                 
                 mobileSearchTimer = setTimeout(() => {
+                    console.log('[Mobile Search] Fetching recipes for keyword:', keyword);
                     fetch(`/api/recipes/search?keyword=${encodeURIComponent(keyword)}`)
                         .then(res => res.json())
                         .then(recipes => {
+                            // Always clear previous results first
                             mobileSuggestionsList.innerHTML = '';
+                            
                             if (recipes && recipes.length > 0) {
+                                console.log('[Mobile Search] Found ' + recipes.length + ' recipes');
                                 recipes.forEach(recipe => {
                                     const li = document.createElement('li');
                                     li.textContent = recipe;
+                                    li.style.cursor = 'pointer';
                                     li.addEventListener('click', () => {
+                                        const recipeName = recipe.toLowerCase().replace(/\s+/g, '-');
+                                        console.log('[Mobile Search] Navigating to:', recipeName);
                                         mobileSearchInput.value = '';
                                         mobileSuggestionsList.innerHTML = '';
                                         mobileSuggestionsList.style.display = 'none';
-                                        window.location.href = '/' + recipe.toLowerCase().replace(/\s+/g, '-');
+                                        window.location.href = '/' + recipeName;
                                     });
                                     mobileSuggestionsList.appendChild(li);
                                 });
+                                // Make sure dropdown is visible with results
                                 mobileSuggestionsList.style.display = 'block';
+                                console.log('[Mobile Search] Dropdown displayed');
+                            } else {
+                                console.log('[Mobile Search] No recipes found');
+                                mobileSuggestionsList.style.display = 'none';
                             }
                         })
-                        .catch(err => console.log('Mobile search error:', err));
-                }, 200);
+                        .catch(err => {
+                            console.error('[Mobile Search] Fetch error:', err);
+                            mobileSuggestionsList.style.display = 'none';
+                            mobileSuggestionsList.innerHTML = '<li style="padding: 10px; color: red;">Error fetching recipes</li>';
+                            mobileSuggestionsList.style.display = 'block';
+                        });
+                }, 300);
+            });
+            
+            // Focus event - show suggestions if they exist
+            mobileSearchInput.addEventListener('focus', function(e) {
+                if (this.value.trim() && mobileSuggestionsList.children.length > 0) {
+                    mobileSuggestionsList.style.display = 'block';
+                }
             });
             
             // Search on Enter key
@@ -546,10 +597,12 @@
                     clearTimeout(mobileSearchTimer);
                     const keyword = this.value.trim();
                     if (keyword) {
+                        const recipeName = keyword.toLowerCase().replace(/\s+/g, '-');
+                        console.log('[Mobile Search] Enter key - navigating to:', recipeName);
                         mobileSearchInput.value = '';
                         mobileSuggestionsList.innerHTML = '';
                         mobileSuggestionsList.style.display = 'none';
-                        window.location.href = '/' + keyword.toLowerCase().replace(/\s+/g, '-');
+                        window.location.href = '/' + recipeName;
                     }
                 }
             });
