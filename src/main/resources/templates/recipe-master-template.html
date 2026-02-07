@@ -608,10 +608,8 @@
                     combo.value = langMap[this.value] || 'English';
                     combo.dispatchEvent(new Event('change', { bubbles: true }));
                 }
-            });
-        }
-        
-        function initTranslate() {
+
+    function initTranslate() {
             try {
                 new google.translate.TranslateElement({
                     pageLanguage: 'en',
