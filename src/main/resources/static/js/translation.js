@@ -77,7 +77,7 @@ hideGoogleTranslateBar();
 class RecipeTranslator {
   constructor() {
     this.currentLanguage = localStorage.getItem('selectedLanguage') || 'en';
-    this.supportedLanguages = ['en', 'hi', 'te'];
+    this.supportedLanguages = ['en', 'hi', 'te', 'ja'];
     this.translations = {};
     this.isInitialized = false;
     this.initializationAttempts = 0;
@@ -131,7 +131,7 @@ class RecipeTranslator {
       new google.translate.TranslateElement(
         {
           pageLanguage: 'en',
-          includedLanguages: 'en,hi,te',
+          includedLanguages: 'en,hi,te,ja',
           autoDisplay: false,
           layout: google.translate.TranslateElement.InlineLayout.SIMPLE
         },
@@ -183,7 +183,8 @@ class RecipeTranslator {
     const languageMap = {
       en: 'English',
       hi: 'Hindi',
-      te: 'Telugu'
+      te: 'Telugu',
+      ja: 'Japanese'
     };
 
     try {
@@ -213,7 +214,10 @@ class RecipeTranslator {
         document.cookie = 'googtrans=/en/hi; path=/;';
       } else if (langCode === 'te') {
         document.cookie = 'googtrans=/en/te; path=/;';
+      }else if (langCode === 'ja') {
+        document.cookie = 'googtrans=/en/ja; path=/;';
       }
+
       
       console.log('[Translation] Cookie set. Reloading page...');
       
