@@ -81,6 +81,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-left: 10px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            min-height: 44px;
+            font-size: 16px;
+            min-width: 140px;
         }
 
         .lang-selector:hover {
@@ -88,9 +94,41 @@
             border-color: #ffc107;
         }
 
+        .lang-selector:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #ffc107;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+        }
+
+        .lang-selector:active {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .lang-selector:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #ffc107;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+        }
+
+        .lang-selector:active {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
         .lang-selector option {
             background: #333;
             color: white;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .lang-selector {
+                margin-left: 5px;
+                padding: 10px 12px;
+                font-size: 14px;
+                min-width: 130px;
+            }
         }
 
         .autocomplete-container {

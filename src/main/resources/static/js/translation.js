@@ -242,11 +242,36 @@ class RecipeTranslator {
     selector.value = this.currentLanguage;
     console.log('[Translation] Set selector to:', this.currentLanguage);
 
-    // Listen for changes
-    selector.addEventListener('change', (e) => {
-      console.log('[Translation] Language selector changed to:', e.target.value);
-      this.changeLanguage(e.target.value);
+    // Store the last value to detect changes
+    let lastValue = selector.value;
+
+    // Handler function for language change
+    const handleLanguageChange = (e) => {
+      const newValue = selector.value;
+      if (newValue !== lastValue) {
+        console.log('[Translation] Language selector changed to:', newValue);
+        lastValue = newValue;
+        this.changeLanguage(newValue);
+      }
+    };
+
+    // Listen for multiple events to ensure mobile compatibility
+    // 'change' event - standard browser event
+    selector.addEventListener('change', handleLanguageChange);
+    
+    // 'input' event - fires more reliably on mobile
+    selector.addEventListener('input', handleLanguageChange);
+    
+    // 'touchend' event - for touch devices
+    selector.addEventListener('touchend', handleLanguageChange);
+    
+    // 'click' event - fallback for some mobile browsers
+    selector.addEventListener('click', (e) => {
+      // Delay to allow dropdown to register selection
+      setTimeout(() => handleLanguageChange(e), 50);
     });
+
+    console.log('[Translation] Language selector ready with mobile support');
   }
 
   /**
