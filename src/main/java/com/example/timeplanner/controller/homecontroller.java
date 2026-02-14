@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Controller
 public class homecontroller {
 
-    // List of all recipes (157 total)
+    // List of all recipes (175+ total)
     private static final List<String> RECIPES = Arrays.asList(
             "Aloo Fry",
             "Aloo Gobi",
@@ -31,6 +31,7 @@ public class homecontroller {
             "Bhujia",
             "Bihari Litti",
             "Biryani Dum Pukht",
+            "Biryani Lucknowi",
             "Biryani Rice",
             "Biryani",
             "Bonda",
@@ -45,16 +46,20 @@ public class homecontroller {
             "Chakli",
             "Chana Masala",
             "Cheese Dosa",
+            "Chettinad Chicken",
             "Chicken 65",
             "Chicken Biryani",
             "Chicken Curry",
+            "Chicken Do Pyaza",
             "Chicken Tikka Masala",
             "Chikhalwali Chips",
             "Chikhalwali",
             "Chole Bhature",
+            "Chotey Gosht",
             "Coconut Curry",
             "Coconut Rice",
             "Dal Makhani",
+            "Dal Tadka",
             "Dhokla",
             "Dosa",
             "Dum Biryani",
@@ -64,10 +69,12 @@ public class homecontroller {
             "Fir Ni",
             "Fish Biryani",
             "Fish Curry",
+            "Fish Jhol",
             "France Biryani",
             "Gajar Ka Halwa",
             "Galauti Kebab",
             "Garlic Naan",
+            "Goan Vindaloo",
             "Gongura Chicken",
             "Gongura",
             "Green Curry",
@@ -85,9 +92,11 @@ public class homecontroller {
             "Kalakand",
             "Kashmir Pulao",
             "Kebab",
+            "Kerala Fish Curry",
             "Kesari",
             "Kheer",
             "Khichdi",
+            "Konkan Fish Ampyal",
             "Kulcha",
             "Lachcha Paratha",
             "Laddu",
@@ -108,6 +117,7 @@ public class homecontroller {
             "Mirchi Ka Salan",
             "Mohan Thal",
             "Munakada Biryani",
+            "Murgh Malaiwala",
             "Murukku",
             "Mushroom Curry",
             "Mutter Paneer",
@@ -119,13 +129,17 @@ public class homecontroller {
             "Nihari",
             "Onion Bhajiya",
             "Pakora",
+            "Palak Cottage Cheese",
             "Palak Paneer",
             "Panasa Kaya Biryani",
             "Paneer Biryani",
             "Paneer Chakli",
+            "Paneer Makhani Gravy",
+            "Paneer Mushroom",
             "Paneer Tikka Masala",
             "Paneer Tikka",
             "Pani Puri",
+            "Pani Puri Complete",
             "Paratha",
             "Paya",
             "Payesh",
@@ -141,11 +155,13 @@ public class homecontroller {
             "Raita",
             "Rajma",
             "Rasam",
+            "Rasam Tomato",
             "Rasgulla",
             "Rasmalai",
             "Rasogulla",
             "Red Curry",
             "Rogan Josh",
+            "Rogan Josh Mutton",
             "Roti",
             "Saag Roti",
             "Sambar",
@@ -160,11 +176,13 @@ public class homecontroller {
             "Spring Roll",
             "Tamarind Rice",
             "Tandoori Chicken",
+            "Tandoori Chicken Thighs",
             "Tandoori Paneer",
             "Tomato Based Gravy",
             "Tortilla",
             "Ulava Caru Biryani",
             "Unappakaya",
+            "Undhyu Gujarati",
             "Upma",
             "Uttam Idli",
             "Uttapam",
@@ -1294,6 +1312,1732 @@ public class homecontroller {
         return mv;
     }
 
+    // New recipes from untracked templates
+    @GetMapping("/biryani-lucknowi")
+    public ModelAndView biryaniLucknowi() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("biryani-lucknowi");
+        return mv;
+    }
+
+    @GetMapping("/chettinad-chicken")
+    public ModelAndView chettiadChicken() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chettinad-chicken");
+        return mv;
+    }
+
+    @GetMapping("/chicken-do-pyaza")
+    public ModelAndView chickenDoPyaza() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chicken-do-pyaza");
+        return mv;
+    }
+
+    @GetMapping("/chotey-gosht")
+    public ModelAndView choteyGosht() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chotey-gosht");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka")
+    public ModelAndView dalTadka() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka");
+        return mv;
+    }
+
+    @GetMapping("/fish-jhol")
+    public ModelAndView fishJhol() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("fish-jhol");
+        return mv;
+    }
+
+    @GetMapping("/goan-vindaloo")
+    public ModelAndView goanVindaloo() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("goan-vindaloo");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry")
+    public ModelAndView keralaFishCurry() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry");
+        return mv;
+    }
+
+    @GetMapping("/konkan-fish-ampyal")
+    public ModelAndView konkanFishAmpyal() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("konkan-fish-ampyal");
+        return mv;
+    }
+
+    @GetMapping("/murgh-malaiwala")
+    public ModelAndView murghMalaiwala() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("murgh-malaiwala");
+        return mv;
+    }
+
+    @GetMapping("/palak-cottage-cheese")
+    public ModelAndView palakCottagecheese() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("palak-cottage-cheese");
+        return mv;
+    }
+
+    @GetMapping("/paneer-makhani-gravy")
+    public ModelAndView paneerMakhaniGravy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-makhani-gravy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom")
+    public ModelAndView paneerMushroom() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom");
+        return mv;
+    }
+
+    @GetMapping("/pani-puri-complete")
+    public ModelAndView paniPuriComplete() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("pani-puri-complete");
+        return mv;
+    }
+
+    @GetMapping("/rasam-tomato")
+    public ModelAndView rasamTomato() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rasam-tomato");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-mutton")
+    public ModelAndView roganJoshMutton() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-mutton");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-thighs")
+    public ModelAndView tandooriChickenThighs() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-thighs");
+        return mv;
+    }
+
+    @GetMapping("/undhyu-gujarati")
+    public ModelAndView undhyuGujarati() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("undhyu-gujarati");
+        return mv;
+    }
+
+    // Regional and Style Variants for Multiple Recipes
+    // Butter Chicken Variants
+    @GetMapping("/butter-chicken-classic")
+    public ModelAndView butterChickenClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-classic");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-coastal-classic")
+    public ModelAndView butterChickenCoastalClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-coastal-classic");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-coastal-creamy")
+    public ModelAndView butterChickenCoastalCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-coastal-creamy");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-coastal-home-style")
+    public ModelAndView butterChickenCoastalHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-coastal-home-style");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-coastal-mild")
+    public ModelAndView butterChickenCoastalMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-coastal-mild");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-coastal-spicy")
+    public ModelAndView butterChickenCoastalSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-coastal-spicy");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-east-indian-classic")
+    public ModelAndView butterChickenEastIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-east-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-east-indian-creamy")
+    public ModelAndView butterChickenEastIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-east-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-east-indian-home-style")
+    public ModelAndView butterChickenEastIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-east-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-east-indian-mild")
+    public ModelAndView butterChickenEastIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-east-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-east-indian-spicy")
+    public ModelAndView butterChickenEastIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-east-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-north-indian-classic")
+    public ModelAndView butterChickenNorthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-north-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-north-indian-creamy")
+    public ModelAndView butterChickenNorthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-north-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-north-indian-home-style")
+    public ModelAndView butterChickenNorthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-north-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-north-indian-mild")
+    public ModelAndView butterChickenNorthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-north-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-north-indian-spicy")
+    public ModelAndView butterChickenNorthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-north-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-south-indian-classic")
+    public ModelAndView butterChickenSouthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-south-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-south-indian-creamy")
+    public ModelAndView butterChickenSouthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-south-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-south-indian-home-style")
+    public ModelAndView butterChickenSouthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-south-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-south-indian-mild")
+    public ModelAndView butterChickenSouthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-south-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-south-indian-spicy")
+    public ModelAndView butterChickenSouthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-south-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-west-indian-classic")
+    public ModelAndView butterChickenWestIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-west-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-west-indian-creamy")
+    public ModelAndView butterChickenWestIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-west-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-west-indian-home-style")
+    public ModelAndView butterChickenWestIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-west-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-west-indian-mild")
+    public ModelAndView butterChickenWestIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-west-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/butter-chicken-west-indian-spicy")
+    public ModelAndView butterChickenWestIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("butter-chicken-west-indian-spicy");
+        return mv;
+    }
+
+    // Chole Bhature Variants
+    @GetMapping("/chole-bhature-coastal-classic")
+    public ModelAndView choleBhatureCoastalClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-coastal-classic");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-coastal-creamy")
+    public ModelAndView choleBhatureCoastalCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-coastal-creamy");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-coastal-home-style")
+    public ModelAndView choleBhatureCoastalHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-coastal-home-style");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-coastal-mild")
+    public ModelAndView choleBhatureCoastalMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-coastal-mild");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-coastal-spicy")
+    public ModelAndView choleBhatureCoastalSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-coastal-spicy");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-east-indian-classic")
+    public ModelAndView choleBhatureEastIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-east-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-east-indian-creamy")
+    public ModelAndView choleBhatureEastIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-east-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-east-indian-home-style")
+    public ModelAndView choleBhatureEastIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-east-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-east-indian-mild")
+    public ModelAndView choleBhatureEastIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-east-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-east-indian-spicy")
+    public ModelAndView choleBhatureEastIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-east-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-north-indian-classic")
+    public ModelAndView choleBhatureNorthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-north-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-north-indian-creamy")
+    public ModelAndView choleBhatureNorthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-north-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-north-indian-home-style")
+    public ModelAndView choleBhatureNorthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-north-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-north-indian-mild")
+    public ModelAndView choleBhatureNorthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-north-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-north-indian-spicy")
+    public ModelAndView choleBhatureNorthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-north-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-south-indian-classic")
+    public ModelAndView choleBhatureSouthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-south-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-south-indian-creamy")
+    public ModelAndView choleBhatureSouthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-south-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-south-indian-home-style")
+    public ModelAndView choleBhatureSouthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-south-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-south-indian-mild")
+    public ModelAndView choleBhatureSouthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-south-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-south-indian-spicy")
+    public ModelAndView choleBhatureSouthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-south-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-west-indian-classic")
+    public ModelAndView choleBhatureWestIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-west-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-west-indian-creamy")
+    public ModelAndView choleBhatureWestIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-west-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-west-indian-home-style")
+    public ModelAndView choleBhatureWestIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-west-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-west-indian-mild")
+    public ModelAndView choleBhatureWestIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-west-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/chole-bhature-west-indian-spicy")
+    public ModelAndView choleBhatureWestIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("chole-bhature-west-indian-spicy");
+        return mv;
+    }
+
+    // Dal Tadka Variants
+    @GetMapping("/dal-tadka-coastal-classic")
+    public ModelAndView dalTadkaCoastalClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-coastal-classic");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-coastal-creamy")
+    public ModelAndView dalTadkaCoastalCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-coastal-creamy");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-coastal-home-style")
+    public ModelAndView dalTadkaCoastalHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-coastal-home-style");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-coastal-mild")
+    public ModelAndView dalTadkaCoastalMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-coastal-mild");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-coastal-spicy")
+    public ModelAndView dalTadkaCoastalSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-coastal-spicy");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-east-indian-classic")
+    public ModelAndView dalTadkaEastIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-east-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-east-indian-creamy")
+    public ModelAndView dalTadkaEastIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-east-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-east-indian-home-style")
+    public ModelAndView dalTadkaEastIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-east-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-east-indian-mild")
+    public ModelAndView dalTadkaEastIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-east-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-east-indian-spicy")
+    public ModelAndView dalTadkaEastIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-east-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-north-indian-classic")
+    public ModelAndView dalTadkaNorthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-north-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-north-indian-creamy")
+    public ModelAndView dalTadkaNorthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-north-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-north-indian-home-style")
+    public ModelAndView dalTadkaNorthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-north-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-north-indian-mild")
+    public ModelAndView dalTadkaNorthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-north-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-north-indian-spicy")
+    public ModelAndView dalTadkaNorthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-north-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-south-indian-classic")
+    public ModelAndView dalTadkaSouthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-south-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-south-indian-creamy")
+    public ModelAndView dalTadkaSouthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-south-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-south-indian-home-style")
+    public ModelAndView dalTadkaSouthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-south-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-south-indian-mild")
+    public ModelAndView dalTadkaSouthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-south-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-south-indian-spicy")
+    public ModelAndView dalTadkaSouthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-south-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-west-indian-classic")
+    public ModelAndView dalTadkaWestIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-west-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-west-indian-creamy")
+    public ModelAndView dalTadkaWestIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-west-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-west-indian-home-style")
+    public ModelAndView dalTadkaWestIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-west-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-west-indian-mild")
+    public ModelAndView dalTadkaWestIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-west-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/dal-tadka-west-indian-spicy")
+    public ModelAndView dalTadkaWestIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("dal-tadka-west-indian-spicy");
+        return mv;
+    }
+
+    // Gulab Jamun Variants
+    @GetMapping("/gulab-jamun-coastal-classic")
+    public ModelAndView gulabJamunCoastalClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-coastal-classic");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-coastal-creamy")
+    public ModelAndView gulabJamunCoastalCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-coastal-creamy");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-coastal-home-style")
+    public ModelAndView gulabJamunCoastalHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-coastal-home-style");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-coastal-mild")
+    public ModelAndView gulabJamunCoastalMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-coastal-mild");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-coastal-spicy")
+    public ModelAndView gulabJamunCoastalSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-coastal-spicy");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-east-indian-classic")
+    public ModelAndView gulabJamunEastIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-east-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-east-indian-creamy")
+    public ModelAndView gulabJamunEastIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-east-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-east-indian-home-style")
+    public ModelAndView gulabJamunEastIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-east-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-east-indian-mild")
+    public ModelAndView gulabJamunEastIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-east-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-east-indian-spicy")
+    public ModelAndView gulabJamunEastIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-east-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-north-indian-classic")
+    public ModelAndView gulabJamunNorthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-north-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-north-indian-creamy")
+    public ModelAndView gulabJamunNorthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-north-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-north-indian-home-style")
+    public ModelAndView gulabJamunNorthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-north-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-north-indian-mild")
+    public ModelAndView gulabJamunNorthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-north-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-north-indian-spicy")
+    public ModelAndView gulabJamunNorthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-north-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-south-indian-classic")
+    public ModelAndView gulabJamunSouthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-south-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-south-indian-creamy")
+    public ModelAndView gulabJamunSouthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-south-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-south-indian-home-style")
+    public ModelAndView gulabJamunSouthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-south-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-south-indian-mild")
+    public ModelAndView gulabJamunSouthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-south-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-south-indian-spicy")
+    public ModelAndView gulabJamunSouthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-south-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-west-indian-classic")
+    public ModelAndView gulabJamunWestIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-west-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-west-indian-creamy")
+    public ModelAndView gulabJamunWestIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-west-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-west-indian-home-style")
+    public ModelAndView gulabJamunWestIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-west-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-west-indian-mild")
+    public ModelAndView gulabJamunWestIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-west-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/gulab-jamun-west-indian-spicy")
+    public ModelAndView gulabJamunWestIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("gulab-jamun-west-indian-spicy");
+        return mv;
+    }
+
+    // Kerala Fish Curry Variants
+    @GetMapping("/kerala-fish-curry-coastal-classic")
+    public ModelAndView keralaFishCurryCoastalClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-coastal-classic");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-coastal-creamy")
+    public ModelAndView keralaFishCurryCoastalCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-coastal-creamy");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-coastal-home-style")
+    public ModelAndView keralaFishCurryCoastalHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-coastal-home-style");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-coastal-mild")
+    public ModelAndView keralaFishCurryCoastalMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-coastal-mild");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-coastal-spicy")
+    public ModelAndView keralaFishCurryCoastalSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-coastal-spicy");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-east-indian-classic")
+    public ModelAndView keralaFishCurryEastIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-east-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-east-indian-creamy")
+    public ModelAndView keralaFishCurryEastIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-east-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-east-indian-home-style")
+    public ModelAndView keralaFishCurryEastIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-east-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-east-indian-mild")
+    public ModelAndView keralaFishCurryEastIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-east-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-east-indian-spicy")
+    public ModelAndView keralaFishCurryEastIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-east-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-north-indian-classic")
+    public ModelAndView keralaFishCurryNorthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-north-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-north-indian-creamy")
+    public ModelAndView keralaFishCurryNorthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-north-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-north-indian-home-style")
+    public ModelAndView keralaFishCurryNorthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-north-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-north-indian-mild")
+    public ModelAndView keralaFishCurryNorthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-north-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-north-indian-spicy")
+    public ModelAndView keralaFishCurryNorthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-north-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-south-indian-classic")
+    public ModelAndView keralaFishCurrySouthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-south-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-south-indian-creamy")
+    public ModelAndView keralaFishCurrySouthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-south-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-south-indian-home-style")
+    public ModelAndView keralaFishCurrySouthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-south-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-south-indian-mild")
+    public ModelAndView keralaFishCurrySouthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-south-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-south-indian-spicy")
+    public ModelAndView keralaFishCurrySouthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-south-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-west-indian-classic")
+    public ModelAndView keralaFishCurryWestIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-west-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-west-indian-creamy")
+    public ModelAndView keralaFishCurryWestIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-west-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-west-indian-home-style")
+    public ModelAndView keralaFishCurryWestIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-west-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-west-indian-mild")
+    public ModelAndView keralaFishCurryWestIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-west-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/kerala-fish-curry-west-indian-spicy")
+    public ModelAndView keralaFishCurryWestIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("kerala-fish-curry-west-indian-spicy");
+        return mv;
+    }
+
+    // Paneer Mushroom Variants
+    @GetMapping("/paneer-mushroom-coastal-classic")
+    public ModelAndView paneerMushroomCoastalClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-coastal-classic");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-coastal-creamy")
+    public ModelAndView paneerMushroomCoastalCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-coastal-creamy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-coastal-home-style")
+    public ModelAndView paneerMushroomCoastalHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-coastal-home-style");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-coastal-mild")
+    public ModelAndView paneerMushroomCoastalMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-coastal-mild");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-coastal-spicy")
+    public ModelAndView paneerMushroomCoastalSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-coastal-spicy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-east-indian-classic")
+    public ModelAndView paneerMushroomEastIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-east-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-east-indian-creamy")
+    public ModelAndView paneerMushroomEastIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-east-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-east-indian-home-style")
+    public ModelAndView paneerMushroomEastIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-east-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-east-indian-mild")
+    public ModelAndView paneerMushroomEastIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-east-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-east-indian-spicy")
+    public ModelAndView paneerMushroomEastIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-east-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-north-indian-classic")
+    public ModelAndView paneerMushroomNorthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-north-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-north-indian-creamy")
+    public ModelAndView paneerMushroomNorthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-north-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-north-indian-home-style")
+    public ModelAndView paneerMushroomNorthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-north-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-north-indian-mild")
+    public ModelAndView paneerMushroomNorthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-north-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-north-indian-spicy")
+    public ModelAndView paneerMushroomNorthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-north-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-south-indian-classic")
+    public ModelAndView paneerMushroomSouthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-south-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-south-indian-creamy")
+    public ModelAndView paneerMushroomSouthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-south-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-south-indian-home-style")
+    public ModelAndView paneerMushroomSouthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-south-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-south-indian-mild")
+    public ModelAndView paneerMushroomSouthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-south-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-south-indian-spicy")
+    public ModelAndView paneerMushroomSouthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-south-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-west-indian-classic")
+    public ModelAndView paneerMushroomWestIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-west-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-west-indian-creamy")
+    public ModelAndView paneerMushroomWestIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-west-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-west-indian-home-style")
+    public ModelAndView paneerMushroomWestIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-west-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-west-indian-mild")
+    public ModelAndView paneerMushroomWestIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-west-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/paneer-mushroom-west-indian-spicy")
+    public ModelAndView paneerMushroomWestIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("paneer-mushroom-west-indian-spicy");
+        return mv;
+    }
+
+    // Rogan Josh Variants
+    @GetMapping("/rogan-josh-coastal-classic")
+    public ModelAndView roganJoshCoastalClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-coastal-classic");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-coastal-creamy")
+    public ModelAndView roganJoshCoastalCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-coastal-creamy");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-coastal-home-style")
+    public ModelAndView roganJoshCoastalHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-coastal-home-style");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-coastal-mild")
+    public ModelAndView roganJoshCoastalMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-coastal-mild");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-coastal-spicy")
+    public ModelAndView roganJoshCoastalSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-coastal-spicy");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-east-indian-classic")
+    public ModelAndView roganJoshEastIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-east-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-east-indian-creamy")
+    public ModelAndView roganJoshEastIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-east-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-east-indian-home-style")
+    public ModelAndView roganJoshEastIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-east-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-east-indian-mild")
+    public ModelAndView roganJoshEastIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-east-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-east-indian-spicy")
+    public ModelAndView roganJoshEastIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-east-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-north-indian-classic")
+    public ModelAndView roganJoshNorthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-north-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-north-indian-creamy")
+    public ModelAndView roganJoshNorthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-north-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-north-indian-home-style")
+    public ModelAndView roganJoshNorthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-north-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-north-indian-mild")
+    public ModelAndView roganJoshNorthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-north-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-north-indian-spicy")
+    public ModelAndView roganJoshNorthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-north-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-south-indian-classic")
+    public ModelAndView roganJoshSouthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-south-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-south-indian-creamy")
+    public ModelAndView roganJoshSouthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-south-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-south-indian-home-style")
+    public ModelAndView roganJoshSouthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-south-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-south-indian-mild")
+    public ModelAndView roganJoshSouthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-south-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-south-indian-spicy")
+    public ModelAndView roganJoshSouthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-south-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-west-indian-classic")
+    public ModelAndView roganJoshWestIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-west-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-west-indian-creamy")
+    public ModelAndView roganJoshWestIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-west-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-west-indian-home-style")
+    public ModelAndView roganJoshWestIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-west-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-west-indian-mild")
+    public ModelAndView roganJoshWestIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-west-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/rogan-josh-west-indian-spicy")
+    public ModelAndView roganJoshWestIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("rogan-josh-west-indian-spicy");
+        return mv;
+    }
+
+    // Sambar Variants
+    @GetMapping("/sambar-coastal-classic")
+    public ModelAndView sambarCoastalClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-coastal-classic");
+        return mv;
+    }
+
+    @GetMapping("/sambar-coastal-creamy")
+    public ModelAndView sambarCoastalCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-coastal-creamy");
+        return mv;
+    }
+
+    @GetMapping("/sambar-coastal-home-style")
+    public ModelAndView sambarCoastalHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-coastal-home-style");
+        return mv;
+    }
+
+    @GetMapping("/sambar-coastal-mild")
+    public ModelAndView sambarCoastalMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-coastal-mild");
+        return mv;
+    }
+
+    @GetMapping("/sambar-coastal-spicy")
+    public ModelAndView sambarCoastalSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-coastal-spicy");
+        return mv;
+    }
+
+    @GetMapping("/sambar-east-indian-classic")
+    public ModelAndView sambarEastIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-east-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/sambar-east-indian-creamy")
+    public ModelAndView sambarEastIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-east-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/sambar-east-indian-home-style")
+    public ModelAndView sambarEastIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-east-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/sambar-east-indian-mild")
+    public ModelAndView sambarEastIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-east-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/sambar-east-indian-spicy")
+    public ModelAndView sambarEastIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-east-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/sambar-north-indian-classic")
+    public ModelAndView sambarNorthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-north-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/sambar-north-indian-creamy")
+    public ModelAndView sambarNorthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-north-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/sambar-north-indian-home-style")
+    public ModelAndView sambarNorthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-north-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/sambar-north-indian-mild")
+    public ModelAndView sambarNorthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-north-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/sambar-north-indian-spicy")
+    public ModelAndView sambarNorthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-north-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/sambar-south-indian-classic")
+    public ModelAndView sambarSouthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-south-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/sambar-south-indian-creamy")
+    public ModelAndView sambarSouthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-south-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/sambar-south-indian-home-style")
+    public ModelAndView sambarSouthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-south-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/sambar-south-indian-mild")
+    public ModelAndView sambarSouthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-south-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/sambar-south-indian-spicy")
+    public ModelAndView sambarSouthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-south-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/sambar-traditional")
+    public ModelAndView sambarTraditional() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-traditional");
+        return mv;
+    }
+
+    @GetMapping("/sambar-west-indian-classic")
+    public ModelAndView sambarWestIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-west-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/sambar-west-indian-creamy")
+    public ModelAndView sambarWestIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-west-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/sambar-west-indian-home-style")
+    public ModelAndView sambarWestIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-west-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/sambar-west-indian-mild")
+    public ModelAndView sambarWestIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-west-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/sambar-west-indian-spicy")
+    public ModelAndView sambarWestIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("sambar-west-indian-spicy");
+        return mv;
+    }
+
+    // Tandoori Chicken Variants
+    @GetMapping("/tandoori-chicken-coastal-classic")
+    public ModelAndView tandooriChickenCoastalClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-coastal-classic");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-coastal-creamy")
+    public ModelAndView tandooriChickenCoastalCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-coastal-creamy");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-coastal-home-style")
+    public ModelAndView tandooriChickenCoastalHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-coastal-home-style");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-coastal-mild")
+    public ModelAndView tandooriChickenCoastalMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-coastal-mild");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-coastal-spicy")
+    public ModelAndView tandooriChickenCoastalSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-coastal-spicy");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-east-indian-classic")
+    public ModelAndView tandooriChickenEastIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-east-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-east-indian-creamy")
+    public ModelAndView tandooriChickenEastIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-east-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-east-indian-home-style")
+    public ModelAndView tandooriChickenEastIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-east-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-east-indian-mild")
+    public ModelAndView tandooriChickenEastIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-east-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-east-indian-spicy")
+    public ModelAndView tandooriChickenEastIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-east-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-north-indian-classic")
+    public ModelAndView tandooriChickenNorthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-north-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-north-indian-creamy")
+    public ModelAndView tandooriChickenNorthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-north-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-north-indian-home-style")
+    public ModelAndView tandooriChickenNorthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-north-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-north-indian-mild")
+    public ModelAndView tandooriChickenNorthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-north-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-north-indian-spicy")
+    public ModelAndView tandooriChickenNorthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-north-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-south-indian-classic")
+    public ModelAndView tandooriChickenSouthIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-south-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-south-indian-creamy")
+    public ModelAndView tandooriChickenSouthIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-south-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-south-indian-home-style")
+    public ModelAndView tandooriChickenSouthIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-south-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-south-indian-mild")
+    public ModelAndView tandooriChickenSouthIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-south-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-south-indian-spicy")
+    public ModelAndView tandooriChickenSouthIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-south-indian-spicy");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-west-indian-classic")
+    public ModelAndView tandooriChickenWestIndianClassic() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-west-indian-classic");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-west-indian-creamy")
+    public ModelAndView tandooriChickenWestIndianCreamy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-west-indian-creamy");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-west-indian-home-style")
+    public ModelAndView tandooriChickenWestIndianHomeStyle() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-west-indian-home-style");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-west-indian-mild")
+    public ModelAndView tandooriChickenWestIndianMild() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-west-indian-mild");
+        return mv;
+    }
+
+    @GetMapping("/tandoori-chicken-west-indian-spicy")
+    public ModelAndView tandooriChickenWestIndianSpicy() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("tandoori-chicken-west-indian-spicy");
+        return mv;
+    }
+
     @GetMapping("/search")
     public ModelAndView search(@RequestParam(required = false) String keyword) {
         ModelAndView mv = new ModelAndView();
@@ -1313,5 +3057,20 @@ public class homecontroller {
                 .filter(recipe -> recipe.toLowerCase().contains(keyword.toLowerCase()))
                 .limit(15)
                 .collect(Collectors.toList());
+    }
+
+    // Menu page - displays all recipes with advanced filtering and sorting
+    @GetMapping("/menu")
+    public ModelAndView menu() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("menu");
+        return mv;
+    }
+
+    // API endpoint to get all recipes
+    @GetMapping("/api/all-recipes")
+    @ResponseBody
+    public List<String> getAllRecipes() {
+        return RECIPES.stream().collect(Collectors.toList());
     }
 }

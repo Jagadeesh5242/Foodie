@@ -1,0 +1,15 @@
+
+Next steps to apply the consolidation:
+
+1. Backup the templates directory first:
+   copy src/main/resources/templates src/main/resources/templates.backup
+
+2. Run the cleanup script:
+   node cleanup-templates.js
+
+3. Verify routes in the controller are all defined
+
+4. Test the application:
+   mvn clean package
+
+This will delete 286 extra/variant files and keep only the 83 recipe files.

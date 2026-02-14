@@ -497,7 +497,8 @@
                     <ul id="suggestionsList"></ul>
                 </div>
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/menu"><i class="fas fa-list"></i> Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#"><i class="fas fa-heart"></i> Favorites</a></li>
                     <li class="nav-item">
                         <select class="lang-selector" id="languageSelector">
                             <option value="en">English</option>
@@ -535,37 +536,54 @@
             <div class="card-section">
                 <h2 class="section-header">👨‍🍳 Instructions</h2>
                 <div class="instructions-list">
-
                             <div class="instruction-step">
                                 <div class="step-number">1</div>
-                                <div class="step-text">Cut potatoes into thin slices. Soak in water for 10 minutes and pat dry</div>
+                                <div class="step-text">Prepare all your ingredients. Clean and measure them carefully before starting. This ensures smooth cooking without interruptions. Gather spices, vegetables, and other components in small bowls for easy access during cooking.</div>
                             </div>
-
                             <div class="instruction-step">
                                 <div class="step-number">2</div>
-                                <div class="step-text">Heat oil in deep pan until hot</div>
+                                <div class="step-text">Start with the base preparation. Heat oil or ghee in a pan over medium heat. Once hot, add the primary aromatics (onions, garlic, or ginger). Cook until fragrant and lightly golden, stirring occasionally to prevent burning. This creates the flavorful foundation.</div>
                             </div>
-
                             <div class="instruction-step">
                                 <div class="step-number">3</div>
-                                <div class="step-text">Deep fry potatoes in batches until golden and crispy</div>
+                                <div class="step-text">Add spices gradually. Toast them briefly in the hot oil to release their essential oils and deepen flavors. Stir constantly for 30-45 seconds. Be careful not to burn them as this can make them bitter. Add main ingredients immediately after.</div>
                             </div>
-
                             <div class="instruction-step">
                                 <div class="step-number">4</div>
-                                <div class="step-text">For tadka: Heat oil, add mustard seeds, curry leaves, and dried chili</div>
+                                <div class="step-text">Cook the primary ingredients thoroughly. Maintain consistent medium-high heat. Stir frequently to ensure even cooking. Watch for color changes and aromas indicating the dish is progressing properly. This usually takes 8-12 minutes depending on ingredients.</div>
                             </div>
-
                             <div class="instruction-step">
                                 <div class="step-number">5</div>
-                                <div class="step-text">Mix fried potatoes with tadka. Add ginger-garlic paste and garam masala</div>
+                                <div class="step-text">Adjust seasoning and consistency. Taste and add salt, pepper, and other seasonings as needed. If the dish seems too thick, add water gradually. If too thin, let it simmer to reduce. Fine-tune flavors at this stage for perfect balance.</div>
                             </div>
-
                             <div class="instruction-step">
                                 <div class="step-number">6</div>
-                                <div class="step-text">Toss well and serve hot with lemon juice</div>
+                                <div class="step-text">Final touches and plating. Turn off heat and add fresh ingredients like cilantro or lemon juice. Let it rest 2-3 minutes to allow flavors to meld. Serve hot while aromatic. Garnish with fresh herbs and side accompaniments as desired.</div>
                             </div>
                 </div>
+                            <div class="instruction-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Heat oil in a deep pan or wok over medium-high heat. The oil should be about 350°F (175°C). Test by dropping a small piece of potato - it should sizzle immediately without browning too quickly.</div>
+                            </div>
+                            <div class="instruction-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Carefully add potatoes in small batches to avoid overcrowding and temperature drop. Fry for 5-7 minutes until they turn golden and crispy. Stir occasionally to ensure even cooking. Remove with a slotted spoon and drain on paper towels.</div>
+                            </div>
+                            <div class="instruction-step">
+                                <div class="step-number">4</div>
+                                <div class="step-text">For the tadka (tempering): In another pan, heat 2 tablespoons of oil over medium heat. Add 1 teaspoon mustard seeds and wait until they pop. Add curry leaves and 1-2 dried chili peppers. Fry for 30 seconds until fragrant.</div>
+                            </div>
+                            <div class="instruction-step">
+                                <div class="step-number">5</div>
+                                <div class="step-text">Mix the fried potatoes with the hot tadka. Add 1 tablespoon freshly made ginger-garlic paste and 1/2 teaspoon garam masala. Toss everything gently to coat evenly. Add salt and black pepper to taste.</div>
+                            </div>
+                            <div class="instruction-step">
+                                <div class="step-number">6</div>
+                                <div class="step-text">Turn off heat and add a squeeze of fresh lemon juice (about 2 tablespoons) and finely chopped cilantro. Toss gently once more. Serve immediately while still warm and crispy. Goes well with any meal.</div>
+                            </div>
+                </div>
+            </div>
+        </div>
             </div>
         </div>
 
@@ -583,7 +601,8 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/js/translation.js"></script>
+    <script src="/js/translation-v2.js"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
         const searchInput = document.getElementById('searchInput');
         const suggestionsList = document.getElementById('suggestionsList');
