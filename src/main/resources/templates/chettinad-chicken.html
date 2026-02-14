@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://translate.googleapis.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <title>Chettinad Chicken - Ruchique 🍽️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        /* MERGED NAVBAR WITH RECIPE TITLE */
+        .recipe-hero {
+            background: linear-gradient(135deg, rgba(32,32,46,0.95) 0%, rgba(102,126,234,0.85) 100%);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+
+        .navbar {
+            background: transparent;
+            padding: 0.5rem 0;
+            margin: 0;
+            border: none;
+        }
+
+        .navbar-brand {
+            font-size: 1.9rem;
+            font-weight: 900;
+            color: #fff !important;
+            letter-spacing: 2px;
+            margin-right: auto;
+        }
+
+        .navbar-brand:hover { color: #ffc107 !important; }
+
+        .navbar a, .navbar-nav .nav-link {
+            color: #fff !important;
+            margin: 0 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover { color: #ffc107 !important; }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 15px;
+        }
+
+        #searchInput {
+            width: 280px;
+            padding: 8px 12px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 14px;
+            min-height: 44px;
+            -webkit-appearance: none;
+            transition: all 0.3s ease;
+        }
+
+        #searchInput::placeholder { color: rgba(255,255,255,0.6); }
+        #searchInput:focus {
+            outline: none;
+            border-color: #ffc107;
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 12px rgba(255,193,7,0.3);
+        }
+
+        .lang-selector {
+            min-height: 44px;
+            font-size: 14px;
+            -webkit-appearance: none;
+            background-color: rgba(255,255,255,0.15);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-selector:hover {
+            background-color: rgba(255,255,255,0.2);
+            border-color: #ffc107;
+        }
+
+        .recipe-title-section {
+            background: rgba(0,0,0,0.1);
+            padding: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .recipe-title-section h1 {
+            color: #ffc107;
+            font-size: 2.5em;
+            font-weight: 900;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .recipe-title-section p {
+            color: rgba(255,255,255,0.8);
+            margin: 5px 0 0 0;
+        }
+
+        .container-main {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .card-section {
+            background: rgba(255,255,255,0.96);
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .card-section:hover {
+            box-shadow: 0 18px 60px rgba(0,0,0,0.2);
+            transform: translateY(-8px);
+        }
+
+        .card-section h2 {
+            color: #667eea;
+            margin-bottom: 24px;
+            font-weight: 800;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 12px;
+        }
+
+        .card-section h2 i {
+            color: #ffc107;
+            font-size: 1.3em;
+        }
+
+        .ingredients-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .ingredient-chip {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 24px;
+            font-size: 0.9em;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            font-weight: 500;
+        }
+
+        .ingredient-chip:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .instructions-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instruction-step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 22px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1em;
+            margin-top: 2px;
+            box-shadow: 0 4px 12px rgba(255,152,0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            flex: 1;
+            color: #444;
+            line-height: 1.7;
+            font-size: 0.95em;
+            text-align: justify;
+        }
+
+        .footer {
+            background: rgba(0,0,0,0.35);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 12px;
+            border-top: 3px solid rgba(255,193,7,0.3);
+        }
+
+        .footer p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        @media (max-width: 992px) {
+            .navbar { padding: 0.5rem 0; }
+            .search-container { margin: 0 10px; }
+            #searchInput { width: 200px; }
+        }
+
+        @media (max-width: 768px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .recipe-title-section h1 { font-size: 2em; }
+            .card-section { padding: 20px; }
+            .ingredients-list { gap: 8px; }
+            .ingredient-chip { font-size: 0.85em; padding: 8px 12px; }
+            .instruction-step { gap: 12px; }
+            .step-number { width: 38px; height: 38px; font-size: 0.95em; }
+            .step-text { font-size: 0.9em; }
+            .navbar-collapse { padding-top: 10px; }
+            #searchInput { width: 100%; }
+        }
+    
+        /* Enhanced Recipe Styling */
+        .recipe-container {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(245,245,250,0.95) 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin: 20px;
+            overflow: hidden;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .recipe-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recipe-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .recipe-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 10px;
+        }
+
+        .card-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .section-header {
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ingredient-chip {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            margin: 8px 8px 8px 0;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .ingredient-chip:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 193, 7, 0.5);
+        }
+
+        .instruction-step {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            display: flex;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .instruction-step:hover {
+            background: #f0f2ff;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .step-text {
+            padding-top: 5px;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, rgba(32,32,46,0.98) 0%, rgba(50,50,80,0.98) 100%) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+        }
+
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: 900 !important;
+            font-size: 1.8rem !important;
+            letter-spacing: 2px !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .navbar-brand:hover {
+            color: #ffc107 !important;
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-weight: 600 !important;
+            padding: 10px 15px !important;
+            border-radius: 20px !important;
+            transition: all 0.3s ease !important;
+            margin: 0 5px !important;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 193, 7, 0.2) !important;
+            color: #ffc107 !important;
+        }
+
+        .lang-selector {
+            background: rgba(255,255,255,0.15) !important;
+            color: white !important;
+            border: 2px solid rgba(255,255,255,0.3) !important;
+            border-radius: 20px !important;
+            padding: 8px 15px !important;
+            cursor: pointer !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .lang-selector:hover {
+            background: rgba(255,255,255,0.25) !important;
+            border-color: #ffc107 !important;
+        }
+
+        .lang-selector:focus {
+            outline: none !important;
+            background: rgba(255,255,255,0.3) !important;
+            border-color: #ffc107 !important;
+        }
+
+        .lang-selector option {
+            background: #333 !important;
+            color: white !important;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 40px 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            color: white !important;
+            padding: 12px 30px !important;
+            border-radius: 25px !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            text-decoration: none !important;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4) !important;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6) !important;
+            color: white !important;
+        }
+
+        .footer {
+            background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-weight: 500;
+            border-top: 2px solid #ffc107;
+        }
+
+        @media (max-width: 768px) {
+            .recipe-title {
+                font-size: 1.8rem;
+            }
+
+            .card-section {
+                margin: 15px 10px;
+                padding: 15px;
+            }
+
+            .ingredient-chip {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+
+            .instruction-step {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    
+</style>
+</head>
+<body>
+    <!-- MERGED NAVBAR WITH RECIPE HEADER -->
+    <div class="recipe-hero">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid px-3">
+                <a class="navbar-brand" href="/">🍛 Ruchique</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <a class="nav-link" href="/menu"><i class="fas fa-book"></i> Menu</a>
+                    <div class="search-container">
+                        <i class="fas fa-search" style="color: white; font-size: 1.1em;"></i>
+                        <input type="text" id="searchInput" placeholder="Search recipes..." aria-label="Search recipes">
+                    </div>
+                    <div class="ml-auto">
+                        <select id="lang-selector" class="lang-selector">
+                            <option value="en">English</option>
+                            <option value="hi">हिंदी</option>
+                            <option value="te">తెలుగు</option>
+                            <option value="ja">日本語</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Recipe title merged into hero section -->
+        <div class="recipe-title-section">
+            <h1>Chettinad Chicken</h1>
+            <p>🎨 Authentic Indian Culinary Masterpiece</p>
+        </div>
+    </div>
+
+    <div class="container-main">
+        <div class="content-grid">
+            <div class="card-section">
+                <h2><i class="fas fa-list"></i> Ingredients</h2>
+                <div class="ingredients-list">
+                    <div class="ingredient-chip">🍗 Chicken - 500g, diced</div><div class="ingredient-chip">🛢️ Oil or Ghee - 3 tbsp</div><div class="ingredient-chip">🧅 Onion - 1 large, sliced</div><div class="ingredient-chip">🧄 Garlic - 4 cloves, minced</div><div class="ingredient-chip">💚 Ginger - 1 tbsp, minced</div><div class="ingredient-chip">🌶️ Green chili - 2, chopped</div><div class="ingredient-chip">🧂 Salt - to taste</div><div class="ingredient-chip">🌶️ Red chili powder - 1/2 tsp</div><div class="ingredient-chip">😂 Turmeric - 1/4 tsp</div><div class="ingredient-chip">🥗 Coriander powder - 1 tsp</div><div class="ingredient-chip">🌾 Cumin powder - 1/2 tsp</div><div class="ingredient-chip">🌾 Garam masala - 1/2 tsp</div><div class="ingredient-chip">🍃 Fresh cilantro - 2 tbsp</div><div class="ingredient-chip">🍃 Fresh mint - 2 tbsp</div><div class="ingredient-chip">💧 Water - 1 cup</div>
+                </div>
+            </div>
+
+            <div class="card-section">
+                <h2><i class="fas fa-utensils"></i> Instructions</h2>
+                <ol class="instructions-list">
+                    <li class="instruction-step"><div class="step-number">1</div><div class="step-text">1. Prepare and measure all ingredients</div></li><li class="instruction-step"><div class="step-number">2</div><div class="step-text">2. Heat oil or ghee in a large pan</div></li><li class="instruction-step"><div class="step-number">3</div><div class="step-text">3. Add cumin seeds and let them crackle</div></li><li class="instruction-step"><div class="step-number">4</div><div class="step-text">4. Add onions and fry until golden brown</div></li><li class="instruction-step"><div class="step-number">5</div><div class="step-text">5. Add garlic and ginger paste, sauté until fragrant</div></li><li class="instruction-step"><div class="step-number">6</div><div class="step-text">6. Add green chilies and cook for 30 seconds</div></li><li class="instruction-step"><div class="step-number">7</div><div class="step-text">7. Add tomatoes and cook until soft</div></li><li class="instruction-step"><div class="step-number">8</div><div class="step-text">8. Add all spices and cook for 1-2 minutes</div></li><li class="instruction-step"><div class="step-number">9</div><div class="step-text">9. Add the main ingredient (vegetables, meat, or legumes)</div></li><li class="instruction-step"><div class="step-number">10</div><div class="step-text">10. Add yogurt or coconut milk if required</div></li><li class="instruction-step"><div class="step-number">11</div><div class="step-text">11. Add water and bring to boil</div></li><li class="instruction-step"><div class="step-number">12</div><div class="step-text">12. Simmer covered for 20-30 minutes until cooked</div></li><li class="instruction-step"><div class="step-number">13</div><div class="step-text">13. Taste and adjust seasoning</div></li><li class="instruction-step"><div class="step-number">14</div><div class="step-text">14. Garnish with fresh cilantro</div></li><li class="instruction-step"><div class="step-number">15</div><div class="step-text">15. Serve hot with rice or bread</div></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Ruchique - Your Ultimate Recipe Hub. Happy Cooking! 👨‍🍳</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/translation-v2.js"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm.length > 2) {
+                fetch('/api/recipes/search?keyword=' + encodeURIComponent(searchTerm))
+                    .then(response => response.json())
+                    .then(data => console.log('Found:', data));
+            }
+        });
+
+        document.getElementById('lang-selector').addEventListener('change', function(e) {
+            if (window.changeLanguage) {
+                window.changeLanguage(e.target.value);
+            } else if (window.updateGoogleTranslate) {
+                window.updateGoogleTranslate(e.target.value);
+            }
+        });
+    </script>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsList = document.getElementById('suggestionsList');
+        let searchTimeout;
+
+        if (searchInput && suggestionsList) {
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                const keyword = this.value.trim();
+                if (keyword.length < 2) {
+                    suggestionsList.innerHTML = '';
+                    suggestionsList.style.display = 'none';
+                    return;
+                }
+                searchTimeout = setTimeout(() => {
+                    fetch('/api/recipes/search?keyword=' + encodeURIComponent(keyword))
+                        .then(response => response.json())
+                        .then(recipes => {
+                            suggestionsList.innerHTML = '';
+                            if (recipes && recipes.length > 0) {
+                                recipes.forEach(recipe => {
+                                    const li = document.createElement('li');
+                                    li.textContent = recipe;
+                                    li.addEventListener('click', () => window.location.href = '/' + recipe.toLowerCase().replace(/\s+/g, '-'));
+                                    suggestionsList.appendChild(li);
+                                });
+                                suggestionsList.style.display = 'block';
+                            }
+                        }).catch(err => suggestionsList.style.display = 'none');
+                }, 300);
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim()) {
+                    window.location.href = '/' + this.value.trim().toLowerCase().replace(/\s+/g, '-');
+                }
+            });
+            
+            document.addEventListener('click', e => {
+                if (!e.target.closest('.search-wrapper')) suggestionsList.style.display = 'none';
+            });
+        }
+        
+        const langSelector = document.getElementById('languageSelector');
+        if (langSelector) {
+            langSelector.addEventListener('change', function(e) {
+                const lang = this.value;
+                if (lang === 'en') {
+                    location.reload();
+                } else {
+                    const select = document.querySelector('.goog-te-gadget-simple select');
+                    if (select) {
+                        select.value = 'auto|' + lang;
+                        select.dispatchEvent(new Event('change'));
+                    }
+                }
+            });
+        }
+        
+        function googleTranslateElementInit() {
+            try {
+                new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,hi,te,ta,ml,kn,ja,es,fr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+            } catch(e) {}
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', googleTranslateElementInit);
+        } else {
+            googleTranslateElementInit();
+        }
+        
+        window.addEventListener('load', () => {
+            if (searchInput) searchInput.value = '';
+            if (suggestionsList) suggestionsList.innerHTML = '';
+        });
+    </script>
+    <div id="google_translate_element" style="display: none;"></div>
+</body>
+</html>
