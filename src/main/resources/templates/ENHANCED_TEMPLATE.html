@@ -481,6 +481,7 @@
                             <option value="en">English</option>
                             <option value="te">Telugu</option>
                             <option value="hi">Hindi</option>
+                            <option value="ja">Japanese</option>
                         </select>
                     </li>
                 </ul>
@@ -560,95 +561,93 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        const searchInput = document.getElementById('searchInput');
-        const suggestionsList = document.getElementById('suggestionsList');
-        const languageSelector = document.getElementById('languageSelector');
-        
-        if (searchInput && suggestionsList) {
-            searchInput.value = '';
-            suggestionsList.innerHTML = '';
-            suggestionsList.style.display = 'none';
-            
-            let searchTimer;
-            searchInput.addEventListener('input', function(e) {
-                clearTimeout(searchTimer);
-                const keyword = this.value.trim();
-                
-                if (!keyword) {
-                    suggestionsList.innerHTML = '';
-                    suggestionsList.style.display = 'none';
-                    return;
-                }
-                
-                searchTimer = setTimeout(() => {
-                    fetch('/api/recipes/search?keyword=' + encodeURIComponent(keyword))
-                        .then(res => res.json())
-                        .then(recipes => {
-                            suggestionsList.innerHTML = '';
-                            if (recipes && recipes.length > 0) {
-                                recipes.forEach(recipe => {
-                                    const li = document.createElement('li');
-                                    li.textContent = recipe;
-                                    li.addEventListener('click', () => {
-                                        searchInput.value = '';
-                                        suggestionsList.innerHTML = '';
-                                        suggestionsList.style.display = 'none';
-                                        window.location.href = '/' + recipe.toLowerCase().replace(/\s+/g, '-');
-                                    });
-                                    suggestionsList.appendChild(li);
-                                });
-                                suggestionsList.style.display = 'block';
-                            }
-                        })
-                        .catch(err => console.log('Search error:', err));
-                }, 200);
-            });
-            
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    clearTimeout(searchTimer);
-                    const keyword = this.value.trim();
-                    if (keyword) {
-                        searchInput.value = '';
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const suggestionsList = document.getElementById('suggestionsList');
+    const languageSelector = document.getElementById('languageSelector');
+
+    /* ---------------- SEARCH FUNCTION ---------------- */
+
+    if (searchInput && suggestionsList) {
+        searchInput.value = '';
+        suggestionsList.innerHTML = '';
+        suggestionsList.style.display = 'none';
+
+        let searchTimer;
+
+        searchInput.addEventListener('input', function () {
+            clearTimeout(searchTimer);
+            const keyword = this.value.trim();
+
+            if (!keyword) {
+                suggestionsList.innerHTML = '';
+                suggestionsList.style.display = 'none';
+                return;
+            }
+
+            searchTimer = setTimeout(() => {
+                fetch('/api/recipes/search?keyword=' + encodeURIComponent(keyword))
+                    .then(res => res.json())
+                    .then(recipes => {
                         suggestionsList.innerHTML = '';
-                        suggestionsList.style.display = 'none';
-                        window.location.href = '/' + keyword.toLowerCase().replace(/\s+/g, '-');
-                    }
-                }
-            });
-            
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.autocomplete-container')) {
-                    suggestionsList.style.display = 'none';
-                }
-            });
-        }
-        
-        if (languageSelector) {
-            languageSelector.addEventListener('change', function(e) {
-                const langMap = { 'en': 'English', 'te': 'Telugu', 'hi': 'Hindi' };
-                const combo = document.querySelector('.goog-te-combo');
-                if (combo) {
-                    combo.value = langMap[this.value] || 'English';
-                    combo.dispatchEvent(new Event('change', { bubbles: true }));
-                }
+                        if (recipes && recipes.length > 0) {
+                            recipes.forEach(recipe => {
+                                const li = document.createElement('li');
+                                li.textContent = recipe;
+                                li.addEventListener('click', () => {
+                                    window.location.href =
+                                        '/' + recipe.toLowerCase().replace(/\s+/g, '-');
+                                });
+                                suggestionsList.appendChild(li);
+                            });
+                            suggestionsList.style.display = 'block';
+                        }
+                    })
+                    .catch(err => console.log('Search error:', err));
+            }, 200);
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.autocomplete-container')) {
+                suggestionsList.style.display = 'none';
+            }
+        });
+    }
+
+    /* ---------------- GOOGLE TRANSLATE INIT ---------------- */
 
     function initTranslate() {
-            try {
-                new google.translate.TranslateElement({
-                    pageLanguage: 'en',
-                    includedLanguages: 'en,te,hi',
-                    autoDisplay: false
-                }, 'google_translate_element');
-            } catch(e) {}
+        try {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi,te,ja',
+                autoDisplay: false
+            }, 'google_translate_element');
+        } catch (e) {
+            console.log("Translate init error:", e);
         }
-        
-        if (window.google && window.google.translate) {
-            initTranslate();
-        } else {
-            setTimeout(initTranslate, 1500);
-        }
-    </script>
+    }
+
+    window.googleTranslateElementInit = initTranslate;
+
+    /* ---------------- LANGUAGE SWITCHER ---------------- */
+
+    if (languageSelector) {
+        languageSelector.addEventListener('change', function () {
+            const langMap = {
+                en: '/en/en',
+                hi: '/en/hi',
+                te: '/en/te',
+                ja: '/en/ja'
+            };
+
+            const lang = langMap[this.value] || '/en/en';
+
+            document.cookie = "googtrans=" + lang + ";path=/";
+            window.location.reload();
+        });
+    }
+</script>
+
 </body>
 </html>
