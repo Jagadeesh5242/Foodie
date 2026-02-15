@@ -1,653 +1,565 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruchique - Authentic Indian Recipes</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore India Through Food • Ruchique</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-image: url('/logodes.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
-            position: relative;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.35);
-            pointer-events: none;
-            z-index: 0;
-        }
+<style>
 
-        /* Navbar Styling */
-        .navbar {
-            background: linear-gradient(90deg, rgba(32,32,46,0.99) 0%, rgba(50,50,80,0.99) 100%);
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
-            padding: 1rem 0;
-            position: relative;
-            z-index: 100;
-            backdrop-filter: blur(12px);
-            border-bottom: 2px solid rgba(255, 193, 7, 0.15);
-        }
+:root{
+--saffron:#FF9933;
+--royal-red:#9B1C31;
+--turmeric:#FFC107;
+--cream:#FFF8E7;
+--green:#1B5E20;
+--dark:#1A1A1A;
+}
 
-        .navbar-brand {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #fff !important;
-            letter-spacing: 2px;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-        }
+body{
+font-family:Poppins;
+background:var(--cream);
+margin:0;
+color:var(--dark);
+}
 
-        .navbar-brand:hover {
-            color: #ffc107 !important;
-            text-shadow: 0 0 20px rgba(255, 193, 7, 0.6);
-            transform: scale(1.05);
-        }
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 40px;
+background:white;
+box-shadow:0 3px 12px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+z-index:100;
+}
 
-        .navbar a {
-            color: #fff !important;
-            margin: 0 1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-weight: 700;
-            padding: 10px 18px;
-            border-radius: 24px;
-            position: relative;
-            overflow: hidden;
-        }
+.logo{
+font-family:'Playfair Display';
+font-size:28px;
+color:var(--royal-red);
+font-weight:900;
+}
 
-        .navbar a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 193, 7, 0.25);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
+.navbar-center {
+display:flex;
+align-items:center;
+gap:20px;
+}
 
-        .navbar a:hover::before {
-            left: 0;
-        }
+.search-box {
+display:flex;
+gap:8px;
+align-items:center;
+}
 
-        .navbar a:hover {
-            color: #ffc107 !important;
-            transform: translateY(-2px);
-        }
+.search-box input {
+padding:10px 16px;
+border:2px solid var(--turmeric);
+border-radius:25px;
+font-family:Poppins;
+width:250px;
+transition:.3s;
+}
 
-        /* Search Bar */
-        .search-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 0 1rem;
-            flex: 1;
-            max-width: 400px;
-        }
+.search-box input:focus {
+outline:none;
+box-shadow:0 0 10px rgba(255,193,7,.3);
+}
 
-        .search-input {
-            width: 100%;
-            padding: 10px 16px;
-            border: 2px solid #ffc107;
-            border-radius: 24px;
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
-        }
+.search-box button {
+background:var(--turmeric);
+border:none;
+padding:10px 16px;
+border-radius:25px;
+cursor:pointer;
+font-weight:600;
+color:white;
+transition:.3s;
+}
 
-        .search-input:focus {
-            outline: none;
-            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
-            background: white;
-        }
+.search-box button:hover {
+background:var(--saffron);
+}
 
-        .search-input::placeholder {
-            color: rgba(100, 100, 100, 0.7);
-        }
+.language-selector {
+padding:10px 16px;
+border:2px solid var(--royal-red);
+border-radius:25px;
+background:white;
+color:var(--royal-red);
+font-weight:600;
+cursor:pointer;
+font-family:Poppins;
+transition:.3s;
+}
 
-        .search-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 24px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
+.language-selector:hover {
+background:var(--royal-red);
+color:white;
+}
 
-        .search-btn:hover {
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-            transform: translateY(-2px);
-            color: white;
-        }
+.back-btn{
+text-decoration:none;
+color:var(--royal-red);
+font-weight:600;
+padding:10px 20px;
+border:2px solid var(--royal-red);
+border-radius:25px;
+transition:.3s;
+}
 
-        /* Language Selector */
-        .language-selector {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 10px;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            min-height: 44px;
-            font-size: 16px;
-            min-width: 160px;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 20px;
-            padding-right: 36px;
-        }
+.back-btn:hover {
+background:var(--royal-red);
+color:white;
+}
 
-        .language-selector:hover {
-            background-color: rgba(255, 255, 255, 0.25);
-            border-color: #ffc107;
-        }
+/* HERO */
+.hero{
+text-align:center;
+padding:80px 20px 60px;
+background:linear-gradient(135deg,#fff,#fff6e5);
+}
 
-        .language-selector:focus {
-            outline: none;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-color: #ffc107;
-        }
+.hero h1{
+font-family:'Playfair Display';
+font-size:48px;
+margin-bottom:10px;
+color:var(--royal-red);
+}
 
-        .language-selector option {
-            background: #2a2a3e;
-            color: white;
-            padding: 10px;
-        }
+.hero p{
+color:#777;
+font-size:18px;
+margin-bottom:30px;
+}
 
-        /* Main Content */
-        .main-content {
-            position: relative;
-            z-index: 1;
-            min-height: calc(100vh - 100px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 20px;
-            text-align: center;
-        }
+.hero-buttons {
+display:flex;
+gap:20px;
+justify-content:center;
+flex-wrap:wrap;
+}
 
-        /* Hero Section */
-        .hero-title {
-            font-size: 4.5rem;
-            font-weight: 900;
-            color: white;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-            animation: fadeInDown 1s ease;
-        }
+.hero-btn {
+padding:12px 40px;
+border:none;
+border-radius:25px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+text-decoration:none;
+font-family:Poppins;
+}
 
-        .hero-subtitle {
-            font-size: 2rem;
-            color: #ffc107;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px;
-            font-weight: 600;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
+.hero-btn-primary {
+background:var(--royal-red);
+color:white;
+}
 
-        .hero-description {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 50px;
-            max-width: 600px;
-            line-height: 1.6;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
+.hero-btn-primary:hover {
+background:var(--saffron);
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(255,153,51,.3);
+}
 
-        /* CTA Buttons */
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
+.hero-btn-secondary {
+background:transparent;
+color:var(--royal-red);
+border:2px solid var(--royal-red);
+}
 
-        .btn-primary-custom {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 16px 40px;
-            border: none;
-            border-radius: 28px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            text-decoration: none;
-            display: inline-block;
-        }
+.hero-btn-secondary:hover {
+background:var(--royal-red);
+color:white;
+transform:translateY(-2px);
+}
 
-        .btn-primary-custom:hover {
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
-            transform: translateY(-3px);
-            color: white;
-        }
+/* SECTION TITLE */
+.section-title{
+text-align:center;
+font-family:'Playfair Display';
+font-size:36px;
+margin:70px 0 40px;
+color:var(--royal-red);
+}
 
-        .btn-secondary-custom {
-            background: rgba(255, 255, 255, 0.95);
-            color: #667eea;
-            padding: 16px 40px;
-            border: 2px solid #667eea;
-            border-radius: 28px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+padding:0 40px;
+margin-bottom:60px;
+}
 
-        .btn-secondary-custom:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-        }
+/* CARDS */
+.card{
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.3s;
+cursor:pointer;
+}
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
 
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+.card-content{
+padding:22px;
+}
 
-        /* Footer */
-        .footer {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            padding: 30px 20px;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-            border-top: 1px solid rgba(255, 193, 7, 0.2);
-        }
+.card h3{
+margin:0;
+font-family:'Playfair Display';
+color:var(--royal-red);
+font-size:20px;
+margin-bottom:8px;
+}
 
-        /* Hide Google Translate UI Elements - AGGRESSIVE */
+.card p{
+font-size:14px;
+color:#777;
+margin:0;
+line-height:1.5;
+}
+
+/* FOOTER */
+.footer{
+margin-top:80px;
+text-align:center;
+padding:40px 20px;
+background:#fff;
+color:#777;
+border-top:2px solid var(--turmeric);
+font-family:'Playfair Display';
+font-size:18px;
+font-style:italic;
+}
+
+/* HIDE GOOGLE TRANSLATE */
+.goog-te-banner-frame,
+.goog-te-gadget,
+.goog-te-gadget-simple,
+.goog-te-bottom,
+.goog-te-toolbar,
+.goog-te-balloon-frame,
+.skiptranslate,
+div[id*="goog-gt"],
+div[class*="goog-te"],
+iframe[src*="translate"] {
+display:none!important;
+visibility:hidden!important;
+height:0!important;
+width:0!important;
+}
+
+body {
+top:0!important;
+margin-top:0!important;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+.navbar {
+flex-wrap:wrap;
+gap:15px;
+}
+.navbar-center {
+width:100%;
+flex-direction:column;
+gap:12px;
+}
+.search-box input {
+width:100%;
+}
+.grid {
+padding:0 20px;
+grid-template-columns:1fr;
+}
+.hero h1 {
+font-size:32px;
+}
+.section-title {
+font-size:24px;
+margin:50px 0 30px;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="logo">🍽️ RUCHIQUE</div>
+<div class="navbar-center">
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search recipes...">
+<button onclick="searchRecipes()">🔍</button>
+</div>
+<select class="language-selector" id="languageSelector">
+<option value="en">🌐 English</option>
+<option value="hi">हिंदी</option>
+<option value="ta">தமிழ்</option>
+<option value="te">తెలుగు</option>
+<option value="kn">ಕನ್ನಡ</option>
+<option value="ml">മലയാളം</option>
+<option value="mr">मराठी</option>
+<option value="gu">ગુજરાતી</option>
+<option value="bn">বাংলা</option>
+<option value="pa">ਪੰਜਾਬੀ</option>
+<option value="or">ଓଡ଼ିଆ</option>
+<option value="ur">اردو</option>
+<option value="ja">日本語</option>
+</select>
+</div>
+<a href="/menu" class="back-btn">📋 Menu</a>
+</div>
+
+<div class="hero">
+<h1>Travel India Through Food</h1>
+<p>Discover authentic flavors from across the subcontinent 🇮🇳</p>
+<div class="hero-buttons">
+<button class="hero-btn hero-btn-primary" onclick="document.querySelector('.section-title').scrollIntoView({behavior:'smooth'})">Explore Now</button>
+<a href="/menu" class="hero-btn hero-btn-secondary">View Menu</a>
+</div>
+</div>
+
+<!-- STATES -->
+<h2 class="section-title">Explore by State</h2>
+
+<div class="grid">
+
+<div class="card" onclick="location.href='/state/punjab'">
+<img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398" alt="Punjab">
+<div class="card-content">
+<h3>Punjab</h3>
+<p>Butter Chicken • Paratha • Lassi</p>
+</div>
+</div>
+
+<div class="card" onclick="location.href='/state/rajasthan'">
+<img src="https://images.unsplash.com/photo-1631452180539-96aca7d48617" alt="Rajasthan">
+<div class="card-content">
+<h3>Rajasthan</h3>
+<p>Dal Baati • Gatte • Ker Sangri</p>
+</div>
+</div>
+
+<div class="card" onclick="location.href='/state/tamilnadu'">
+<img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3" alt="Tamil Nadu">
+<div class="card-content">
+<h3>Tamil Nadu</h3>
+<p>Dosa • Sambar • Pongal</p>
+</div>
+</div>
+
+<div class="card" onclick="location.href='/state/kerala'">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950" alt="Kerala">
+<div class="card-content">
+<h3>Kerala</h3>
+<p>Appam • Fish Curry • Sadya</p>
+</div>
+</div>
+
+</div>
+
+<!-- FESTIVALS -->
+<h2 class="section-title">Festival Specials 🎉</h2>
+
+<div class="grid">
+
+<div class="card" onclick="location.href='/festival/diwali'">
+<img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75" alt="Diwali">
+<div class="card-content">
+<h3>Diwali</h3>
+<p>Ladoo • Kaju Katli • Chakli</p>
+</div>
+</div>
+
+<div class="card" onclick="location.href='/festival/eid'">
+<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d" alt="Eid">
+<div class="card-content">
+<h3>Eid</h3>
+<p>Biryani • Sheer Khurma</p>
+</div>
+</div>
+
+<div class="card" onclick="location.href='/festival/pongal'">
+<img src="https://images.unsplash.com/photo-1628294896516-5a2f1dbdfc92" alt="Pongal">
+<div class="card-content">
+<h3>Pongal</h3>
+<p>Sakkarai Pongal • Ven Pongal</p>
+</div>
+</div>
+
+</div>
+
+<!-- THALI -->
+<h2 class="section-title">Regional Thali 🍛</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1617093727343-374698b1b08d" alt="South Indian Thali">
+<div class="card-content">
+<h3>South Indian Thali</h3>
+<p>Sambar • Rasam • Poriyal • Payasam</p>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1628294896516-5a2f1dbdfc92" alt="Gujarati Thali">
+<div class="card-content">
+<h3>Gujarati Thali</h3>
+<p>Dhokla • Kadhi • Thepla</p>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+"Food is our common ground, a universal experience." — Ruchique 2026
+</div>
+
+<!-- Google Translate Widget (Hidden) -->
+<div id="google_translate_element"></div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Google Translate API -->
+<script type="text/javascript">
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,ta,te,kn,ml,mr,gu,bn,pa,or,ur,ja',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+// Language map
+const langMap = {
+    'en': 'en',
+    'hi': 'hi',
+    'ta': 'ta',
+    'te': 'te',
+    'kn': 'kn',
+    'ml': 'ml',
+    'mr': 'mr',
+    'gu': 'gu',
+    'bn': 'bn',
+    'pa': 'pa',
+    'or': 'or',
+    'ur': 'ur',
+    'ja': 'ja'
+};
+
+// Clear translation
+function clearTranslation() {
+    document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    document.cookie = 'googtrans=; path=/; max-age=0;';
+    localStorage.clear();
+    localStorage.removeItem('selectedLanguage');
+}
+
+// Set language using cookie
+function setLanguage(code) {
+    if (code === 'en') {
+        clearTranslation();
+        setTimeout(() => location.reload(), 100);
+        return;
+    }
+    
+    document.cookie = 'googtrans=/en/' + code + '; path=/; max-age=315360000';
+    localStorage.setItem('selectedLanguage', code);
+    
+    setTimeout(() => location.reload(), 100);
+}
+
+// Language selector
+const selector = document.getElementById('languageSelector');
+if (selector) {
+    selector.addEventListener('change', function(e) {
+        setLanguage(this.value);
+    });
+    
+    window.addEventListener('load', function() {
+        const saved = localStorage.getItem('selectedLanguage') || 'en';
+        selector.value = saved;
+    });
+}
+
+// Hide Google Translate UI
+function hideTranslateUI() {
+    const style = document.createElement('style');
+    style.innerHTML = `
         .goog-te-banner-frame,
-        .goog-te-banner-frame.skiptranslate,
         .goog-te-gadget,
         .goog-te-gadget-simple,
-        .goog-te-tooltip,
-        .goog-tooltip,
         .goog-te-bottom,
-        .goog-te-combo,
-        .goog-te-balloon,
         .goog-te-toolbar,
-        iframe[src*="translate"],
-        .goog-te-flash,
+        .goog-te-balloon-frame,
         .skiptranslate,
         div[id*="goog-gt"],
-        div[style*="google"],
-        div[style*="translate"] {
+        div[class*="goog-te"],
+        iframe[src*="translate"] {
             display: none !important;
             visibility: hidden !important;
             height: 0 !important;
             width: 0 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            border: none !important;
-            background: none !important;
-            position: absolute !important;
-            left: -9999px !important;
-            top: -9999px !important;
         }
-
-        #google_translate_element {
-            display: none !important;
-            visibility: hidden !important;
-        }
-
-        body,
-        html {
+        body {
             top: 0 !important;
             margin-top: 0 !important;
-            padding-top: 0 !important;
         }
+    `;
+    if (document.head) {
+        document.head.appendChild(style);
+    }
+}
 
-        /* Prevent any offsets caused by banner */
-        body.translated {
-            top: 0 !important;
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', hideTranslateUI);
+} else {
+    hideTranslateUI();
+}
+
+// Search functionality
+function searchRecipes() {
+    const keyword = document.getElementById('searchInput').value.trim();
+    if (keyword) {
+        window.location.href = '/search?keyword=' + encodeURIComponent(keyword);
+    }
+}
+
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchRecipes();
         }
+    });
+}
+</script>
 
-        /* Hide only translate-related iframes */
-        iframe[src*="translate"],
-        iframe[src*="google/translate"] {
-            display: none !important;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-                letter-spacing: 1px;
-            }
-
-            .hero-subtitle {
-                font-size: 1.3rem;
-            }
-
-            .hero-description {
-                font-size: 1rem;
-            }
-
-            .search-container {
-                max-width: 100%;
-                margin: 10px 0;
-                order: 3;
-                width: 100%;
-            }
-
-            .navbar-collapse {
-                margin-top: 15px;
-            }
-
-            .language-selector {
-                min-width: 140px;
-                margin-left: 0;
-                margin-top: 10px;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn-primary-custom,
-            .btn-secondary-custom {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .navbar-brand {
-                font-size: 1.4rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .main-content {
-                padding: 40px 15px;
-            }
-
-            .navbar {
-                padding: 0.75rem 0;
-            }
-
-            .navbar a {
-                margin: 5px 8px;
-                padding: 8px 12px;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">🍽️ RUCHIQUE</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" style="background-image: url(&quot;data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cline x1='5' y1='8' x2='25' y2='8' stroke='white' stroke-width='2'/%3E%3Cline x1='5' y1='15' x2='25' y2='15' stroke='white' stroke-width='2'/%3E%3Cline x1='5' y1='22' x2='25' y2='22' stroke='white' stroke-width='2'/%3E%3C/svg%3E&quot;);"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Search Bar -->
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="🔍 Search recipes..." id="searchInput">
-                    <button class="search-btn" onclick="searchRecipes()">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-
-                <!-- Right side menu -->
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/menu">
-                            <i class="fas fa-list"></i> Menu
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <select class="language-selector" id="languageSelector">
-                            <option value="en">🌐 English</option>
-                            <option value="hi">हिंदी</option>
-                            <option value="ta">தமிழ்</option>
-                            <option value="te">తెలుగు</option>
-                            <option value="kn">ಕನ್ನಡ</option>
-                            <option value="ml">മലയാളം</option>
-                            <option value="mr">मराठी</option>
-                            <option value="gu">ગુજરાતી</option>
-                            <option value="bn">বাংলা</option>
-                            <option value="pa">ਪੰਜਾਬੀ</option>
-                            <option value="or">ଓଡ଼ିଆ</option>
-                            <option value="ur">اردو</option>
-                            <option value="ja">日本語</option>
-                        </select>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <h1 class="hero-title">RUCHIQUE</h1>
-        <p class="hero-subtitle">Authentic Indian Recipes</p>
-        <p class="hero-description">Discover the rich flavors of traditional Indian cuisine. Explore hundreds of authentic recipes from across India, crafted with passion and served with love.</p>
-        
-        <div class="cta-buttons">
-            <a href="/menu" class="btn-primary-custom">
-                <i class="fas fa-book"></i> Explore Recipes
-            </a>
-            <a href="#features" class="btn-secondary-custom">
-                <i class="fas fa-heart"></i> Learn More
-            </a>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2026 Ruchique - Authentic Indian Recipes <i class="fas fa-utensils" style="margin: 0 5px;"></i></p>
-    </div>
-
-    <!-- Google Translate Widget (Hidden) -->
-    <div id="google_translate_element"></div>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
-    <!-- Google Translate API -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,hi,ta,te,kn,ml,mr,gu,bn,pa,or,ur,ja',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <script>
-        // Simple language map
-        const langMap = {
-            'en': 'en',
-            'hi': 'hi',
-            'ta': 'ta',
-            'te': 'te',
-            'kn': 'kn',
-            'ml': 'ml',
-            'mr': 'mr',
-            'gu': 'gu',
-            'bn': 'bn',
-            'pa': 'pa',
-            'or': 'or',
-            'ur': 'ur',
-            'ja': 'ja'
-        };
-
-        // Clear all translation cookies and localStorage first
-        function clearTranslation() {
-            // Clear cookies completely
-            document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-            document.cookie = 'googtrans=; path=/; max-age=0;';
-            localStorage.clear();
-            localStorage.removeItem('selectedLanguage');
-            console.log('Translation cleared');
-        }
-
-        // Set language using cookie
-        function setLanguage(code) {
-            console.log('Setting language to: ' + code);
-            
-            if (code === 'en') {
-                // Go back to English
-                clearTranslation();
-                setTimeout(() => location.reload(), 100);
-                return;
-            }
-
-            // Set the Google Translate cookie
-            const cookieValue = '/en/' + code;
-            document.cookie = 'googtrans=' + cookieValue + '; path=/; max-age=315360000; SameSite=None; Secure';
-            
-            // Save preference
-            localStorage.setItem('selectedLanguage', code);
-            
-            console.log('Cookie set: googtrans=' + cookieValue);
-            
-            // Reload to apply translation
-            setTimeout(() => location.reload(), 100);
-        }
-
-        // Get language selector
-        const selector = document.getElementById('languageSelector');
-
-        // On change, update language
-        if (selector) {
-            selector.addEventListener('change', function(e) {
-                console.log('Language changed to: ' + this.value);
-                setLanguage(this.value);
-            });
-
-            // Restore saved language on load
-            window.addEventListener('load', function() {
-                const saved = localStorage.getItem('selectedLanguage') || 'en';
-                console.log('Restoring saved language: ' + saved);
-                selector.value = saved;
-            });
-        }
-
-        // Hide the Google Translate UI
-        function hideTranslateUI() {
-            const style = document.createElement('style');
-            style.innerHTML = `
-                .goog-te-banner-frame,
-                .goog-te-gadget,
-                .goog-te-gadget-simple,
-                .goog-te-bottom,
-                .goog-te-toolbar,
-                .goog-te-balloon-frame,
-                .skiptranslate,
-                div[id*="goog-gt"],
-                div[class*="goog-te"],
-                iframe[src*="translate"] {
-                    display: none !important;
-                    visibility: hidden !important;
-                    height: 0 !important;
-                    width: 0 !important;
-                }
-                body {
-                    top: 0 !important;
-                    margin-top: 0 !important;
-                }
-            `;
-            if (document.head) {
-                document.head.appendChild(style);
-            }
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', hideTranslateUI);
-        } else {
-            hideTranslateUI();
-        }
-
-        // Search functionality
-        function searchRecipes() {
-            const keyword = document.getElementById('searchInput').value.trim();
-            if (keyword) {
-                window.location.href = '/search?keyword=' + encodeURIComponent(keyword);
-            }
-        }
-
-        // Search on Enter key
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput) {
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    searchRecipes();
-                }
-            });
-        }
-    </script>
-    </script>
 </body>
 </html>
