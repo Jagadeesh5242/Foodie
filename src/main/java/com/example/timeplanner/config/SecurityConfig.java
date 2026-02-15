@@ -11,13 +11,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
-                        .anyRequest().permitAll() // Allow all requests without authentication
-                )
-                .csrf(csrf -> csrf.disable()) // Disable CSRF protection for development
-                .headers(headers -> headers.frameOptions(frame -> frame.disable())); // Allow H2 console
+                        .anyRequest().permitAll())
+                .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers
+                        .frameOptions(frameOptions -> frameOptions.sameOrigin()));
 
         return http.build();
     }
