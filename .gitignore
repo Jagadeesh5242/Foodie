@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+### Large Files ###
+src/main/resources/templates/recipe-list.txt
