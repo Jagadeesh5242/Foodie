@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chicken Biryani • Ruchique</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--primary:#9B1C31;
+--accent:#FF9933;
+--cream:#FFF8E7;
+--dark:#1a1a1a;
+}
+
+body{margin:0;font-family:Poppins;background:var(--cream);color:var(--dark);}
+
+/* NAVBAR */
+.navbar{
+display:flex;justify-content:space-between;align-items:center;
+padding:18px 40px;background:white;box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+.logo{font-family:'Playfair Display';font-size:28px;color:var(--primary);font-weight:900;}
+.nav-links a{
+margin-left:20px;text-decoration:none;color:var(--primary);
+font-weight:600;border:2px solid var(--primary);
+padding:8px 18px;border-radius:25px;
+}
+.nav-links a:hover{background:var(--primary);color:white}
+
+/* HERO */
+.hero{
+height:70vh;
+background:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFIENTSeyaVBUA5Yfh1HT8iJMWy1raKxxlJQ&s") center/cover;
+display:flex;align-items:center;justify-content:center;
+color:white;text-align:center;
+}
+.hero h1{
+font-family:'Playfair Display';
+font-size:70px;
+background:rgba(0,0,0,.5);
+padding:20px 40px;border-radius:10px;
+}
+
+/* STORY */
+.story{
+max-width:900px;margin:auto;padding:70px 30px;text-align:center;
+line-height:1.8;font-size:18px;
+}
+
+/* MAIN GRID */
+.container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+max-width:1200px;
+margin:auto;
+padding:20px 30px 80px;
+}
+
+.section-title{
+font-family:'Playfair Display';
+font-size:34px;color:var(--primary);
+margin-bottom:20px;
+}
+
+/* INGREDIENTS */
+.ing{
+background:white;padding:25px;border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-bottom:15px;
+}
+
+/* STEPS */
+.step{
+background:white;padding:25px;border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+margin-bottom:20px;
+}
+
+.step span{
+font-size:22px;font-weight:700;color:var(--accent);
+}
+
+/* FOOTER */
+.footer{text-align:center;padding:40px;background:white;}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="logo">🍽️ RUCHIQUE</div>
+<div class="nav-links">
+<a href="/">Home</a>
+<a href="/browse">Browse Recipes</a>
+<a href="/about">About</a>
+</div>
+</div>
+
+<div class="hero">
+<h1>Chicken Biryani</h1>
+</div>
+
+<div class="story">
+Biryani is not just food — it is celebration, tradition and aroma.
+This royal Mughlai dish blends fragrant basmati rice, tender chicken,
+and rich spices to create India’s most loved rice dish.
+</div>
+
+<div class="container">
+
+<div>
+<h2 class="section-title">🧂 Ingredients</h2>
+
+<div class="ing">🍚 2 cups Basmati Rice</div>
+<div class="ing">🍗 500g Chicken (bone-in)</div>
+<div class="ing">🧅 3 Onions (thin sliced)</div>
+<div class="ing">🍅 2 Tomatoes (chopped)</div>
+<div class="ing">🥛 1 cup Yogurt</div>
+<div class="ing">🧄 Ginger Garlic Paste</div>
+<div class="ing">🌶️ Biryani Masala & Whole Spices</div>
+<div class="ing">🌿 Coriander & Mint Leaves</div>
+
+</div>
+
+<div>
+<h2 class="section-title">👨‍🍳 Cooking Process</h2>
+
+<div class="step"><span>1.</span> Marinate chicken with yogurt, spices and salt for 30 mins.</div>
+<div class="step"><span>2.</span> Fry onions until golden brown.</div>
+<div class="step"><span>3.</span> Cook marinated chicken until tender.</div>
+<div class="step"><span>4.</span> Boil rice until 70% cooked.</div>
+<div class="step"><span>5.</span> Layer rice and chicken masala.</div>
+<div class="step"><span>6.</span> Dum cook for 20 minutes on low heat.</div>
+<div class="step"><span>7.</span> Serve hot with raita & salad.</div>
+
+</div>
+
+</div>
+
+<div class="footer">© Ruchique 2026 • Discover & Cook</div>
+
+</body>
+</html>
