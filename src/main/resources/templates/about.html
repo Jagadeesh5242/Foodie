@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About • Ruchique</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--primary:#9B1C31;
+--accent:#FF9933;
+--cream:#FFF8E7;
+--dark:#1a1a1a;
+}
+
+body{
+font-family:Poppins;
+margin:0;
+background:var(--cream);
+color:var(--dark);
+}
+
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 40px;
+background:white;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+}
+
+.logo{
+font-family:'Playfair Display';
+font-size:28px;
+color:var(--primary);
+font-weight:900;
+}
+
+.nav-links a{
+margin-left:20px;
+text-decoration:none;
+color:var(--primary);
+font-weight:600;
+border:2px solid var(--primary);
+padding:8px 18px;
+border-radius:25px;
+transition:.3s;
+}
+
+.nav-links a:hover{
+background:var(--primary);
+color:white;
+}
+
+/* HERO */
+.hero{
+text-align:center;
+padding:110px 20px 60px;
+}
+
+.hero h1{
+font-family:'Playfair Display';
+font-size:52px;
+color:var(--primary);
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:20px;
+color:#555;
+max-width:800px;
+margin:auto;
+line-height:1.8;
+}
+
+/* CONTENT SECTION */
+.section{
+max-width:1100px;
+margin:auto;
+padding:60px 30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:40px;
+}
+
+.card{
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h2{
+font-family:'Playfair Display';
+color:var(--primary);
+margin-bottom:15px;
+}
+
+.card p{
+line-height:1.7;
+color:#444;
+}
+
+/* HIGHLIGHT */
+.highlight{
+background:var(--primary);
+color:white;
+text-align:center;
+padding:70px 30px;
+margin-top:60px;
+}
+
+.highlight h2{
+font-family:'Playfair Display';
+font-size:40px;
+margin-bottom:20px;
+}
+
+.footer{
+text-align:center;
+padding:40px;
+background:white;
+margin-top:60px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="logo">🍽️ RUCHIQUE</div>
+<div class="nav-links">
+<a href="/">Home</a>
+<a href="/browse">Browse Recipes</a>
+<a href="/about">About</a>
+</div>
+</div>
+
+<section class="hero">
+<h1>Celebrating Culture Through Food</h1>
+<p>
+Ruchique is more than a recipe search platform — it is a journey through flavors,
+traditions, and stories from kitchens across India and beyond.
+We believe food connects generations, regions, and emotions.
+</p>
+</section>
+
+<section class="section">
+
+<div class="card">
+<h2>🌍 Our Mission</h2>
+<p>
+To make authentic recipes easily accessible while preserving cultural richness.
+From street food favorites to royal delicacies, Ruchique helps anyone
+discover ingredients and cooking steps instantly.
+</p>
+</div>
+
+<div class="card">
+<h2>🍲 Why Ruchique?</h2>
+<p>
+Many recipe platforms feel cluttered and overwhelming.
+Ruchique focuses on simplicity — search a dish,
+and instantly see clear ingredients and detailed preparation steps.
+No distractions. Just pure cooking experience.
+</p>
+</div>
+
+<!-- <div class="card">
+<h2>🎨 Design Philosophy</h2>
+<p>
+Inspired by Indian heritage colors — deep maroon and saffron —
+the interface reflects warmth, tradition and elegance.
+Every element is crafted to feel welcoming and culturally rich.
+</p>
+</div> -->
+
+<div class="card">
+<h2>🚀 Future Vision</h2>
+<p>
+We aim to expand with regional cuisines,
+multi-language support, AI-powered smart suggestions,
+and personalized cooking experiences.
+Ruchique will evolve into a global food discovery platform.
+</p>
+</div>
+
+</section>
+
+<section class="highlight">
+<h2>Food is Memory. Food is Emotion.</h2>
+<p>
+Every recipe tells a story — of family, celebration, and tradition.
+Ruchique exists to keep those stories alive.
+</p>
+</section>
+
+<div class="footer">
+© 2026 Ruchique • Discover & Cook
+</div>
+
+</body>
+</html>

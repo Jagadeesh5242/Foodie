@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ruchique • Recipe Search</title>
+<title>Browse Recipes • Ruchique</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -51,7 +51,6 @@ padding:8px 18px;
 border-radius:25px;
 transition:.3s;
 }
-
 .nav-links a:hover{
 background:var(--primary);
 color:white;
@@ -60,39 +59,33 @@ color:white;
 /* HERO SEARCH */
 .hero{
 text-align:center;
-padding:120px 20px 80px;
+padding:80px 20px 40px;
 }
 
 .hero h1{
 font-family:'Playfair Display';
-font-size:56px;
+font-size:46px;
 color:var(--primary);
-margin-bottom:10px;
+margin-bottom:20px;
 }
 
-.hero p{
-font-size:20px;
-color:#666;
-margin-bottom:40px;
-}
-
-.search-big{
+.search{
 display:flex;
 justify-content:center;
 gap:10px;
 flex-wrap:wrap;
 }
 
-.search-big input{
-padding:18px 25px;
-width:420px;
+.search input{
+padding:16px 25px;
+width:380px;
 border-radius:40px;
 border:2px solid var(--accent);
 font-size:16px;
 }
 
-.search-big button{
-padding:18px 35px;
+.search button{
+padding:16px 30px;
 border:none;
 background:var(--accent);
 color:white;
@@ -100,84 +93,71 @@ border-radius:40px;
 font-weight:600;
 cursor:pointer;
 }
+.search button:hover{background:var(--primary);}
 
-.search-big button:hover{
-background:var(--primary);
-}
-
-/* TRENDING */
-.section-title{
-font-family:'Playfair Display';
+/* CATEGORY CHIPS */
+.categories{
 text-align:center;
-font-size:38px;
-color:var(--primary);
-margin:80px 0 30px;
+margin:25px 0 40px;
 }
 
+.chip{
+display:inline-block;
+margin:8px;
+padding:10px 20px;
+border-radius:25px;
+border:2px solid var(--primary);
+cursor:pointer;
+font-weight:600;
+}
+.chip:hover{
+background:var(--primary);
+color:white;
+}
+
+/* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:25px;
-padding:0 40px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+padding:20px 40px 80px;
 max-width:1300px;
 margin:auto;
 }
 
 .card{
 background:white;
-border-radius:20px;
+border-radius:22px;
 overflow:hidden;
-box-shadow:0 8px 20px rgba(0,0,0,.12);
+box-shadow:0 10px 25px rgba(0,0,0,.12);
 transition:.3s;
 cursor:pointer;
 }
-
-.card:hover{
-transform:translateY(-10px);
-}
+.card:hover{transform:translateY(-10px);}
 
 .card img{
 width:100%;
-height:180px;
+height:190px;
 object-fit:cover;
 }
 
-.card-content{
-padding:18px;
-}
+.card-content{padding:18px;}
 
 .card h3{
 font-family:'Playfair Display';
 color:var(--primary);
-margin:0;
+margin:0 0 5px;
 }
 
-/* CATEGORY CHIPS */
-.categories{
-text-align:center;
-margin:40px 0 90px;
-}
-
-.chip{
-display:inline-block;
-margin:8px;
-padding:12px 22px;
-border-radius:25px;
-border:2px solid var(--primary);
-cursor:pointer;
-font-weight:600;
-}
-
-.chip:hover{
-background:var(--primary);
-color:white;
+.tag{
+font-size:13px;
+color:#777;
 }
 
 .footer{
 text-align:center;
 padding:40px;
 background:white;
-margin-top:60px;
 }
 </style>
 </head>
@@ -187,53 +167,79 @@ margin-top:60px;
 <div class="navbar">
 <div class="logo">🍽️ RUCHIQUE</div>
 <div class="nav-links">
+<a href="/">Home</a>
 <a href="/browse">Browse Recipes</a>
 <a href="/about">About</a>
 </div>
 </div>
 
 <section class="hero">
-<h1>Find Any Recipe in Seconds</h1>
-<p>Search ingredients, instructions & cooking steps instantly</p>
+<h1>Explore Delicious Recipes</h1>
 
-<div class="search-big">
-<input id="searchInput" placeholder="Search chicken biryani, dosa, pasta..." />
+<div class="search">
+<input id="searchInput" placeholder="Search biryani, dosa, pasta..." />
 <button onclick="searchRecipe()">Search</button>
 </div>
 </section>
-
-<h2 class="section-title">🔥 Trending Recipes</h2>
-
-<div class="grid">
-<div class="card" onclick="openRecipe('chicken-biryani')">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFIENTSeyaVBUA5Yfh1HT8iJMWy1raKxxlJQ&s">
-<div class="card-content"><h3>Chicken Biryani</h3></div>
-</div>
-
-<div class="card" onclick="openRecipe('masala-dosa')">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmyC7uis1FdyUpZW9h4OEQYOM9NDbXozIfVg&s">
-<div class="card-content"><h3>Masala Dosa</h3></div>
-</div>
-
-<div class="card" onclick="openRecipe('paneer-butter-masala')">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT85iSF9VSvP3JREyzT2L40ZuxDcpcqegj5IQ&s">
-<div class="card-content"><h3>Paneer Butter Masala</h3></div>
-</div>
-
-<div class="card" onclick="openRecipe('gulab-jamun')">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUTZA1cEtNFBTKDUT8ow1m-3dorJDIO8UDcQ&s">
-<div class="card-content"><h3>Gulab Jamun</h3></div>
-</div>
-</div>
-
-<!-- <h2 class="section-title">🥗 Categories</h2>
 
 <div class="categories">
 <span class="chip" onclick="filterCategory('veg')">Veg</span>
 <span class="chip" onclick="filterCategory('nonveg')">Non-Veg</span>
 <span class="chip" onclick="filterCategory('breakfast')">Breakfast</span>
 <span class="chip" onclick="filterCategory('dessert')">Dessert</span>
-<span class="chip" onclick="filterCategory('quick')">Quick Meals</span> -->
+<span class="chip" onclick="filterCategory('quick')">Quick Meals</span>
+</div>
+
+<div class="grid">
+
+<div class="card" onclick="openRecipe('chicken-biryani')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFIENTSeyaVBUA5Yfh1HT8iJMWy1raKxxlJQ&s">
+<div class="card-content">
+<h3>Chicken Biryani</h3>
+<div class="tag">Non-Veg • Main Course</div>
+</div>
+</div>
+
+<div class="card" onclick="openRecipe('paneer-butter-masala')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT85iSF9VSvP3JREyzT2L40ZuxDcpcqegj5IQ&s">
+<div class="card-content">
+<h3>Paneer Butter Masala</h3>
+<div class="tag">Veg • Dinner</div>
+</div>
+</div>
+
+<div class="card" onclick="openRecipe('masala-dosa')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmyC7uis1FdyUpZW9h4OEQYOM9NDbXozIfVg&s">
+<div class="card-content">
+<h3>Masala Dosa</h3>
+<div class="tag">Breakfast • South Indian</div>
+</div>
+</div>
+
+<div class="card" onclick="openRecipe('gulab-jamun')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUTZA1cEtNFBTKDUT8ow1m-3dorJDIO8UDcQ&s">
+<div class="card-content">
+<h3>Gulab Jamun</h3>
+<div class="tag">Dessert • Sweet</div>
+</div>
+</div>
+
+<div class="card" onclick="openRecipe('veg-fried-rice')">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuDttBX4uGzZ1Y5POXeUaPMkVCYtayAsijVw&s">
+<div class="card-content">
+<h3>Veg Fried Rice</h3>
+<div class="tag">Quick Meal • Indo-Chinese</div>
+</div>
+</div>
+
+<div class="card" onclick="openRecipe('butter-chicken')">
+<img src="https://www.thespicehouse.com/cdn/shop/articles/Chicken_Makhani_Indian_Butter_Chicken_720x.jpg?v=1606157395">
+<div class="card-content">
+<h3>Butter Chicken</h3>
+<div class="tag">Non-Veg • North Indian</div>
+</div>
+</div>
+
 </div>
 
 <div class="footer">© Ruchique 2026 • Discover & Cook</div>
@@ -243,11 +249,9 @@ function searchRecipe(){
 const keyword=document.getElementById("searchInput").value;
 if(keyword) window.location="/search?keyword="+encodeURIComponent(keyword);
 }
-
 function openRecipe(slug){
 window.location="/recipe/"+slug;
 }
-
 function filterCategory(cat){
 window.location="/recipes?category="+cat;
 }
