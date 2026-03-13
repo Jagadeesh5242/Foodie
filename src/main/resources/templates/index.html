@@ -57,7 +57,7 @@ background:var(--primary);
 color:white;
 }
 
-/* HERO SEARCH */
+/* HERO */
 .hero{
 text-align:center;
 padding:120px 20px 80px;
@@ -76,11 +76,14 @@ color:#666;
 margin-bottom:40px;
 }
 
+/* SEARCH */
 .search-big{
 display:flex;
 justify-content:center;
 gap:10px;
-flex-wrap:wrap;
+position:relative;
+width:520px;
+margin:auto;
 }
 
 .search-big input{
@@ -103,6 +106,29 @@ cursor:pointer;
 
 .search-big button:hover{
 background:var(--primary);
+}
+
+/* SUGGESTIONS */
+.suggestions{
+position:absolute;
+top:65px;
+left:0;
+width:420px;
+background:white;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+text-align:left;
+z-index:100;
+}
+
+.suggestion-item{
+padding:12px 18px;
+cursor:pointer;
+border-bottom:1px solid #eee;
+}
+
+.suggestion-item:hover{
+background:#FFF1E6;
 }
 
 /* TRENDING */
@@ -152,27 +178,6 @@ color:var(--primary);
 margin:0;
 }
 
-/* CATEGORY CHIPS */
-.categories{
-text-align:center;
-margin:40px 0 90px;
-}
-
-.chip{
-display:inline-block;
-margin:8px;
-padding:12px 22px;
-border-radius:25px;
-border:2px solid var(--primary);
-cursor:pointer;
-font-weight:600;
-}
-
-.chip:hover{
-background:var(--primary);
-color:white;
-}
-
 .footer{
 text-align:center;
 padding:40px;
@@ -197,60 +202,102 @@ margin-top:60px;
 <p>Search ingredients, instructions & cooking steps instantly</p>
 
 <div class="search-big">
-<input id="searchInput" placeholder="Search chicken biryani, dosa, pasta..." />
+<input id="searchInput" onkeyup="showSuggestions()" placeholder="Search chicken biryani, dosa, pasta..." />
 <button onclick="searchRecipe()">Search</button>
+
+<div id="suggestions" class="suggestions"></div>
 </div>
 </section>
 
 <h2 class="section-title">🔥 Trending Recipes</h2>
 
 <div class="grid">
-<div class="card" onclick="openRecipe('chicken-biryani')">
+
+<div class="card" data-name="Chicken Biryani" onclick="openRecipe('chicken-biryani')">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFIENTSeyaVBUA5Yfh1HT8iJMWy1raKxxlJQ&s">
 <div class="card-content"><h3>Chicken Biryani</h3></div>
 </div>
 
-<div class="card" onclick="openRecipe('masala-dosa')">
+<div class="card" data-name="Masala Dosa" onclick="openRecipe('masala-dosa')">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmyC7uis1FdyUpZW9h4OEQYOM9NDbXozIfVg&s">
 <div class="card-content"><h3>Masala Dosa</h3></div>
 </div>
 
-<div class="card" onclick="openRecipe('paneer-butter-masala')">
+<div class="card" data-name="Paneer Butter Masala" onclick="openRecipe('paneer-butter-masala')">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT85iSF9VSvP3JREyzT2L40ZuxDcpcqegj5IQ&s">
 <div class="card-content"><h3>Paneer Butter Masala</h3></div>
 </div>
 
-<div class="card" onclick="openRecipe('gulab-jamun')">
+<div class="card" data-name="Gulab Jamun" onclick="openRecipe('gulab-jamun')">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUTZA1cEtNFBTKDUT8ow1m-3dorJDIO8UDcQ&s">
 <div class="card-content"><h3>Gulab Jamun</h3></div>
 </div>
-</div>
 
-<!-- <h2 class="section-title">🥗 Categories</h2>
-
-<div class="categories">
-<span class="chip" onclick="filterCategory('veg')">Veg</span>
-<span class="chip" onclick="filterCategory('nonveg')">Non-Veg</span>
-<span class="chip" onclick="filterCategory('breakfast')">Breakfast</span>
-<span class="chip" onclick="filterCategory('dessert')">Dessert</span>
-<span class="chip" onclick="filterCategory('quick')">Quick Meals</span> -->
 </div>
 
 <div class="footer">© Ruchique 2026 • Discover & Cook</div>
 
 <script>
-function searchRecipe(){
-const keyword=document.getElementById("searchInput").value;
-if(keyword) window.location="/search?keyword="+encodeURIComponent(keyword);
-}
 
+/* Open recipe */
 function openRecipe(slug){
 window.location="/recipe/"+slug;
 }
 
-function filterCategory(cat){
-window.location="/recipes?category="+cat;
+/* Search button */
+function searchRecipe(){
+const keyword=document.getElementById("searchInput").value.toLowerCase();
+const cards=document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+const name=card.dataset.name.toLowerCase();
+if(name.includes(keyword)){
+card.click();
 }
+});
+}
+
+/* Suggestions from recipe cards */
+function showSuggestions(){
+
+const input=document.getElementById("searchInput").value.toLowerCase();
+const box=document.getElementById("suggestions");
+
+box.innerHTML="";
+
+if(input==="") return;
+
+const cards=document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+
+const name=card.dataset.name;
+
+if(name.toLowerCase().includes(input)){
+
+const div=document.createElement("div");
+div.classList.add("suggestion-item");
+div.innerText=name;
+
+div.onclick=function(){
+card.click();
+};
+
+box.appendChild(div);
+
+}
+
+});
+
+}
+
+/* Hide suggestions when clicking outside */
+document.addEventListener("click",function(e){
+if(!document.getElementById("searchInput").contains(e.target)){
+document.getElementById("suggestions").innerHTML="";
+}
+});
+
 </script>
 
 </body>
