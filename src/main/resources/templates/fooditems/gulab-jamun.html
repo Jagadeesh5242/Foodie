@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
 --primary:#9B1C31;
 --accent:#FF9933;
@@ -15,82 +17,357 @@
 --dark:#1a1a1a;
 }
 
-body{margin:0;font-family:Poppins;background:var(--cream);color:var(--dark);}
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:white;box-shadow:0 3px 10px rgba(0,0,0,.08);}
-.logo{font-family:'Playfair Display';font-size:28px;color:var(--primary);font-weight:900;}
-.nav-links a{margin-left:20px;text-decoration:none;color:var(--primary);font-weight:600;border:2px solid var(--primary);padding:8px 18px;border-radius:25px;}
-.nav-links a:hover{background:var(--primary);color:white}
+body{
+margin:0;
+font-family:Poppins;
+background:var(--cream);
+color:var(--dark);
+line-height:1.6;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 40px;
+background:white;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.logo{
+font-family:'Playfair Display';
+font-size:28px;
+color:var(--primary);
+font-weight:900;
+}
+
+.nav-links a{
+margin-left:20px;
+text-decoration:none;
+color:var(--primary);
+font-weight:600;
+border:2px solid var(--primary);
+padding:8px 18px;
+border-radius:25px;
+transition:.3s;
+}
+
+.nav-links a:hover{
+background:var(--primary);
+color:white;
+}
 
 /* HERO */
+
 .hero{
 height:70vh;
-background:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUTZA1cEtNFBTKDUT8ow1m-3dorJDIO8UDcQ&s") center/cover;
-display:flex;align-items:center;justify-content:center;color:white;text-align:center;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+overflow:hidden;
 }
-.hero h1{font-family:'Playfair Display';font-size:70px;background:rgba(0,0,0,.5);padding:20px 40px;border-radius:10px;}
 
-.story{max-width:900px;margin:auto;padding:70px 30px;text-align:center;line-height:1.8;font-size:18px;}
+.hero img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+top:0;
+left:0;
+z-index:-2;
+}
 
-.container{display:grid;grid-template-columns:1fr 1fr;gap:50px;max-width:1200px;margin:auto;padding:20px 30px 80px;}
-.section-title{font-family:'Playfair Display';font-size:34px;color:var(--primary);margin-bottom:20px;}
-.ing,.step{background:white;padding:25px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);margin-bottom:15px;}
-.step span{font-size:22px;font-weight:700;color:var(--accent);}
-.footer{text-align:center;padding:40px;background:white;}
+.hero::after{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom,rgba(0,0,0,.4),rgba(0,0,0,.7));
+z-index:-1;
+}
+
+.hero h1{
+font-family:'Playfair Display';
+font-size:70px;
+text-shadow:0 4px 15px rgba(0,0,0,.7);
+}
+
+/* INFO */
+
+.info{
+display:flex;
+justify-content:center;
+gap:40px;
+margin:40px 0;
+flex-wrap:wrap;
+}
+
+.info-box{
+background:white;
+padding:20px 30px;
+border-radius:14px;
+box-shadow:0 8px 18px rgba(0,0,0,.1);
+font-weight:500;
+font-size:18px;
+}
+
+/* STORY */
+
+.story-section{
+max-width:1000px;
+margin:40px auto;
+padding:0 20px;
+text-align:center;
+}
+
+.story{
+font-size:18px;
+line-height:1.7;
+margin-bottom:30px;
+}
+
+/* VIDEO */
+
+.video-section{
+max-width:900px;
+margin:60px auto;
+padding:0 20px;
+}
+
+.video-section h2{
+font-family:'Playfair Display';
+color:var(--primary);
+text-align:center;
+margin-bottom:20px;
+}
+
+iframe{
+width:100%;
+height:500px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+border:none;
+}
+
+/* MAIN CONTENT */
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:60px 30px 80px;
+}
+
+.section-title{
+font-family:'Playfair Display';
+font-size:38px;
+color:var(--primary);
+margin-bottom:25px;
+text-align:center;
+}
+
+/* INGREDIENTS */
+
+.ingredients-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+.ing{
+background:white;
+padding:18px 24px;
+border-radius:14px;
+box-shadow:0 6px 16px rgba(0,0,0,.08);
+font-size:17px;
+transition:.25s;
+}
+
+.ing:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 22px rgba(0,0,0,.15);
+}
+
+/* STEPS */
+
+.steps-grid{
+display:grid;
+gap:20px;
+}
+
+.step{
+display:flex;
+gap:20px;
+background:white;
+padding:24px;
+border-radius:14px;
+box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+
+.step span{
+background:var(--accent);
+color:white;
+font-weight:700;
+width:45px;
+height:45px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:22px;
+flex-shrink:0;
+}
+
+/* BUY BUTTON */
+
+.buy-btn{
+display:block;
+width:fit-content;
+margin:50px auto;
+padding:18px 50px;
+background:var(--primary);
+color:white;
+font-size:20px;
+font-weight:600;
+text-decoration:none;
+border-radius:50px;
+box-shadow:0 8px 20px rgba(155,28,49,.3);
+transition:.3s;
+}
+
+.buy-btn:hover{
+background:#7d1627;
+transform:translateY(-3px);
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+padding:50px 20px;
+background:white;
+border-top:1px solid #eee;
+font-size:15px;
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="navbar">
 <div class="logo">🍽️ RUCHIQUE</div>
+
 <div class="nav-links">
 <a href="/">Home</a>
 <a href="/browse">Browse Recipes</a>
+<a href="/ingredients">Cook with what you have</a>
 <a href="/about">About</a>
 </div>
 </div>
 
 <div class="hero">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGoFrPEUp0_YVuaV7GpWCx3Ny86tSvURIVLA&s" alt="Gulab Jamun">
 <h1>Gulab Jamun</h1>
 </div>
 
+<div class="info">
+<div class="info-box">⏱ 30 Minutes</div>
+<div class="info-box">🍬 Dessert</div>
+<div class="info-box">🔥 Easy</div>
+</div>
+
+<div class="story-section">
 <div class="story">
-Soft, melt-in-the-mouth golden dumplings soaked in fragrant sugar syrup.
-Gulab Jamun is the heart of Indian celebrations and festivals.
+Gulab Jamun is one of India’s most beloved desserts. These soft, deep-fried milk dumplings are soaked in fragrant sugar syrup flavored with cardamom and rose water. Served warm, they melt in the mouth and are a must-have during festivals and celebrations.
+</div>
 </div>
 
 <div class="container">
 
-<div>
-<h2 class="section-title">🧂 Ingredients</h2>
+<h2 class="section-title">🧂 Ingredients (Serves 4)</h2>
+
+<div class="ingredients-grid">
 
 <div class="ing">🥛 1 cup Milk Powder</div>
-<div class="ing">🌾 ¼ cup Maida (flour)</div>
-<div class="ing">🧈 2 tbsp Ghee</div>
-<div class="ing">🥛 Milk (for kneading)</div>
-<div class="ing">🍬 2 cups Sugar</div>
-<div class="ing">💧 2 cups Water</div>
-<div class="ing">🌸 Cardamom & Rose Water</div>
-<div class="ing">🍳 Oil / Ghee for frying</div>
+<div class="ing">🌾 2 tbsp All Purpose Flour (Maida)</div>
+<div class="ing">🥛 2 tbsp Milk</div>
+<div class="ing">🧈 1 tsp Ghee</div>
+<div class="ing">🧂 A pinch Baking Soda</div>
+<div class="ing">🍬 1½ cups Sugar</div>
+<div class="ing">💧 1½ cups Water</div>
+<div class="ing">🌿 4 Cardamom Pods</div>
 
 </div>
 
-<div>
+<div class="video-section">
+<h2>👩‍🍳 Watch Video Guide</h2>
+
+<iframe src="https://www.youtube.com/embed/3dMo4byghrw" allowfullscreen></iframe>
+
+
+</div>
+
 <h2 class="section-title">👨‍🍳 Cooking Process</h2>
 
-<div class="step"><span>1.</span> Prepare sugar syrup with sugar, water and cardamom.</div>
-<div class="step"><span>2.</span> Mix milk powder, maida and ghee.</div>
-<div class="step"><span>3.</span> Add milk and make soft dough.</div>
-<div class="step"><span>4.</span> Roll into smooth small balls.</div>
-<div class="step"><span>5.</span> Fry on low heat until golden brown.</div>
-<div class="step"><span>6.</span> Soak in warm sugar syrup for 2 hours.</div>
-<div class="step"><span>7.</span> Serve warm and enjoy!</div>
+<div class="steps-grid">
 
+<div class="step">
+<span>1</span>
+Mix milk powder, flour, baking soda, ghee and milk to form a soft dough.
+</div>
+
+<div class="step">
+<span>2</span>
+Divide the dough and roll into small smooth balls.
+</div>
+
+<div class="step">
+<span>3</span>
+Heat oil or ghee on low flame and fry the balls until golden brown.
+</div>
+
+<div class="step">
+<span>4</span>
+Prepare sugar syrup by boiling sugar, water and cardamom.
+</div>
+
+<div class="step">
+<span>5</span>
+Add fried gulab jamun into warm syrup.
+</div>
+
+<div class="step">
+<span>6</span>
+Let them soak for 1–2 hours for best flavor.
+</div>
+
+<div class="step">
+<span>7</span>
+Serve warm and garnish with pistachios.
 </div>
 
 </div>
 
-<div class="footer">© Ruchique 2026 • Discover & Cook</div>
+<a href="https://www.bigbasket.com/" class="buy-btn" target="_blank">
+🛒 Buy Ingredients Online
+</a>
+
+</div>
+
+<div class="footer">
+© Ruchique 2026 • Discover & Cook Authentic Indian Flavors
+</div>
 
 </body>
 </html>

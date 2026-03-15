@@ -11,6 +11,11 @@ public class PageController {
         return "index";
     }
 
+    @GetMapping("/ingredients")
+    public String ingrediants() {
+        return "ingredients";
+    }
+
     @GetMapping("/browse")
     public String browse() {
         return "browse";
