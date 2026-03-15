@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Ingredients • Ruchique</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#9B1C31;
+--accent:#FF9933;
+--cream:#FFF8E7;
+--dark:#1a1a1a;
+}
+
+body{
+font-family:Poppins;
+background:var(--cream);
+margin:0;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 40px;
+background:white;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.logo{
+font-family:'Playfair Display';
+font-size:28px;
+color:var(--primary);
+font-weight:900;
+}
+
+.nav-links a{
+margin-left:20px;
+text-decoration:none;
+color:var(--primary);
+font-weight:600;
+border:2px solid var(--primary);
+padding:8px 18px;
+border-radius:25px;
+}
+
+.nav-links a:hover{
+background:var(--primary);
+color:white;
+}
+
+/* CONTAINER */
+
+.container{
+max-width:600px;
+margin:80px auto;
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+h1{
+color:var(--primary);
+}
+
+.ing{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #eee;
+}
+
+.total{
+font-size:22px;
+margin-top:20px;
+}
+
+button{
+margin-top:20px;
+padding:14px 35px;
+border:none;
+background:var(--accent);
+color:white;
+border-radius:30px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:var(--primary);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+<div class="logo">🍽️ RUCHIQUE</div>
+
+<div class="nav-links">
+<a href="/">Home</a>
+<a href="/browse">Browse Recipes</a>
+<a href="/ingredients">Cook with what you have</a>
+<a href="/about">About</a>
+</div>
+</div>
+
+<!-- CONTENT -->
+
+<div class="container">
+
+<h1 id="recipeTitle"></h1>
+
+<div id="ingredientsList"></div>
+
+<div class="total">
+Total: ₹<span id="total">0</span>
+</div>
+
+<button onclick="checkout()">Proceed to Payment</button>
+
+</div>
+
+<script>
+
+/* DATABASE */const recipeIngredients={
+
+"butter-chicken":[
+{name:"Chicken 500g",price:220},
+{name:"Tomato",price:25},
+{name:"Butter",price:60},
+{name:"Cream",price:40}
+],
+
+"chicken-biryani":[
+{name:"Chicken 500g",price:220},
+{name:"Basmati Rice",price:120},
+{name:"Onion",price:20},
+{name:"Yogurt",price:40}
+],
+
+"kaju-paneer-butter-masala":[
+{name:"Paneer 250g",price:120},
+{name:"Cashews (Kaju)",price:80},
+{name:"Tomato",price:25},
+{name:"Butter",price:60},
+{name:"Cream",price:40}
+],
+
+"egg-fried-rice":[
+{name:"Rice",price:60},
+{name:"Eggs",price:40},
+{name:"Carrot",price:20},
+{name:"Beans",price:20},
+{name:"Garlic",price:10}
+],
+
+"ragi-masala-dosa":[
+{name:"Ragi Flour",price:70},
+{name:"Rice Flour",price:60},
+{name:"Potato",price:40},
+{name:"Onion",price:20}
+],
+
+"gulab-jamun":[
+{name:"Milk Powder",price:120},
+{name:"Flour",price:30},
+{name:"Sugar",price:40}
+],
+
+"vegetable-pulao":[
+{name:"Basmati Rice",price:120},       
+{name:"Carrot",price:20},
+{name:"Beans",price:20},
+{name:"Peas",price:30},
+{name:"Potato",price:40}
+],
+
+"paneer-pulao":[
+{name:"Basmati Rice",price:120},        
+{name:"Paneer",price:120},
+{name:"Onion",price:20},
+{name:"Tomato",price:25},       
+{name:"Yogurt",price:40}
+],
+
+"mushroom-biryani":[
+{name:"Basmati Rice",price:120},
+{name:"Mushroom",price:80},
+{name:"Onion",price:20},
+{name:"Tomato",price:25},
+{name:"Yogurt",price:40}
+],
+
+"soya-biryani":[
+{name:"Basmati Rice",price:120},        
+{name:"Soya Chunks",price:60},
+{name:"Onion",price:20},
+{name:"Tomato",price:25},
+{name:"Yogurt",price:40}
+],
+
+"kashmiri-pulao":[
+{name:"Basmati Rice",price:120},    
+{name:"Apple",price:30},
+{name:"Onion",price:20},
+{name:"Tomato",price:25},
+{name:"Yogurt",price:40}
+]
+
+
+};
+
+
+/* GET RECIPE FROM URL */
+
+const params=new URLSearchParams(window.location.search);
+
+const recipe=params.get("recipe");
+
+document.getElementById("recipeTitle").innerText=
+"Ingredients for "+recipe.replaceAll("-"," ");
+
+const list=document.getElementById("ingredientsList");
+
+let total=0;
+
+
+/* DISPLAY INGREDIENTS */
+
+if(recipeIngredients[recipe]){
+
+recipeIngredients[recipe].forEach(item=>{
+
+const div=document.createElement("div");
+
+div.className="ing";
+
+div.innerHTML=`
+<label>
+<input type="checkbox" value="${item.price}" onchange="calculate()">
+${item.name}
+</label>
+
+<span>₹${item.price}</span>
+`;
+
+list.appendChild(div);
+
+});
+
+}
+
+
+/* CALCULATE TOTAL */
+
+function calculate(){
+
+const checked=[...document.querySelectorAll("input:checked")];
+
+total=0;
+
+checked.forEach(i=>{
+
+total+=Number(i.value);
+
+});
+
+document.getElementById("total").innerText=total;
+
+}
+
+
+/* PAYMENT */
+
+function checkout(){
+
+if(total===0){
+alert("Select at least one ingredient");
+return;
+}
+
+window.location="/payment?amount="+total;
+
+}
+
+</script>
+
+</body>
+</html>

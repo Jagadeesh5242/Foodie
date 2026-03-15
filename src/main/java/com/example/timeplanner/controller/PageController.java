@@ -46,13 +46,49 @@ public class PageController {
         return "fooditems/gulab-jamun";
     }
 
-    @GetMapping("/recipe/veg-fried-rice")
-    public String vegFriedRice() {
-        return "fooditems/veg-fried-rice";
+    @GetMapping("/recipe/egg-fried-rice")
+    public String eggFriedRice() {
+        return "fooditems/egg-fried-rice";
     }
 
     @GetMapping("/recipe/butter-chicken")
     public String butterChicken() {
         return "fooditems/butter-chicken";
     }
+
+    @GetMapping("/recipe/vegetable-pulao")
+    public String vegetablePulao() {
+        return "fooditems/vegetable-pulao";
+    }
+
+    @GetMapping("/recipe/paneer-pulao")
+    public String paneerPulao() {
+        return "fooditems/paneer-pulao";
+    }
+
+    @GetMapping("/recipe/mushroom-biryani")
+    public String mushroomBiryani() {
+        return "fooditems/mushroom-biryani";
+    }
+
+    @GetMapping("/recipe/soya-biryani")
+    public String soyaBiryani() {
+        return "fooditems/soya-biryani";
+    }
+
+    @GetMapping("/recipe/kashmiri-pulao")
+    public String kashmiriPulao() {
+        return "fooditems/kashmiri-pulao";
+    }
+
+    @GetMapping("/buy")
+    public String buy() {
+        return "buy";
+    }
+
+    @GetMapping("/payment")
+    public String payment() {
+        return "payment";
+    }
+
 }

@@ -4,12 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Egg Fried Rice • Ruchique</title>
+<title>Mushroom Biryani • Ruchique</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
 --primary:#9B1C31;
 --accent:#FF9933;
@@ -102,25 +101,6 @@ font-size:70px;
 text-shadow:0 4px 15px rgba(0,0,0,.7);
 }
 
-/* INFO */
-
-.info{
-display:flex;
-justify-content:center;
-gap:40px;
-margin:40px 0;
-flex-wrap:wrap;
-}
-
-.info-box{
-background:white;
-padding:20px 30px;
-border-radius:14px;
-box-shadow:0 8px 18px rgba(0,0,0,.1);
-font-weight:500;
-font-size:18px;
-}
-
 /* STORY */
 
 .story-section{
@@ -134,6 +114,22 @@ text-align:center;
 font-size:18px;
 line-height:1.7;
 margin-bottom:30px;
+}
+
+/* MAIN CONTENT */
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:60px 30px 80px;
+}
+
+.section-title{
+font-family:'Playfair Display';
+font-size:38px;
+color:var(--primary);
+margin-bottom:25px;
+text-align:center;
 }
 
 /* VIDEO */
@@ -159,22 +155,6 @@ box-shadow:0 10px 30px rgba(0,0,0,.15);
 border:none;
 }
 
-/* MAIN CONTENT */
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:60px 30px 80px;
-}
-
-.section-title{
-font-family:'Playfair Display';
-font-size:38px;
-color:var(--primary);
-margin-bottom:25px;
-text-align:center;
-}
-
 /* INGREDIENTS */
 
 .ingredients-grid{
@@ -189,12 +169,6 @@ padding:18px 24px;
 border-radius:14px;
 box-shadow:0 6px 16px rgba(0,0,0,.08);
 font-size:17px;
-transition:.25s;
-}
-
-.ing:hover{
-transform:translateY(-4px);
-box-shadow:0 10px 22px rgba(0,0,0,.15);
 }
 
 /* STEPS */
@@ -241,24 +215,14 @@ font-weight:600;
 text-decoration:none;
 border-radius:50px;
 box-shadow:0 8px 20px rgba(155,28,49,.3);
-transition:.3s;
 }
-
-.buy-btn:hover{
-background:#7d1627;
-transform:translateY(-3px);
-}
-
-/* FOOTER */
 
 .footer{
 text-align:center;
 padding:50px 20px;
 background:white;
 border-top:1px solid #eee;
-font-size:15px;
 }
-
 </style>
 
 </head>
@@ -277,90 +241,80 @@ font-size:15px;
 </div>
 
 <div class="hero">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSeyNBUBooHqQRxDBAOTzk1BYYG-y-PR7oKA&s" alt="Egg Fried Rice">
-<h1>Egg Fried Rice</h1>
-</div>
-
-<div class="info">
-<div class="info-box">⏱ 20 Minutes</div>
-<div class="info-box">🥚 Egg Dish</div>
-<div class="info-box">🔥 Easy</div>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoPmxhh79JIfm_1MTu0SxdbUuiC0JDf-isSg&s">
+<h1>Mushroom Biryani</h1>
 </div>
 
 <div class="story-section">
 <div class="story">
-Egg Fried Rice is a quick and flavorful Indo-Chinese dish made with stir-fried rice, scrambled eggs, vegetables, and savory sauces. It is perfect for busy weeknights and pairs well with chili chicken, manchurian, or spicy gravy dishes.
+Mushroom Biryani is a flavorful vegetarian variation of the classic Indian biryani.  
+Tender mushrooms are cooked with fragrant basmati rice, aromatic spices, herbs, and yogurt to create a rich and comforting dish.  
+
+Mushrooms absorb spices beautifully, giving the biryani a deep umami flavor and a juicy texture.
+When cooked using the traditional dum method, the rice and mushrooms blend perfectly with caramelized onions, mint, and coriander, resulting in a delicious one-pot meal loved across India.
+
 </div>
 </div>
 
 <div class="container">
 
-<h2 class="section-title">🧂 Ingredients (Serves 3)</h2>
+<h2 class="section-title">🧂 Ingredients (Serves 4)</h2>
 
 <div class="ingredients-grid">
 
-<div class="ing">🍚 3 cups Cooked Rice (preferably cold)</div>
-<div class="ing">🥚 3 Eggs</div>
-<div class="ing">🥕 1 Carrot (finely chopped)</div>
-<div class="ing">🫘 ½ cup Beans</div>
-<div class="ing">🧅 1 Onion (chopped)</div>
-<div class="ing">🧄 1 tbsp Garlic (minced)</div>
-<div class="ing">🥬 Spring Onions</div>
-<div class="ing">🥢 2 tbsp Soy Sauce</div>
-<div class="ing">🌶️ 1 tsp Black Pepper</div>
-<div class="ing">🧂 Salt to taste</div>
+<div class="ing">🍚 2 cups Basmati Rice (soaked 30 minutes)</div>
+<div class="ing">🍄 250g Fresh Mushrooms (sliced)</div>
+<div class="ing">🧅 2 Onions (thinly sliced)</div>
+<div class="ing">🍅 2 Tomatoes (chopped)</div>
+<div class="ing">🥛 ½ cup Yogurt</div>
+<div class="ing">🌿 Mint Leaves</div>
+<div class="ing">🌿 Coriander Leaves</div>
+<div class="ing">🌶 Biryani Masala</div>
+<div class="ing">🧄 Ginger Garlic Paste</div>
+<div class="ing">🧂 Salt & Whole Spices</div>
 
 </div>
 
 <div class="video-section">
 <h2>👩‍🍳 Watch Video Guide</h2>
-
-<iframe src="https://www.youtube.com/embed/RVhJ3N0embk" allowfullscreen></iframe>
-
+<iframe src="https://www.youtube.com/embed/L5vQd5P7B48" allowfullscreen></iframe>
 </div>
 
 <h2 class="section-title">👨‍🍳 Cooking Process</h2>
 
 <div class="steps-grid">
 
-<div class="step">
-<span>1</span>
-Heat oil in a wok and scramble the eggs. Set aside.
+<div class="step"><span>1</span>
+Wash and soak basmati rice for about 30 minutes. Cook the rice until it is 70% done and set it aside.
 </div>
 
-<div class="step">
-<span>2</span>
-In the same wok sauté garlic and onions for a few seconds.
+<div class="step"><span>2</span>
+Heat oil or ghee in a large pot. Add whole spices such as cloves, cardamom, cinnamon, and bay leaf.
 </div>
 
-<div class="step">
-<span>3</span>
-Add carrots, beans and stir fry on high flame.
+<div class="step"><span>3</span>
+Add sliced onions and sauté until golden brown. Keep some fried onions aside for garnishing.
 </div>
 
-<div class="step">
-<span>4</span>
-Add cooked rice and mix well with vegetables.
+<div class="step"><span>4</span>
+Add ginger-garlic paste and chopped tomatoes. Cook until the tomatoes become soft.
 </div>
 
-<div class="step">
-<span>5</span>
-Add soy sauce, salt and black pepper.
+<div class="step"><span>5</span>
+Add sliced mushrooms, yogurt, and biryani masala. Cook for a few minutes until the mushrooms release their juices.
 </div>
 
-<div class="step">
-<span>6</span>
-Add scrambled eggs and mix thoroughly.
+<div class="step"><span>6</span>
+Layer the partially cooked rice over the mushroom masala. Sprinkle mint, coriander, and fried onions.
 </div>
 
-<div class="step">
-<span>7</span>
-Garnish with spring onions and serve hot.
+<div class="step"><span>7</span>
+Cover the pot tightly and cook on low heat (dum) for about 15–20 minutes until the flavors blend perfectly.
 </div>
 
 </div>
 
-<a href="https://www.bigbasket.com/" class="buy-btn" target="_blank">
+<a href="/buy?recipe=mushroom-biryani" class="buy-btn">
 🛒 Buy Ingredients Online
 </a>
 
